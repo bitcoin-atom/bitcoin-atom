@@ -447,7 +447,7 @@ void SendCoinsDialog::on_sendButton_clicked()
     if (changeFeeDialog->ui->optInRBF->isChecked())
     {
         questionString.append("<hr /><span>");
-        questionString.append(tr("This transaction signals replaceability (optin-RBF)."));
+        questionString.append(tr("You can increase the fee later (signals Replace-By-Fee)."));
         questionString.append("</span>");
     }
 
