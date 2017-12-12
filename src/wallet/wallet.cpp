@@ -24,14 +24,12 @@
 #include <primitives/block.h>
 #include <primitives/transaction.h>
 #include <script/script.h>
-#include <script/sign.h>
 #include <scheduler.h>
 #include <timedata.h>
 #include <txmempool.h>
 #include <txdb.h>
 #include <uint256hm.h>
 #include <util.h>
-#include <ui_interface.h>
 #include <utilmoneystr.h>
 #include <validation.h>
 #include <wallet/fees.h>

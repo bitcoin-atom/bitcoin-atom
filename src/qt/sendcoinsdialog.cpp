@@ -13,7 +13,6 @@
 #include <qt/optionsmodel.h>
 #include <qt/platformstyle.h>
 #include <qt/sendcoinsentry.h>
-#include <qt/walletmodel.h>
 #include <qt/transactionrecord.h>
 
 #include <base58.h>
@@ -33,11 +32,9 @@
 #include <qt/pricewidget.h>
 
 #include <QFontMetrics>
-#include <QMessageBox>
 #include <QScrollBar>
 #include <QSettings>
 #include <QTextDocument>
-#include <QTimer>
 #include <QSpacerItem>
 
 #define TARGETS_COUNT 9
