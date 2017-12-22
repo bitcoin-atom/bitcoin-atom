@@ -217,8 +217,6 @@ public:
 
     int getDefaultConfirmTarget() const;
 
-    bool getDefaultWalletRbf() const;
-
     int getLastTransactions(TransactionRecord& tr1, TransactionRecord& tr2, TransactionRecord& tr3);
 private:
     CWallet *wallet;

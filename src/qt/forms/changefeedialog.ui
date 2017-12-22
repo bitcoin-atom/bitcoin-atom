@@ -536,7 +536,7 @@ QCheckBox::indicator:checked {
 }</string>
     </property>
     <property name="text">
-     <string>Allow increasing fee</string>
+     <string>Enable Replace-By-Fee</string>
     </property>
    </widget>
   </widget>

@@ -237,7 +237,7 @@ void SendCoinsDialog::setModel(WalletModel *_model)
         updateSmartFeeLabel();
 
         // set default rbf checkbox state
-        changeFeeDialog->ui->optInRBF->setCheckState(model->getDefaultWalletRbf() ? Qt::Checked : Qt::Unchecked);
+        changeFeeDialog->ui->optInRBF->setCheckState(Qt::Checked);
 
         // set the smartfee-sliders default value (wallets default conf.target or last stored value)
         QSettings settings;
@@ -444,12 +444,14 @@ void SendCoinsDialog::on_sendButton_clicked()
     questionString.append(QString("<span style='font-size:10pt;font-weight:normal;'><br />(=%1)</span>")
         .arg(alternativeUnits.join(" " + tr("or") + "<br />")));
 
-    if (changeFeeDialog->ui->optInRBF->isChecked())
-    {
-        questionString.append("<hr /><span>");
-        questionString.append(tr("You can increase the fee later (signals Replace-By-Fee)."));
-        questionString.append("</span>");
+    questionString.append("<hr /><span>");
+    if (changeFeeDialog->ui->optInRBF->isChecked()) {
+        questionString.append(tr("You can increase the fee later (signals Replace-By-Fee, BIP-125)."));
+    } else {
+        questionString.append(tr("Not signalling Replace-By-Fee, BIP-125."));
     }
+    questionString.append("</span>");
+
 
     SendConfirmationDialog confirmationDialog(tr("Confirm send coins"),
         questionString.arg(formatted.join("<br />")), SEND_CONFIRM_DELAY, this);

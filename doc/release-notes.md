@@ -59,6 +59,14 @@ Example item for a notable change.
 
 (to be filled in at release time)
 
+Replace-By-Fee by default in GUI
+--------------------------------
+The send screen now uses BIP-125 RBF by default, regardless of `-walletrbf`.
+There is a checkbox to mark the transaction as final.
+
+The RPC default remains unchanged: to use RBF, launch with `-walletrbf=1` or
+use the `replaceable` argument for individual transactions.
+
 Credits
 =======
 
