@@ -49,14 +49,14 @@ static CUpdatedBlock latestblock;
 
 extern void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry);
 
-double GetDifficulty(const CBlockIndex* blockindex, bool fPowOnly)
+double GetDifficulty(const CChain& chain, const CBlockIndex* blockindex, bool fPowOnly)
 {
     if (blockindex == nullptr)
     {
-        if (chainActive.Tip() == nullptr || !fPowOnly)
+        if (chain.Tip() == nullptr || !fPowOnly)
             return 1.0;
         else
-            blockindex = chainActive.Tip();        
+            blockindex = chain.Tip();
     }
 
     if (fPowOnly) {
@@ -66,7 +66,6 @@ double GetDifficulty(const CBlockIndex* blockindex, bool fPowOnly)
     }
 
     int nShift = (blockindex->nBits >> 24) & 0xff;
-
     double dDiff =
         (double)0x0000ffff / (double)(blockindex->nBits & 0x00ffffff);
 
@@ -82,6 +81,11 @@ double GetDifficulty(const CBlockIndex* blockindex, bool fPowOnly)
     }
 
     return dDiff;
+}
+
+double GetDifficulty(const CBlockIndex* blockindex, bool fPowOnly)
+{
+    return GetDifficulty(chainActive, blockindex, fPowOnly);
 }
 
 UniValue blockheaderToJSON(const CBlockIndex* blockindex)
