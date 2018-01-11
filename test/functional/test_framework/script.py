@@ -647,7 +647,7 @@ def SignatureHash(script, txTo, inIdx, hashtype):
     if hashtype & SIGHASH_FORKID:
         hashtype |= FORKID_BCA << 8
 
-    s = txtmp.serialize()
+    s = txtmp.serialize_without_witness()
     s += struct.pack(b"<I", hashtype)
 
     hash = hash256(s)
