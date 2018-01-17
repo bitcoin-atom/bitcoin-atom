@@ -8,6 +8,8 @@
 #include <QAbstractTableModel>
 #include <QStringList>
 
+enum OutputType : int;
+
 class AddressTablePriv;
 class WalletModel;
 
@@ -61,8 +63,9 @@ public:
     /* Add an address to the model.
        Returns the added address on success, and an empty string otherwise.
      */
-    QString addRow(const QString &type, const QString &label, const QString &address);
     QString getReceiveFirstAddress();
+
+    QString addRow(const QString &type, const QString &label, const QString &address, const OutputType address_type);
 
     /* Look up label for address in address book, if not found return empty string.
      */
