@@ -153,17 +153,21 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"));
         assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
 
-        // Note that of those with the service bits flag, most only support a subset of possible options
-        vBootstrapSeeds.emplace_back("seed.bitcoin.sipa.be", true); // Pieter Wuille, only supports x1, x5, x9, and xd
-        vBootstrapSeeds.emplace_back("dnsseed.bluematt.me", true); // Matt Corallo, only supports x9
-        vBootstrapSeeds.emplace_back("dnsseed.bitcoin.dashjr.org", false); // Luke Dashjr
-        vBootstrapSeeds.emplace_back("seed.bitcoinstats.com", true); // Christian Decker, supports x1 - xf
-        vBootstrapSeeds.emplace_back("seed.bitcoin.jonasschnelli.ch", true); // Jonas Schnelli, only supports x1, x5, x9, and xd
-        vBootstrapSeeds.emplace_back("seed.btc.petertodd.org", true); // Peter Todd, only supports x1, x5, x9, and xd
+        // Note that of those which support the service bits prefix, most only support a subset of
+        // possible options.
+        // This is fine at runtime as we'll fall back to using them as a oneshot if they dont support the
+        // service bits we want, but we should get them updated to support all service bits wanted by any
+        // release ASAP to avoid it where possible.
+        vBootstrapSeeds.emplace_back("seed.bitcoin.sipa.be"); // Pieter Wuille, only supports x1, x5, x9, and xd
+        vBootstrapSeeds.emplace_back("dnsseed.bluematt.me"); // Matt Corallo, only supports x9
+        vBootstrapSeeds.emplace_back("dnsseed.bitcoin.dashjr.org"); // Luke Dashjr
+        vBootstrapSeeds.emplace_back("seed.bitcoinstats.com"); // Christian Decker, supports x1 - xf
+        vBootstrapSeeds.emplace_back("seed.bitcoin.jonasschnelli.ch"); // Jonas Schnelli, only supports x1, x5, x9, and xd
+        vBootstrapSeeds.emplace_back("seed.btc.petertodd.org"); // Peter Todd, only supports x1, x5, x9, and xd
 
-        vSeeds.emplace_back("seed.bitcoinatom.io", true); // only supports x9
-        vSeeds.emplace_back("seed.bitcoin-atom.org", true); // only supports x9
-        vSeeds.emplace_back("seed.bitcoinatom.net", true); // only supports x9
+        vSeeds.emplace_back("seed.bitcoinatom.io"); // only supports x9
+        vSeeds.emplace_back("seed.bitcoin-atom.org"); // only supports x9
+        vSeeds.emplace_back("seed.bitcoinatom.net"); // only supports x9
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,23);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,10);
@@ -289,13 +293,14 @@ public:
         vBootstrapSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vBootstrapSeeds.emplace_back("testnet-seed.bitcoin.jonasschnelli.ch", true);
-        vBootstrapSeeds.emplace_back("seed.tbtc.petertodd.org", true);
-        vBootstrapSeeds.emplace_back("testnet-seed.bluematt.me", false);
+        vBootstrapSeeds.emplace_back("testnet-seed.bitcoin.jonasschnelli.ch");
+        vBootstrapSeeds.emplace_back("seed.tbtc.petertodd.org");
+        vBootstrapSeeds.emplace_back("seed.testnet.bitcoin.sprovoost.nl");
+        vBootstrapSeeds.emplace_back("testnet-seed.bluematt.me"); // Just a static list of stable node(s), only supports x9
 
-        vSeeds.emplace_back("testnet-seed.bitcoinatom.io", true);
-        vSeeds.emplace_back("testnet-seed.bitcoin-atom.org", true);
-        vSeeds.emplace_back("testnet-seed.bitcoinatom.net", true);
+        vSeeds.emplace_back("testnet-seed.bitcoinatom.io");
+        vSeeds.emplace_back("testnet-seed.bitcoin-atom.org");
+        vSeeds.emplace_back("testnet-seed.bitcoinatom.net");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
