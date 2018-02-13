@@ -126,7 +126,7 @@ bool GetLocal(CService& addr, const CNetAddr *paddrPeer)
 }
 
 //! Convert the pnSeeds6 array into usable address objects.
-static std::vector<CAddress> convertSeed6(const std::vector<SeedSpec6> &vSeedsIn)
+static std::vector<CAddress> convertSeed6(const std::vector<SeedSpec6> &vSeedsIn, ServiceFlags serviceFlags)
 {
     // It'll only connect to one or two seed nodes because once it connects,
     // it'll get a pile of addresses with newer timestamps.
@@ -138,7 +138,7 @@ static std::vector<CAddress> convertSeed6(const std::vector<SeedSpec6> &vSeedsIn
     for (const auto& seed_in : vSeedsIn) {
         struct in6_addr ip;
         memcpy(&ip, seed_in.addr, sizeof(ip));
-        CAddress addr(CService(ip, seed_in.port), NODE_NETWORK);
+        CAddress addr(CService(ip, seed_in.port), serviceFlags);
         addr.nTime = GetTime() - GetRand(nOneWeek) - nOneWeek;
         vSeedsOut.push_back(addr);
     }
@@ -444,9 +444,7 @@ CNode* CConnman::ConnectNode(CAddress addrConnect, const char *pszDest, bool fCo
         uint64_t nonce = GetDeterministicRandomizer(RANDOMIZER_ID_LOCALHOSTNONCE).Write(id).Finalize();
         CAddress addr_bind = GetBindAddress(hSocket);
         CNode* pnode = new CNode(id, nLocalServices, GetBestHeight(), hSocket, addrConnect, CalculateKeyedNetGroup(addrConnect), nonce, addr_bind, pszDest ? pszDest : "", false);
-        if(fBCABootstrapping) {
-            pnode->fUsesAtomMagic = false;
-        }
+        pnode->fUsesAtomMagic = !fBCABootstrapping;
         pnode->AddRef();
 
         return pnode;
@@ -1602,7 +1600,7 @@ void CConnman::ThreadDNSAddressSeed()
         }
     }
 
-    const std::vector<CDNSSeedData> &vSeeds = Params().DNSSeeds();
+    const std::vector<CDNSSeedData> &vSeeds = Params().DNSSeeds(fBCABootstrapping);
     int found = 0;
 
     LogPrintf("Loading addresses from DNS seeds (could take a while)\n");
@@ -1763,7 +1761,8 @@ void CConnman::ThreadOpenConnections(const std::vector<std::string> connect)
                 LogPrintf("Adding fixed seed nodes as DNS doesn't seem to be available.\n");
                 CNetAddr local;
                 local.SetInternal("fixedseeds");
-                addrman.Add(convertSeed6(Params().FixedSeeds()), local);
+                ServiceFlags serviceFlags = fBCABootstrapping ? ServiceFlags(NODE_NETWORK) : ServiceFlags(NODE_NETWORK | NODE_WITNESS);
+                addrman.Add(convertSeed6(Params().FixedSeeds(fBCABootstrapping), serviceFlags), local);
                 done = true;
             }
         }
@@ -1861,7 +1860,6 @@ void CConnman::ThreadOpenConnections(const std::vector<std::string> connect)
         }
 
         if (addrConnect.IsValid()) {
-
             if (fFeeler) {
                 // Add small amount of random noise before connection to avoid synchronization.
                 int randsleep = GetRandInt(FEELER_SLEEP_WINDOW * 1000);

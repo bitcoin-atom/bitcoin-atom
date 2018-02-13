@@ -75,10 +75,10 @@ public:
     bool isLegacyBlock(uint32_t nHeight) const { return nHeight < (uint32_t)this->consensus.BCAHeight; }
     /** Return the BIP70 network string (main, test or regtest) */
     std::string NetworkIDString() const { return strNetworkID; }
-    const std::vector<CDNSSeedData>& DNSSeeds() const { return vSeeds; }
+    const std::vector<CDNSSeedData>& DNSSeeds(bool bootstrapping = false) const { return bootstrapping ? vBootstrapSeeds : vSeeds; }
     const std::vector<unsigned char>& Base58Prefix(Base58Type type) const { return base58Prefixes[type]; }
     const std::string& Bech32HRP() const { return bech32_hrp; }
-    const std::vector<SeedSpec6>& FixedSeeds() const { return vFixedSeeds; }
+    const std::vector<SeedSpec6>& FixedSeeds(bool bootstrapping = false) const { return bootstrapping ? vFixedBootstrapSeeds : vFixedSeeds; }
     const CCheckpointData& Checkpoints() const { return checkpointData; }
     const ChainTxData& TxData() const { return chainTxData; }
     void UpdateVersionBitsParameters(Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout);
@@ -91,11 +91,13 @@ protected:
     int nDefaultPort;
     int nBitcoinDefaultPort;
     uint64_t nPruneAfterHeight;
+    std::vector<CDNSSeedData> vBootstrapSeeds;
     std::vector<CDNSSeedData> vSeeds;
     std::vector<unsigned char> base58Prefixes[MAX_BASE58_TYPES];
     std::string bech32_hrp;
     std::string strNetworkID;
     CBlock genesis;
+    std::vector<SeedSpec6> vFixedBootstrapSeeds;
     std::vector<SeedSpec6> vFixedSeeds;
     bool fDefaultConsistencyChecks;
     bool fMiningRequiresPeers;
