@@ -77,7 +77,17 @@ uint32_t GetNextWorkRequiredForPow(const CBlockIndex* pindexLast, const CBlockHe
                 return pindex->nBits;
             }
         }
-        return pindexLast->nBits;
+
+        const CBlockIndex* pindex = pindexLast;
+        if (pindex->nHeight >= 588671) {
+            while (pindex->pprev && pindex->IsProofOfStake())
+                pindex = pindex->pprev;
+        }
+        return pindex->nBits;
+    }
+
+    if (pindexLast->nHeight >= 588671 && pindexLast->nPowHeight < 588671 + params.DifficultyAdjustmentIntervalPow()) {
+        return 0x1903fffc;
     }
 
     // Go back by what we want to be 14 days worth of blocks
@@ -85,7 +95,6 @@ uint32_t GetNextWorkRequiredForPow(const CBlockIndex* pindexLast, const CBlockHe
     assert(nHeightFirst >= 0);
     const CBlockIndex* pindexFirst = pindexLast->GetPowAncestor(nHeightFirst);
     assert(pindexFirst);
-
     return CalculateNextWorkRequired(pindexLast, pindexFirst->GetBlockTime(), params);
 }
 
