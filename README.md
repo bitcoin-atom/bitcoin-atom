@@ -24,6 +24,42 @@ This project is currently under active development and is in a Beta state.
 
 For additional information, please visit Bitcoin Atom’s website at https://bitcoinatom.io
 
+Build Requirements
+-------
+
+The following dependencies are required:
+
+ Library     | Purpose          | Description
+ ------------|------------------|----------------------
+ libssl      | Crypto           | Random Number Generation, Elliptic Curve Cryptography
+ libboost    | Utility          | Library for threading, data structures, etc
+ libevent    | Networking       | OS independent asynchronous networking
+
+Optional dependencies:
+
+ Library     | Purpose          | Description
+ ------------|------------------|----------------------
+ miniupnpc   | UPnP Support     | Firewall-jumping support
+ libdb4.8    | Berkeley DB      | Wallet storage (only needed when wallet enabled)
+ qt          | GUI              | GUI toolkit (only needed when GUI enabled)
+ protobuf    | Payments in GUI  | Data interchange format used for payment protocol (only needed when GUI enabled)
+ libqrencode | QR codes in GUI  | Optional for generating QR codes (only needed when GUI enabled)
+ univalue    | Utility          | JSON parsing and encoding (bundled version will be used unless --with-system-univalue passed to configure)
+ libzmq3     | ZMQ notification | Optional, allows generating ZMQ notifications (requires ZMQ version >= 4.x)
+
+For the versions used, see [dependencies.md](dependencies.md)
+
+Build How-To
+-------
+```bash
+./autogen.sh
+./configure
+make
+make install # optional
+```
+
+This will build atom-qt as well if the dependencies are met.
+
 Issue Tracker
 -------
 The integrated GitHub issue tracker is used for this project. Upon running into an issue, please submit it [here](https://github.com/bitcoin-atom/bitcoin-atom/issues).
