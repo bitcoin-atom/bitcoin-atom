@@ -24,6 +24,13 @@ This project is currently under active development and is in a Beta state.
 
 For additional information, please visit Bitcoin Atom’s website at https://bitcoinatom.io
 
+Downloads
+-------
+
+Bitcoin Atom node for your OS (Windows, Mac, Linux): https://github.com/bitcoin-atom/bitcoin-atom/releases
+
+Bitcoin Atom source code: https://github.com/bitcoin-atom/bitcoin-atom
+
 Build Requirements
 -------
 
@@ -47,9 +54,9 @@ Optional dependencies:
  univalue    | Utility          | JSON parsing and encoding (bundled version will be used unless --with-system-univalue passed to configure)
  libzmq3     | ZMQ notification | Optional, allows generating ZMQ notifications (requires ZMQ version >= 4.x)
 
-For the versions used, see [dependencies.md](dependencies.md)
+For the versions used, see [dependencies.md](https://github.com/bitcoin-atom/bitcoin-atom/blob/master/doc/dependencies.md)
 
-Build How-To
+How to Build
 -------
 ```bash
 ./autogen.sh
@@ -68,6 +75,12 @@ Documentation
 -------
 The documentation is a work-in-progress. It is located in the doc folder and [the wiki pages](https://github.com/bitcoin-atom/bitcoin-atom/wiki).
 
+Wiki
+-------
+The answers to most technical questions can be found in the official BCA wiki:
+https://github.com/bitcoin-atom/bitcoin-atom/wiki
+
+This wiki will be updated with BCA specifications, docs, manuals and FAQs.
 
 License
 -------
