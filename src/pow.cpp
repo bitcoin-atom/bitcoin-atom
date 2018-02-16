@@ -86,8 +86,10 @@ uint32_t GetNextWorkRequiredForPow(const CBlockIndex* pindexLast, const CBlockHe
         return pindex->nBits;
     }
 
-    if (pindexLast->nHeight >= 588671 && pindexLast->nPowHeight < 588671 + params.DifficultyAdjustmentIntervalPow()) {
-        return 0x1903fffc;
+    if (!params.fPowAllowMinDifficultyBlocks) {
+        if (pindexLast->nHeight >= 588671 && pindexLast->nPowHeight < 588671 + params.DifficultyAdjustmentIntervalPow()) {
+            return 0x1903fffc;
+        }
     }
 
     // Go back by what we want to be 14 days worth of blocks
