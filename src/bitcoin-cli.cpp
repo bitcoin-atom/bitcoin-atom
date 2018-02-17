@@ -39,7 +39,7 @@ std::string HelpMessageCli()
     strUsage += HelpMessageOpt("-?", _("This help message"));
     strUsage += HelpMessageOpt("-conf=<file>", strprintf(_("Specify configuration file (default: %s)"), BITCOIN_CONF_FILENAME));
     strUsage += HelpMessageOpt("-datadir=<dir>", _("Specify data directory"));
-    strUsage += HelpMessageOpt("-getinfo", _("Get general information from the remote server. Note that unlike server-side RPC calls, the results of -getinfo is the result of multiple non-atomic requests. Some entries in the result may represent results from different states (e.g. wallet balance may be as of a different block from the chain state reported)"));
+    strUsage += HelpMessageOpt("getinfo", _("Get general information from the remote server. Note that unlike server-side RPC calls, the results of getinfo is the result of multiple non-atomic requests. Some entries in the result may represent results from different states (e.g. wallet balance may be as of a different block from the chain state reported)"));
     AppendParamsHelpMessages(strUsage);
     strUsage += HelpMessageOpt("-named", strprintf(_("Pass named instead of positional arguments (default: %s)"), DEFAULT_NAMED));
     strUsage += HelpMessageOpt("-rpcconnect=<ip>", strprintf(_("Send commands to node running on <ip> (default: %s)"), DEFAULT_RPCCONNECT));
@@ -240,7 +240,7 @@ public:
     UniValue PrepareRequest(const std::string& method, const std::vector<std::string>& args) override
     {
         if (!args.empty()) {
-            throw std::runtime_error("-getinfo takes no arguments");
+            throw std::runtime_error("getinfo takes no arguments");
         }
         UniValue result(UniValue::VARR);
         result.push_back(JSONRPCRequestObj("getnetworkinfo", NullUniValue, ID_NETWORKINFO));
@@ -428,19 +428,20 @@ int CommandLineRPC(int argc, char *argv[])
                 args.push_back(line);
             }
         }
+
+        if (args.size() < 1) {
+            throw std::runtime_error("too few parameters (need at least command)");
+        }
+
         std::unique_ptr<BaseRequestHandler> rh;
-        std::string method;
-        if (gArgs.GetBoolArg("-getinfo", false)) {
+        std::string method = args[0];
+        if (method == "getinfo") {
             rh.reset(new GetinfoRequestHandler());
             method = "";
         } else {
             rh.reset(new DefaultRequestHandler());
-            if (args.size() < 1) {
-                throw std::runtime_error("too few parameters (need at least command)");
-            }
-            method = args[0];
-            args.erase(args.begin()); // Remove trailing method name from arguments vector
         }
+        args.erase(args.begin()); // Remove trailing method name from arguments vector
 
         // Execute and handle connection failures with -rpcwait
         const bool fWait = gArgs.GetBoolArg("-rpcwait", false);
