@@ -1275,24 +1275,28 @@ bool static ProcessHeadersMessage(CNode *pfrom, CConnman *connman, const std::ve
         if (mapBlockIndex.find(headers[0].hashPrevBlock) == mapBlockIndex.end() && nCount < MAX_BLOCKS_TO_ANNOUNCE) {
             nodestate->nUnconnectingHeaders++;
 
-            if (!pfrom->fUsesAtomMagic && pindexBestHeader->nHeight < chainparams.GetConsensus().BCAHeight) {
-                uint256 stop_hash = chainparams.GetConsensus().BitcoinPostforkBlock;
-                connman->PushMessage(pfrom, msgMaker.Make(NetMsgType::GETHEADERS, chainActive.GetLocator(pindexBestHeader), stop_hash));
-                LogPrint(BCLog::NET, "received header %s: missing prev block %s, sending getheaders (%d) to end (peer=%d, nUnconnectingHeaders=%d)\n",
-                        headers[0].GetHash().ToString(),
-                        headers[0].hashPrevBlock.ToString(),
-                        pindexBestHeader->nHeight,
-                        pfrom->GetId(), nodestate->nUnconnectingHeaders);
-                // Set hashLastUnknownBlock for this peer, so that if we
-                // eventually get the headers - even from a different peer -
-                // we can use this peer to download.
-                UpdateBlockAvailability(pfrom->GetId(), headers.back().GetHash());
-
-                if (nodestate->nUnconnectingHeaders % MAX_UNCONNECTING_HEADERS == 0) {
-                    Misbehaving(pfrom->GetId(), 20);
+            uint256 stop_hash;
+            if (!pfrom->fUsesAtomMagic) {
+                if (pindexBestHeader->nHeight < chainparams.GetConsensus().BCAHeight) {
+                    stop_hash = chainparams.GetConsensus().BitcoinPostforkBlock;
+                } else {
+                    return true;
                 }
             }
+            connman->PushMessage(pfrom, msgMaker.Make(NetMsgType::GETHEADERS, chainActive.GetLocator(pindexBestHeader), stop_hash));
+            LogPrint(BCLog::NET, "received header %s: missing prev block %s, sending getheaders (%d) to end (peer=%d, nUnconnectingHeaders=%d)\n",
+                    headers[0].GetHash().ToString(),
+                    headers[0].hashPrevBlock.ToString(),
+                    pindexBestHeader->nHeight,
+                    pfrom->GetId(), nodestate->nUnconnectingHeaders);
+            // Set hashLastUnknownBlock for this peer, so that if we
+            // eventually get the headers - even from a different peer -
+            // we can use this peer to download.
+            UpdateBlockAvailability(pfrom->GetId(), headers.back().GetHash());
 
+            if (nodestate->nUnconnectingHeaders % MAX_UNCONNECTING_HEADERS == 0) {
+                Misbehaving(pfrom->GetId(), 20);
+            }
             return true;
         }
 
@@ -1884,7 +1888,7 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
                     // fell back to inv we probably have a reorg which we should get the headers for first,
                     // we now only provide a getheaders response here. When we receive the headers, we will
                     // then ask for the blocks we need.
-                    if (!pfrom->fUsesAtomMagic && pindexBestHeader->nHeight < chainparams.GetConsensus().BCAHeight) {
+                    if (pfrom->fUsesAtomMagic || pindexBestHeader->nHeight < chainparams.GetConsensus().BCAHeight) {
                         connman->PushMessage(pfrom, msgMaker.Make(NetMsgType::GETHEADERS, chainActive.GetLocator(pindexBestHeader), inv.hash));
                         LogPrint(BCLog::NET, "getheaders (%d) %s to peer=%d\n", pindexBestHeader->nHeight, inv.hash.ToString(), pfrom->GetId());
                     }
@@ -2616,6 +2620,9 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         for (unsigned int n = 0; n < nCount; n++) {
             vRecv >> headers[n];
             ReadCompactSize(vRecv); // ignore tx count; assume it is 0.
+            if (headers[n].IsProofOfStake()) {
+                ReadCompactSize(vRecv); // ignore vchBlockSig.
+            }
         }
         vRecv.SetVersion(original_version);
         // Headers received via a HEADERS message should be valid, and reflect
