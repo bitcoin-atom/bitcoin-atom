@@ -380,6 +380,28 @@ public:
         return pbegin[(pend - pbegin)/2];
     }
 
+    int64_t GetPowMedianTimePast() const
+    {
+        int64_t pmedian[nMedianTimeSpan];
+        int64_t* pbegin = &pmedian[nMedianTimeSpan];
+        int64_t* pend = &pmedian[nMedianTimeSpan];
+
+        const CBlockIndex* pindex = this;
+        int i = 0;
+        while (i < nMedianTimeSpan && pindex) {
+            if (pindex->IsProofOfStake()) {
+                continue;
+            }
+
+            *(--pbegin) = pindex->GetBlockTime();
+            ++i;
+            pindex = pindex->pprev;
+        }
+
+        std::sort(pbegin, pend);
+        return pbegin[(pend - pbegin)/2];
+    }
+
     std::string ToString() const
     {
         return strprintf("CBlockIndex(nprev=%08x, nFile=%d, nHeight=%d, nPowHeight=%d, nFlags=(%s)(%d)(%s), nStakeModifier=%016llx, nStakeModifierChecksum=%08x, hashProofOfStake=%s, merkle=%s, hashBlock=%s)",

@@ -5,7 +5,6 @@
 
 #include <pow.h>
 
-#include <arith_uint256.h>
 #include <chain.h>
 #include <primitives/block.h>
 #include <uint256.h>
@@ -45,6 +44,37 @@ uint32_t GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *
 }
 
 uint32_t GetNextWorkRequiredForPow(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
+{
+    int nHeight = pindexLast->nHeight+1;
+    if (nHeight < params.NewDifficultyAdjustmentAlgoHeight) {
+        return GetNextWorkRequiredForPowOld(pindexLast, pblock, params);
+    }
+
+    const CBlockIndex* pindexFirst = pindexLast;
+    arith_uint256 bnTotal {0};
+    int i = 0;
+    while (pindexFirst && i < params.nPowAveragingWindow) {
+        if (pindexFirst->IsProofOfStake()) {
+            continue;
+        }
+
+        arith_uint256 bnTmp;
+        bnTmp.SetCompact(pindexFirst->nBits);
+        bnTotal += bnTmp;
+        ++i;
+        pindexFirst = pindexFirst->pprev;
+    }
+
+    if (pindexFirst == nullptr) {
+        return UintToArith256(params.powLimit).GetCompact();
+    }
+
+    arith_uint256 bnAvg {bnTotal / params.nPowAveragingWindow};
+
+    return CalculateNextWorkRequired(bnAvg, pindexLast->GetPowMedianTimePast(), pindexFirst->GetPowMedianTimePast(), params);
+}
+
+uint32_t GetNextWorkRequiredForPowOld(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
     uint32_t nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
     uint32_t nProofOfWorkLimitStart = UintToArith256(params.powLimitStart).GetCompact();
@@ -97,10 +127,28 @@ uint32_t GetNextWorkRequiredForPow(const CBlockIndex* pindexLast, const CBlockHe
     assert(nHeightFirst >= 0);
     const CBlockIndex* pindexFirst = pindexLast->GetPowAncestor(nHeightFirst);
     assert(pindexFirst);
-    return CalculateNextWorkRequired(pindexLast, pindexFirst->GetBlockTime(), params);
+    return CalculateNextWorkRequiredOld(pindexLast, pindexFirst->GetBlockTime(), params);
 }
 
-uint32_t CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
+uint32_t CalculateNextWorkRequired(arith_uint256 bnAvg, int64_t nLastBlockTime, int64_t nFirstBlockTime, const Consensus::Params& params)
+{
+    // Limit adjustment step
+    int64_t nActualTimespan = nLastBlockTime - nFirstBlockTime;
+    nActualTimespan = params.AveragingWindowTimespan() + (nActualTimespan - params.AveragingWindowTimespan())/4;
+
+    // Retarget
+    const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
+    arith_uint256 bnNew {bnAvg};
+    bnNew /= params.AveragingWindowTimespan();
+    bnNew *= nActualTimespan;
+
+    if (bnNew > bnPowLimit)
+        bnNew = bnPowLimit;
+
+    return bnNew.GetCompact();
+}
+
+uint32_t CalculateNextWorkRequiredOld(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
 {
     if (params.fPowNoRetargeting)
         return pindexLast->nBits;
