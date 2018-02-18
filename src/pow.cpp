@@ -71,7 +71,7 @@ uint32_t GetNextWorkRequiredForPow(const CBlockIndex* pindexLast, const CBlockHe
 
     arith_uint256 bnAvg {bnTotal / params.nPowAveragingWindow};
 
-    return CalculateNextWorkRequired(bnAvg, pindexLast->GetPowMedianTimePast(), pindexFirst->GetPowMedianTimePast(), params);
+    return CalculateNextWorkRequired(bnAvg, pindexLast->GetBlockTime(), pindexFirst->GetBlockTime(), params);
 }
 
 uint32_t GetNextWorkRequiredForPowOld(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
