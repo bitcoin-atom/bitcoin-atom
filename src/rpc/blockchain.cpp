@@ -26,6 +26,7 @@
 #include <utilstrencodings.h>
 #include <hash.h>
 #include <warnings.h>
+#include <miner.h>
 
 #include <stdint.h>
 
@@ -48,14 +49,20 @@ static CUpdatedBlock latestblock;
 
 extern void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry);
 
-double GetDifficulty(const CBlockIndex* blockindex)
+double GetDifficulty(const CBlockIndex* blockindex, bool fPowOnly)
 {
     if (blockindex == nullptr)
     {
-        if (chainActive.Tip() == nullptr)
+        if (chainActive.Tip() == nullptr || !fPowOnly)
             return 1.0;
         else
-            blockindex = chainActive.Tip();
+            blockindex = chainActive.Tip();        
+    }
+
+    if (fPowOnly) {
+        while (blockindex->pprev && blockindex->IsProofOfStake()) {
+            blockindex = blockindex->pprev;
+        }
     }
 
     int nShift = (blockindex->nBits >> 24) & 0xff;
@@ -95,7 +102,7 @@ UniValue blockheaderToJSON(const CBlockIndex* blockindex)
     result.push_back(Pair("mediantime", (int64_t)blockindex->GetMedianTimePast()));
     result.push_back(Pair("nonce", (uint64_t)blockindex->nNonce));
     result.push_back(Pair("bits", strprintf("%08x", blockindex->nBits)));
-    result.push_back(Pair("difficulty", GetDifficulty(blockindex)));
+    result.push_back(Pair("difficulty", GetDifficulty(blockindex, false)));
     result.push_back(Pair("chainwork", blockindex->nChainWork.GetHex()));
 
     if (blockindex->pprev)
@@ -144,7 +151,7 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
     result.push_back(Pair("mediantime", (int64_t)blockindex->GetMedianTimePast()));
     result.push_back(Pair("nonce", (uint64_t)block.nNonce));
     result.push_back(Pair("bits", strprintf("%08x", block.nBits)));
-    result.push_back(Pair("difficulty", GetDifficulty(blockindex)));
+    result.push_back(Pair("difficulty", GetDifficulty(blockindex, false)));
     result.push_back(Pair("chainwork", blockindex->nChainWork.GetHex()));
 
     if (blockindex->pprev)
@@ -333,16 +340,20 @@ UniValue getdifficulty(const JSONRPCRequest& request)
     if (request.fHelp || request.params.size() != 0)
         throw std::runtime_error(
             "getdifficulty\n"
-            "\nReturns the proof-of-work difficulty as a multiple of the minimum difficulty.\n"
+            "\nReturns difficulty as a multiple of the minimum difficulty.\n"
             "\nResult:\n"
-            "n.nnn       (numeric) the proof-of-work difficulty as a multiple of the minimum difficulty.\n"
+            "n.nnn       (numeric) difficulty as a multiple of the minimum difficulty.\n"
             "\nExamples:\n"
             + HelpExampleCli("getdifficulty", "")
             + HelpExampleRpc("getdifficulty", "")
         );
 
     LOCK(cs_main);
-    return GetDifficulty();
+    UniValue obj(UniValue::VOBJ);
+    obj.push_back(Pair("proof-of-work",        (double)GetDifficulty()));
+    obj.push_back(Pair("proof-of-stake",       (double)GetDifficulty(GetLastBlockIndex(chainActive.Tip(), Params().GetConsensus(), true), false)));
+    obj.push_back(Pair("search-interval",      (int)nLastCoinStakeSearchInterval));
+    return obj;
 }
 
 std::string EntryDescriptionString()
@@ -1197,7 +1208,12 @@ UniValue getblockchaininfo(const JSONRPCRequest& request)
     obj.push_back(Pair("blocks",                (int)chainActive.Height()));
     obj.push_back(Pair("headers",               pindexBestHeader ? pindexBestHeader->nHeight : -1));
     obj.push_back(Pair("bestblockhash",         chainActive.Tip()->GetBlockHash().GetHex()));
-    obj.push_back(Pair("difficulty",            (double)GetDifficulty()));
+
+    UniValue difficulty(UniValue::VOBJ);
+    difficulty.push_back(Pair("proof-of-work",  (double)GetDifficulty()));
+    difficulty.push_back(Pair("proof-of-stake", (double)GetDifficulty(GetLastBlockIndex(chainActive.Tip(), Params().GetConsensus(), true), false)));
+
+    obj.push_back(Pair("difficulty",            difficulty));
     obj.push_back(Pair("mediantime",            (int64_t)chainActive.Tip()->GetMedianTimePast()));
     obj.push_back(Pair("verificationprogress",  GuessVerificationProgress(Params().TxData(), chainActive.Tip())));
     obj.push_back(Pair("initialblockdownload",  IsInitialBlockDownload()));

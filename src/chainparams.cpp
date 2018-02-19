@@ -6,6 +6,8 @@
 #include <chainparams.h>
 #include <consensus/merkle.h>
 
+#include <uint256.h>
+#include <arith_uint256.h>
 #include <tinyformat.h>
 #include <util.h>
 #include <utilstrencodings.h>
@@ -70,6 +72,8 @@ void CChainParams::UpdateVersionBitsParameters(Consensus::DeploymentPos d, int64
  * + Contains no strange transactions
  */
 
+const arith_uint256 maxUint = UintToArith256(uint256S("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
+
 class CMainParams : public CChainParams {
 public:
     CMainParams() {
@@ -82,8 +86,13 @@ public:
         consensus.BIP66Height = 363725; // 00000000000000000379eaa19dce8c9b722d46ae6a57c2f1a988119488b50931
         consensus.BCAHeight = 505888;
         consensus.BCAInitLim = 50000;
+        consensus.NewDifficultyAdjustmentAlgoHeight = 589500;
         consensus.powLimit = uint256S("00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.powLimitStart = uint256S("000001ffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+
+        consensus.nPowAveragingWindow = 11;
+        assert(maxUint/UintToArith256(consensus.powLimit) >= consensus.nPowAveragingWindow);
+
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 10 * 60;
         consensus.fPowAllowMinDifficultyBlocks = false;
@@ -145,15 +154,16 @@ public:
         assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
-        vSeeds.emplace_back("seed.bitcoin.sipa.be", true); // Pieter Wuille, only supports x1, x5, x9, and xd
-        vSeeds.emplace_back("dnsseed.bluematt.me", true); // Matt Corallo, only supports x9
-        vSeeds.emplace_back("dnsseed.bitcoin.dashjr.org", false); // Luke Dashjr
-        vSeeds.emplace_back("seed.bitcoinstats.com", true); // Christian Decker, supports x1 - xf
-        vSeeds.emplace_back("seed.bitcoin.jonasschnelli.ch", true); // Jonas Schnelli, only supports x1, x5, x9, and xd
-        vSeeds.emplace_back("seed.btc.petertodd.org", true); // Peter Todd, only supports x1, x5, x9, and xd
-        vSeeds.emplace_back("seed.bitcoinatom.io", true);
-        vSeeds.emplace_back("seed.bitcoin-atom.org", true);
-        vSeeds.emplace_back("seed.bitcoinatom.net", true);
+        vBootstrapSeeds.emplace_back("seed.bitcoin.sipa.be", true); // Pieter Wuille, only supports x1, x5, x9, and xd
+        vBootstrapSeeds.emplace_back("dnsseed.bluematt.me", true); // Matt Corallo, only supports x9
+        vBootstrapSeeds.emplace_back("dnsseed.bitcoin.dashjr.org", false); // Luke Dashjr
+        vBootstrapSeeds.emplace_back("seed.bitcoinstats.com", true); // Christian Decker, supports x1 - xf
+        vBootstrapSeeds.emplace_back("seed.bitcoin.jonasschnelli.ch", true); // Jonas Schnelli, only supports x1, x5, x9, and xd
+        vBootstrapSeeds.emplace_back("seed.btc.petertodd.org", true); // Peter Todd, only supports x1, x5, x9, and xd
+
+        vSeeds.emplace_back("seed.bitcoinatom.io", true); // only supports x9
+        vSeeds.emplace_back("seed.bitcoin-atom.org", true); // only supports x9
+        vSeeds.emplace_back("seed.bitcoinatom.net", true); // only supports x9
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,23);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,10);
@@ -163,6 +173,7 @@ public:
 
         bech32_hrp = "bc";
 
+        vFixedBootstrapSeeds = std::vector<SeedSpec6>(pnSeed6_main_bootstrap, pnSeed6_main_bootstrap + ARRAYLEN(pnSeed6_main_bootstrap));
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
 
         fDefaultConsistencyChecks = false;
@@ -212,8 +223,13 @@ public:
         consensus.BIP66Height = 330776; // 000000002104c8c45e99a8853285a3b592602a3ccde2b832481da85e9e4ba182
         consensus.BCAHeight = 1260000;
         consensus.BCAInitLim = 50000;
+        consensus.NewDifficultyAdjustmentAlgoHeight = 1314131;
         consensus.powLimit = uint256S("00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.powLimitStart = uint256S("000007ffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+
+        consensus.nPowAveragingWindow = 11;
+        assert(maxUint/UintToArith256(consensus.powLimit) >= consensus.nPowAveragingWindow);
+
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 10 * 60;
         consensus.fPowAllowMinDifficultyBlocks = true;
@@ -268,12 +284,15 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943"));
         assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
 
+        vFixedBootstrapSeeds.clear();
         vFixedSeeds.clear();
+        vBootstrapSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("testnet-seed.bitcoin.jonasschnelli.ch", true);
-        vSeeds.emplace_back("seed.tbtc.petertodd.org", true);
-        vSeeds.emplace_back("testnet-seed.bluematt.me", false);
+        vBootstrapSeeds.emplace_back("testnet-seed.bitcoin.jonasschnelli.ch", true);
+        vBootstrapSeeds.emplace_back("seed.tbtc.petertodd.org", true);
+        vBootstrapSeeds.emplace_back("testnet-seed.bluematt.me", false);
+
         vSeeds.emplace_back("testnet-seed.bitcoinatom.io", true);
         vSeeds.emplace_back("testnet-seed.bitcoin-atom.org", true);
         vSeeds.emplace_back("testnet-seed.bitcoinatom.net", true);
@@ -286,6 +305,7 @@ public:
 
         bech32_hrp = "tb";
 
+        vFixedBootstrapSeeds = std::vector<SeedSpec6>(pnSeed6_test_bootstrap, pnSeed6_test_bootstrap + ARRAYLEN(pnSeed6_test_bootstrap));
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
 
         fDefaultConsistencyChecks = false;
@@ -324,8 +344,10 @@ public:
         consensus.BIP66Height = 1251; // BIP66 activated on regtest (Used in rpc activation tests)
         consensus.BCAHeight = 1500;
         consensus.BCAInitLim = 100;
+        consensus.NewDifficultyAdjustmentAlgoHeight = 2000;
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.powLimitStart = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.nPowAveragingWindow = 11;
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 10 * 60;
         consensus.fPowAllowMinDifficultyBlocks = true;
@@ -376,7 +398,9 @@ public:
         assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
+        vFixedBootstrapSeeds.clear();
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
+        vBootstrapSeeds.clear();
 
         fDefaultConsistencyChecks = true;
         fRequireStandard = false;

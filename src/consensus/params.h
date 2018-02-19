@@ -62,6 +62,7 @@ struct Params {
     int BCAHeight;
 
     int BCAInitLim;
+    int NewDifficultyAdjustmentAlgoHeight;
     /**
      * Minimum blocks including miner confirmation of the total of 2016 blocks in a retargeting period,
      * (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments.
@@ -89,6 +90,10 @@ struct Params {
     int64_t nStakeMaxAge;
     uint256 nInitialHashTargetPoS;
     int64_t DifficultyAdjustmentIntervalPos() const { return nPosTargetTimespan / nPosTargetSpacing; }
+
+    /** New proof of work difficulty adjustment parameters **/
+    int64_t nPowAveragingWindow;
+    int64_t AveragingWindowTimespan() const { return nPowAveragingWindow * nPowTargetSpacing; }
 
     /** Bootstrap **/
     uint256 BitcoinPostforkBlock;
