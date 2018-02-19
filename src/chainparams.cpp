@@ -223,7 +223,7 @@ public:
         consensus.BIP66Height = 330776; // 000000002104c8c45e99a8853285a3b592602a3ccde2b832481da85e9e4ba182
         consensus.BCAHeight = 1260000;
         consensus.BCAInitLim = 50000;
-        consensus.NewDifficultyAdjustmentAlgoHeight = 1314868;
+        consensus.NewDifficultyAdjustmentAlgoHeight = 1314131;
         consensus.powLimit = uint256S("00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.powLimitStart = uint256S("000007ffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
 
