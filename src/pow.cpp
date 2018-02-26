@@ -54,14 +54,13 @@ uint32_t GetNextWorkRequiredForPow(const CBlockIndex* pindexLast, const CBlockHe
     arith_uint256 bnTotal {0};
     int i = 0;
     while (pindexFirst && i < params.nPowAveragingWindow) {
-        if (pindexFirst->IsProofOfStake()) {
-            continue;
+        if (!pindexFirst->IsProofOfStake()) {
+            arith_uint256 bnTmp;
+            bnTmp.SetCompact(pindexFirst->nBits);
+            bnTotal += bnTmp;
+            ++i;
         }
 
-        arith_uint256 bnTmp;
-        bnTmp.SetCompact(pindexFirst->nBits);
-        bnTotal += bnTmp;
-        ++i;
         pindexFirst = pindexFirst->pprev;
     }
 
