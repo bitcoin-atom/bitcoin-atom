@@ -39,7 +39,6 @@ std::string HelpMessageCli()
     strUsage += HelpMessageOpt("-?", _("This help message"));
     strUsage += HelpMessageOpt("-conf=<file>", strprintf(_("Specify configuration file (default: %s)"), BITCOIN_CONF_FILENAME));
     strUsage += HelpMessageOpt("-datadir=<dir>", _("Specify data directory"));
-    strUsage += HelpMessageOpt("getinfo", _("Get general information from the remote server. Note that unlike server-side RPC calls, the results of getinfo is the result of multiple non-atomic requests. Some entries in the result may represent results from different states (e.g. wallet balance may be as of a different block from the chain state reported)"));
     AppendParamsHelpMessages(strUsage);
     strUsage += HelpMessageOpt("-named", strprintf(_("Pass named instead of positional arguments (default: %s)"), DEFAULT_NAMED));
     strUsage += HelpMessageOpt("-rpcconnect=<ip>", strprintf(_("Send commands to node running on <ip> (default: %s)"), DEFAULT_RPCCONNECT));
@@ -433,14 +432,8 @@ int CommandLineRPC(int argc, char *argv[])
             throw std::runtime_error("too few parameters (need at least command)");
         }
 
-        std::unique_ptr<BaseRequestHandler> rh;
+        std::unique_ptr<BaseRequestHandler> rh = MakeUnique<DefaultRequestHandler>();
         std::string method = args[0];
-        if (method == "getinfo") {
-            rh.reset(new GetinfoRequestHandler());
-            method = "";
-        } else {
-            rh.reset(new DefaultRequestHandler());
-        }
         args.erase(args.begin()); // Remove trailing method name from arguments vector
 
         // Execute and handle connection failures with -rpcwait
