@@ -111,7 +111,9 @@ QT_FORMS_UI = \
   qt/forms/sendcoinsdialog.ui \
   qt/forms/sendcoinsentry.ui \
   qt/forms/signverifymessagedialog.ui \
-  qt/forms/transactiondescdialog.ui
+  qt/forms/transactiondescdialog.ui \
+  qt/forms/mainmenupanel.ui \
+  qt/forms/lastsendtransactionview.ui
 
 QT_MOC_CPP = \
   qt/moc_addressbookpage.cpp \
@@ -159,7 +161,9 @@ QT_MOC_CPP = \
   qt/moc_utilitydialog.cpp \
   qt/moc_walletframe.cpp \
   qt/moc_walletmodel.cpp \
-  qt/moc_walletview.cpp
+  qt/moc_walletview.cpp \
+  qt/moc_mainmenupanel.cpp \
+  qt/moc_lastsendtransactionview.cpp
 
 BITCOIN_MM = \
   qt/macdockiconhandler.mm \
@@ -171,7 +175,10 @@ QT_MOC = \
   qt/callback.moc \
   qt/intro.moc \
   qt/overviewpage.moc \
-  qt/rpcconsole.moc
+  qt/rpcconsole.moc \
+  qt/mainmenupanel.moc \
+  qt/lastsendtransactionview.moc \
+  qt/transactiontablemodel.moc
 
 QT_QRC_CPP = qt/qrc_bitcoin.cpp
 QT_QRC = qt/bitcoin.qrc
@@ -235,7 +242,9 @@ BITCOIN_QT_H = \
   qt/walletmodel.h \
   qt/walletmodeltransaction.h \
   qt/walletview.h \
-  qt/winshutdownmonitor.h
+  qt/winshutdownmonitor.h \
+  qt/mainmenupanel.h \
+  qt/lastsendtransactionview.h
 
 RES_ICONS = \
   qt/res/icons/add.png \
@@ -292,7 +301,30 @@ RES_ICONS = \
   qt/res/icons/tx_output.png \
   qt/res/icons/tx_mined.png \
   qt/res/icons/warning.png \
-  qt/res/icons/verify.png
+  qt/res/icons/verify.png \
+  qt/res/icons/atom.png \
+  qt/res/icons/logo_new.png \
+  qt/res/icons/overview_icon_new.png \
+  qt/res/icons/qr_ico.png \
+  qt/res/icons/receive_icon_new.png \
+  qt/res/icons/send_icon_new.png \
+  qt/res/icons/trans_icon_new.png \
+  qt/res/icons/wallet_bg.png \
+  qt/res/icons/wallet_shadow_bg.png \
+  qt/res/icons/adress_book_ico.png \
+  qt/res/icons/arrow_to_right.png \
+  qt/res/icons/book_ico.png \
+  qt/res/icons/done_ico.png \
+  qt/res/icons/done_ico_leg.png \
+  qt/res/icons/error_ico.png \
+  qt/res/icons/error_ico_leg.png \
+  qt/res/icons/pending_ico.png \
+  qt/res/icons/pending_ico_leg.png \
+  qt/res/icons/total_send_card_bg.png \
+  qt/res/icons/total_send_card_border.png \
+  qt/res/icons/combo_arrow.png \
+  qt/res/icons/bitcoin_atom.png \
+  qt/res/icons/bitcoin_atom_caption.png
 
 BITCOIN_QT_BASE_CPP = \
   qt/bantablemodel.cpp \
@@ -346,7 +378,9 @@ BITCOIN_QT_WALLET_CPP = \
   qt/walletframe.cpp \
   qt/walletmodel.cpp \
   qt/walletmodeltransaction.cpp \
-  qt/walletview.cpp
+  qt/walletview.cpp \
+  qt/mainmenupanel.cpp \
+  qt/lastsendtransactionview.cpp
 
 BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
 if TARGET_WINDOWS

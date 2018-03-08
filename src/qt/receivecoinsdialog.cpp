@@ -32,15 +32,15 @@ ReceiveCoinsDialog::ReceiveCoinsDialog(const PlatformStyle *_platformStyle, QWid
     ui->setupUi(this);
 
     if (!_platformStyle->getImagesOnButtons()) {
-        ui->clearButton->setIcon(QIcon());
-        ui->receiveButton->setIcon(QIcon());
-        ui->showRequestButton->setIcon(QIcon());
-        ui->removeRequestButton->setIcon(QIcon());
+        //ui->clearButton->setIcon(QIcon());
+        //ui->receiveButton->setIcon(QIcon());
+        //ui->showRequestButton->setIcon(QIcon());
+        //ui->removeRequestButton->setIcon(QIcon());
     } else {
-        ui->clearButton->setIcon(_platformStyle->SingleColorIcon(":/icons/remove"));
-        ui->receiveButton->setIcon(_platformStyle->SingleColorIcon(":/icons/receiving_addresses"));
-        ui->showRequestButton->setIcon(_platformStyle->SingleColorIcon(":/icons/edit"));
-        ui->removeRequestButton->setIcon(_platformStyle->SingleColorIcon(":/icons/remove"));
+        //ui->clearButton->setIcon(_platformStyle->SingleColorIcon(":/icons/remove"));
+        //ui->receiveButton->setIcon(_platformStyle->SingleColorIcon(":/icons/receiving_addresses"));
+        //ui->showRequestButton->setIcon(_platformStyle->SingleColorIcon(":/icons/edit"));
+        //ui->removeRequestButton->setIcon(_platformStyle->SingleColorIcon(":/icons/remove"));
     }
 
     // context menu actions
@@ -87,12 +87,14 @@ void ReceiveCoinsDialog::setModel(WalletModel *_model)
         tableView->setColumnWidth(RecentRequestsTableModel::Date, DATE_COLUMN_WIDTH);
         tableView->setColumnWidth(RecentRequestsTableModel::Label, LABEL_COLUMN_WIDTH);
         tableView->setColumnWidth(RecentRequestsTableModel::Amount, AMOUNT_MINIMUM_COLUMN_WIDTH);
+        tableView->horizontalHeader()->hide();
 
         connect(tableView->selectionModel(),
             SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this,
             SLOT(recentRequestsView_selectionChanged(QItemSelection, QItemSelection)));
         // Last 2 columns are set by the columnResizingFixer, when the table geometry is ready.
         columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer(tableView, AMOUNT_MINIMUM_COLUMN_WIDTH, DATE_COLUMN_WIDTH, this);
+        columnResizingFixer->stretchColumnWidth(RecentRequestsTableModel::Message);
     }
 }
 
@@ -137,7 +139,7 @@ void ReceiveCoinsDialog::on_receiveButton_clicked()
     /* Generate new receiving address */
     address = model->getAddressTableModel()->addRow(AddressTableModel::Receive, label, "");
     SendCoinsRecipient info(address, label,
-        ui->reqAmount->value(), ui->reqMessage->text());
+        ui->reqAmount->value(), ui->reqMessage->toPlainText());
     ReceiveRequestDialog *dialog = new ReceiveRequestDialog(this);
     dialog->setAttribute(Qt::WA_DeleteOnClose);
     dialog->setModel(model->getOptionsModel());
@@ -162,9 +164,9 @@ void ReceiveCoinsDialog::on_recentRequestsView_doubleClicked(const QModelIndex &
 void ReceiveCoinsDialog::recentRequestsView_selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
     // Enable Show/Remove buttons only if anything is selected.
-    bool enable = !ui->recentRequestsView->selectionModel()->selectedRows().isEmpty();
-    ui->showRequestButton->setEnabled(enable);
-    ui->removeRequestButton->setEnabled(enable);
+    //bool enable = !ui->recentRequestsView->selectionModel()->selectedRows().isEmpty();
+    //ui->showRequestButton->setEnabled(enable);
+    //ui->removeRequestButton->setEnabled(enable);
 }
 
 void ReceiveCoinsDialog::on_showRequestButton_clicked()

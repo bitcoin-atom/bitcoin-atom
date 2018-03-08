@@ -18,8 +18,6 @@ QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
     unitlist.append(BTC);
-    unitlist.append(mBTC);
-    unitlist.append(uBTC);
     return unitlist;
 }
 
@@ -40,7 +38,7 @@ QString BitcoinUnits::name(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("BTC");
+    case BTC: return QString("BCA");
     case mBTC: return QString("mBTC");
     case uBTC: return QString::fromUtf8("μBTC");
     default: return QString("???");
@@ -88,7 +86,7 @@ QString BitcoinUnits::format(int unit, const CAmount& nIn, bool fPlus, Separator
         return QString(); // Refuse to format invalid unit
     qint64 n = (qint64)nIn;
     qint64 coin = factor(unit);
-    int num_decimals = decimals(unit);
+    int num_decimals = 2;
     qint64 n_abs = (n > 0 ? n : -n);
     qint64 quotient = n_abs / coin;
     qint64 remainder = n_abs % coin;

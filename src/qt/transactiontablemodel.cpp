@@ -259,6 +259,11 @@ TransactionTableModel::~TransactionTableModel()
     delete priv;
 }
 
+QList<TransactionRecord>& TransactionTableModel::getCahsedTransationcs()
+{
+    return priv->cachedWallet;
+}
+
 /** Updates the column title to "Amount (DisplayUnit)" and emits headerDataChanged() signal for table headers to react. */
 void TransactionTableModel::updateAmountColumnTitle()
 {
@@ -272,6 +277,10 @@ void TransactionTableModel::updateTransaction(const QString &hash, int status, b
     updated.SetHex(hash.toStdString());
 
     priv->updateWallet(updated, status, showTransaction);
+
+    if (onCashedTransactionsUpdate) {
+        onCashedTransactionsUpdate();
+    }
 }
 
 void TransactionTableModel::updateConfirmations()

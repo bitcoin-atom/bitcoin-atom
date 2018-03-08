@@ -19,6 +19,7 @@ class SendCoinsRecipient;
 class TransactionView;
 class WalletModel;
 class AddressBookPage;
+class MainMenuPanel;
 
 QT_BEGIN_NAMESPACE
 class QModelIndex;
@@ -54,6 +55,9 @@ public:
 
     void showOutOfSyncWarning(bool fShow);
 
+    void setSyncProgress(double value, double max);
+
+    void connectMainMenu(MainMenuPanel* _mainMenu);
 private:
     ClientModel *clientModel;
     WalletModel *walletModel;

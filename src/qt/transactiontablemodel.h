@@ -10,10 +10,15 @@
 #include <QAbstractTableModel>
 #include <QStringList>
 
+#include <functional>
+
+typedef std::function<void()> onCashedTransactionsUpdateFunc;
+
 class PlatformStyle;
 class TransactionRecord;
 class TransactionTablePriv;
 class WalletModel;
+class TransactionRecord;
 
 class CWallet;
 
@@ -81,6 +86,8 @@ public:
     QModelIndex index(int row, int column, const QModelIndex & parent = QModelIndex()) const;
     bool processingQueuedTransactions() const { return fProcessingQueuedTransactions; }
 
+    void setOnCashedTransactionsUpdateCallback(onCashedTransactionsUpdateFunc _onCashedTransactionsUpdate) { onCashedTransactionsUpdate = _onCashedTransactionsUpdate;}
+    QList<TransactionRecord>& getCahsedTransationcs();
 private:
     CWallet* wallet;
     WalletModel *walletModel;
@@ -88,6 +95,8 @@ private:
     TransactionTablePriv *priv;
     bool fProcessingQueuedTransactions;
     const PlatformStyle *platformStyle;
+
+    onCashedTransactionsUpdateFunc onCashedTransactionsUpdate;
 
     void subscribeToCoreSignals();
     void unsubscribeFromCoreSignals();

@@ -13,6 +13,7 @@
 #include <qt/recentrequeststablemodel.h>
 #include <qt/sendcoinsdialog.h>
 #include <qt/transactiontablemodel.h>
+#include <qt/transactionrecord.h>
 
 #include <base58.h>
 #include <chain.h>
@@ -50,6 +51,7 @@ WalletModel::WalletModel(const PlatformStyle *platformStyle, CWallet *_wallet, O
 
     addressTableModel = new AddressTableModel(wallet, this);
     transactionTableModel = new TransactionTableModel(platformStyle, wallet, this);
+    transactionTableModel->setOnCashedTransactionsUpdateCallback(std::bind(&WalletModel::onCashedTransactionsUpdateCallback, this));
     recentRequestsTableModel = new RecentRequestsTableModel(wallet, this);
 
     // This timer will be fired repeatedly to update the balance
@@ -165,6 +167,37 @@ void WalletModel::checkBalanceChanged()
         Q_EMIT balanceChanged(newBalance, newUnconfirmedBalance, newImmatureBalance,
                             newWatchOnlyBalance, newWatchUnconfBalance, newWatchImmatureBalance);
     }
+}
+
+int WalletModel::getLastTransactions(TransactionRecord& tr1, TransactionRecord& tr2, TransactionRecord& tr3)
+{
+    int count = 0;
+    LOCK2(cs_main, wallet->cs_wallet);
+    QList<TransactionRecord>& transactions = transactionTableModel->getCahsedTransationcs();
+    for (TransactionRecord& tr : transactions) {
+        if (tr.type == TransactionRecord::SendToAddress || tr.type == TransactionRecord::SendToOther || tr.type == TransactionRecord::SendToSelf) {
+            if (tr.time >= tr1.time) {
+                tr3 = tr2;
+                tr2 = tr1;
+                tr1 = tr;
+                if (count == 0) {
+                    count = 1;
+                }
+            } else if (tr.time >= tr2.time) {
+                tr3 = tr2;
+                tr2 = tr;
+                if (count == 1) {
+                    count = 2;
+                }
+            } else if (tr.time >= tr3.time) {
+                tr3 = tr;
+                if (count == 2) {
+                    count = 3;
+                }
+            }
+        }
+    }
+    return count;
 }
 
 void WalletModel::updateTransaction()
@@ -370,6 +403,11 @@ WalletModel::SendCoinsReturn WalletModel::sendCoins(WalletModelTransaction &tran
     checkBalanceChanged(); // update balance immediately, otherwise there could be a short noticeable delay until pollBalanceChanged hits
 
     return SendCoinsReturn(OK);
+}
+
+void WalletModel::onCashedTransactionsUpdateCallback()
+{
+    Q_EMIT onCashedTransactionUpdate();
 }
 
 OptionsModel *WalletModel::getOptionsModel()

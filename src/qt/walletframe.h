@@ -14,6 +14,7 @@ class PlatformStyle;
 class SendCoinsRecipient;
 class WalletModel;
 class WalletView;
+class MainMenuPanel;
 
 QT_BEGIN_NAMESPACE
 class QStackedWidget;
@@ -45,6 +46,7 @@ public:
 
     void showOutOfSyncWarning(bool fShow);
 
+    void setSyncProgress(double value, double max);
 Q_SIGNALS:
     /** Notify that the user has requested more information about the out-of-sync warning */
     void requestedSyncWarningInfo();
@@ -60,7 +62,7 @@ private:
     const PlatformStyle *platformStyle;
 
     WalletView *currentWalletView();
-
+    MainMenuPanel *mainMenuPanel;
 public Q_SLOTS:
     /** Switch to overview (home) page */
     void gotoOverviewPage();

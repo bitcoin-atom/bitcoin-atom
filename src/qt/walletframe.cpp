@@ -6,6 +6,7 @@
 
 #include <qt/bitcoingui.h>
 #include <qt/walletview.h>
+#include <qt/mainmenupanel.h>
 
 #include <cassert>
 #include <cstdio>
@@ -16,22 +17,40 @@
 WalletFrame::WalletFrame(const PlatformStyle *_platformStyle, BitcoinGUI *_gui) :
     QFrame(_gui),
     gui(_gui),
-    platformStyle(_platformStyle)
+    platformStyle(_platformStyle),
+    mainMenuPanel(nullptr)
 {
-    // Leave HBox hook for adding a list view later
-    QHBoxLayout *walletFrameLayout = new QHBoxLayout(this);
     setContentsMargins(0,0,0,0);
+
+    QHBoxLayout *mainLayout = new QHBoxLayout(this);
+    mainLayout->setContentsMargins(0,0,0,0);
+    setLayout(mainLayout);
+
+    mainMenuPanel = new MainMenuPanel(this, platformStyle, this);
+
     walletStack = new QStackedWidget(this);
-    walletFrameLayout->setContentsMargins(0,0,0,0);
-    walletFrameLayout->addWidget(walletStack);
+    walletStack->setContentsMargins(0,0,0,0);
 
     QLabel *noWallet = new QLabel(tr("No wallet has been loaded."));
     noWallet->setAlignment(Qt::AlignCenter);
     walletStack->addWidget(noWallet);
+
+    mainLayout->addWidget(mainMenuPanel);
+    mainLayout->addWidget(walletStack);
 }
 
 WalletFrame::~WalletFrame()
 {
+    if (mainMenuPanel) {
+        delete mainMenuPanel;
+    }
+}
+
+void WalletFrame::setSyncProgress(double value, double max)
+{
+    QMap<QString, WalletView*>::const_iterator i;
+    for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i)
+        i.value()->setSyncProgress(value, max);
 }
 
 void WalletFrame::setClientModel(ClientModel *_clientModel)
@@ -49,16 +68,18 @@ bool WalletFrame::addWallet(const QString& name, WalletModel *walletModel)
     walletView->setClientModel(clientModel);
     walletView->setWalletModel(walletModel);
     walletView->showOutOfSyncWarning(bOutOfSync);
+    walletView->connectMainMenu(mainMenuPanel);
 
      /* TODO we should goto the currently selected page once dynamically adding wallets is supported */
-    walletView->gotoOverviewPage();
+    //walletView->gotoOverviewPage();
     walletStack->addWidget(walletView);
     mapWalletViews[name] = walletView;
 
     // Ensure a walletView is able to show the main window
     connect(walletView, SIGNAL(showNormalIfMinimized()), gui, SLOT(showNormalIfMinimized()));
-
     connect(walletView, SIGNAL(outOfSyncWarningClicked()), this, SLOT(outOfSyncWarningClicked()));
+
+    mainMenuPanel->onWalletAdded();
 
     return true;
 }

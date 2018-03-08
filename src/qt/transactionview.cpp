@@ -41,26 +41,33 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     QWidget(parent), model(0), transactionProxyModel(0),
     transactionView(0), abandonAction(0), bumpFeeAction(0), columnResizingFixer(0)
 {
-    // Build filter row
-    setContentsMargins(0,0,0,0);
+    // Build filter row  54,40,62,40
+    setContentsMargins(40,34,62,40);
 
     QHBoxLayout *hlayout = new QHBoxLayout();
     hlayout->setContentsMargins(0,0,0,0);
 
     if (platformStyle->getUseExtraSpacing()) {
-        hlayout->setSpacing(5);
-        hlayout->addSpacing(26);
+        hlayout->setSpacing(35);
+        //hlayout->addSpacing(26);
     } else {
-        hlayout->setSpacing(0);
-        hlayout->addSpacing(23);
+        hlayout->setSpacing(25);
+        //hlayout->addSpacing(23);
     }
 
-    watchOnlyWidget = new QComboBox(this);
-    watchOnlyWidget->setFixedWidth(24);
-    watchOnlyWidget->addItem("", TransactionFilterProxy::WatchOnlyFilter_All);
-    watchOnlyWidget->addItem(platformStyle->SingleColorIcon(":/icons/eye_plus"), "", TransactionFilterProxy::WatchOnlyFilter_Yes);
-    watchOnlyWidget->addItem(platformStyle->SingleColorIcon(":/icons/eye_minus"), "", TransactionFilterProxy::WatchOnlyFilter_No);
-    hlayout->addWidget(watchOnlyWidget);
+    //watchOnlyWidget = new QComboBox(this);
+    //watchOnlyWidget->setFixedWidth(24);
+    //watchOnlyWidget->addItem("", TransactionFilterProxy::WatchOnlyFilter_All);
+    //watchOnlyWidget->addItem(platformStyle->SingleColorIcon(":/icons/eye_plus"), "", TransactionFilterProxy::WatchOnlyFilter_Yes);
+    //watchOnlyWidget->addItem(platformStyle->SingleColorIcon(":/icons/eye_minus"), "", TransactionFilterProxy::WatchOnlyFilter_No);
+    //hlayout->addWidget(watchOnlyWidget);
+
+    QLabel* labelChoose = new QLabel(this);
+    labelChoose->setText("Choose");
+    QFont labelChooseFont("Liberation Mono", 12, QFont::Normal);
+    labelChoose->setFont(labelChooseFont);
+    labelChoose->setStyleSheet("color: #b2b2c0;");
+    hlayout->addWidget(labelChoose);
 
     dateWidget = new QComboBox(this);
     if (platformStyle->getUseExtraSpacing()) {
@@ -75,6 +82,23 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     dateWidget->addItem(tr("Last month"), LastMonth);
     dateWidget->addItem(tr("This year"), ThisYear);
     dateWidget->addItem(tr("Range..."), Range);
+    dateWidget->setStyleSheet("QComboBox::down-arrow { \
+                              image: url(:/icons/combo_arrow); \
+                              margin: 2px \
+                          } \
+                          QComboBox::drop-down { \
+                              background-color: transparent; \
+                              border: none; \
+                              padding: 2px; \
+                          } \
+                          QComboBox { \
+                              background-color: rgba(170, 170, 186, 33); \
+                              border-top: 2px inset rgba(0, 0, 0, 33); \
+                              border-left: 2px inset rgba(0, 0, 0, 33); \
+                              border-bottom: 2px solid rgba(170, 170, 186, 33); \
+                              border-right: 2px solid rgba(170, 170, 186, 33); \
+                              border-radius: 4px; \
+                          }");
     hlayout->addWidget(dateWidget);
 
     typeWidget = new QComboBox(this);
@@ -93,15 +117,35 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     typeWidget->addItem(tr("Mined"), TransactionFilterProxy::TYPE(TransactionRecord::Generated));
     typeWidget->addItem(tr("Other"), TransactionFilterProxy::TYPE(TransactionRecord::Other));
 
+    typeWidget->setStyleSheet("QComboBox::down-arrow { \
+                              image: url(:/icons/combo_arrow); \
+                              margin: 2px \
+                          } \
+                          QComboBox::drop-down { \
+                              background-color: transparent; \
+                              border: none; \
+                              padding: 2px; \
+                          } \
+                          QComboBox { \
+                              background-color: rgba(170, 170, 186, 33); \
+                              border-top: 2px inset rgba(0, 0, 0, 33); \
+                              border-left: 2px inset rgba(0, 0, 0, 33); \
+                              border-bottom: 2px solid rgba(170, 170, 186, 33); \
+                              border-right: 2px solid rgba(170, 170, 186, 33); \
+                              border-radius: 4px; \
+                          }");
+
     hlayout->addWidget(typeWidget);
 
     search_widget = new QLineEdit(this);
+    search_widget->setStyleSheet("background-color: rgba(170, 170, 186, 33); border-top: 2px inset rgba(0, 0, 0, 33); border-left: 2px inset rgba(0, 0, 0, 33); border-bottom: 2px solid rgba(170, 170, 186, 33); border-right: 2px solid rgba(170, 170, 186, 33); border-radius: 4px;");
 #if QT_VERSION >= 0x040700
     search_widget->setPlaceholderText(tr("Enter address, transaction id, or label to search"));
 #endif
     hlayout->addWidget(search_widget);
 
     amountWidget = new QLineEdit(this);
+    amountWidget->setStyleSheet("background-color: rgba(170, 170, 186, 33); border-top: 2px inset rgba(0, 0, 0, 33); border-left: 2px inset rgba(0, 0, 0, 33); border-bottom: 2px solid rgba(170, 170, 186, 33); border-right: 2px solid rgba(170, 170, 186, 33); border-radius: 4px;");
 #if QT_VERSION >= 0x040700
     amountWidget->setPlaceholderText(tr("Min amount"));
 #endif
@@ -126,19 +170,24 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
 
     QVBoxLayout *vlayout = new QVBoxLayout(this);
     vlayout->setContentsMargins(0,0,0,0);
-    vlayout->setSpacing(0);
+
+    QLabel* labelTrans = new QLabel(this);
+    labelTrans->setText("Transactions:");
+    QFont labelTransFont("Liberation Mono", 24, QFont::Normal);
+    labelTrans->setFont(labelTransFont);
+    vlayout->addWidget(labelTrans);
 
     QTableView *view = new QTableView(this);
     vlayout->addLayout(hlayout);
     vlayout->addWidget(createDateRangeWidget());
     vlayout->addWidget(view);
-    vlayout->setSpacing(0);
-    int width = view->verticalScrollBar()->sizeHint().width();
+    vlayout->setSpacing(45);
+    //int width = view->verticalScrollBar()->sizeHint().width();
     // Cover scroll bar width with spacing
     if (platformStyle->getUseExtraSpacing()) {
-        hlayout->addSpacing(width+2);
+        //hlayout->addSpacing(width+2);
     } else {
-        hlayout->addSpacing(width);
+        //hlayout->addSpacing(width);
     }
     // Always show scroll bar
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
@@ -184,7 +233,7 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
 
     connect(dateWidget, SIGNAL(activated(int)), this, SLOT(chooseDate(int)));
     connect(typeWidget, SIGNAL(activated(int)), this, SLOT(chooseType(int)));
-    connect(watchOnlyWidget, SIGNAL(activated(int)), this, SLOT(chooseWatchonly(int)));
+    //connect(watchOnlyWidget, SIGNAL(activated(int)), this, SLOT(chooseWatchonly(int)));
     connect(amountWidget, SIGNAL(textChanged(QString)), amount_typing_delay, SLOT(start()));
     connect(amount_typing_delay, SIGNAL(timeout()), this, SLOT(changedAmount()));
     connect(search_widget, SIGNAL(textChanged(QString)), prefix_typing_delay, SLOT(start()));
@@ -322,8 +371,8 @@ void TransactionView::chooseWatchonly(int idx)
 {
     if(!transactionProxyModel)
         return;
-    transactionProxyModel->setWatchOnlyFilter(
-        (TransactionFilterProxy::WatchOnlyFilter)watchOnlyWidget->itemData(idx).toInt());
+    //transactionProxyModel->setWatchOnlyFilter(
+     //   (TransactionFilterProxy::WatchOnlyFilter)watchOnlyWidget->itemData(idx).toInt());
 }
 
 void TransactionView::changedSearch()
@@ -619,6 +668,6 @@ bool TransactionView::eventFilter(QObject *obj, QEvent *event)
 // show/hide column Watch-only
 void TransactionView::updateWatchOnlyColumn(bool fHaveWatchOnly)
 {
-    watchOnlyWidget->setVisible(fHaveWatchOnly);
-    transactionView->setColumnHidden(TransactionTableModel::Watchonly, !fHaveWatchOnly);
+    //watchOnlyWidget->setVisible(fHaveWatchOnly);
+    //transactionView->setColumnHidden(TransactionTableModel::Watchonly, !fHaveWatchOnly);
 }

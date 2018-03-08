@@ -80,13 +80,16 @@ private:
     ClientModel *clientModel;
     WalletFrame *walletFrame;
 
-    UnitDisplayStatusBarControl *unitDisplayControl;
-    QLabel *labelWalletEncryptionIcon;
-    QLabel *labelWalletHDStatusIcon;
-    QLabel *connectionsControl;
-    QLabel *labelBlocksIcon;
-    QLabel *progressBarLabel;
-    QProgressBar *progressBar;
+    bool isVerifProgressFull;
+    double curVerifProgress;
+
+    //UnitDisplayStatusBarControl *unitDisplayControl;
+    //QLabel *labelWalletEncryptionIcon;
+    //QLabel *labelWalletHDStatusIcon;
+    //QLabel *connectionsControl;
+    //QLabel *labelBlocksIcon;
+    //QLabel *progressBarLabel;
+    //QProgressBar *progressBar;
     QProgressDialog *progressDialog;
 
     QMenuBar *appMenuBar;

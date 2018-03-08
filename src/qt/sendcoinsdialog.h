@@ -16,6 +16,8 @@ class ClientModel;
 class PlatformStyle;
 class SendCoinsEntry;
 class SendCoinsRecipient;
+class LastSendTransactionView;
+class QSpacerItem;
 
 namespace Ui {
     class SendCoinsDialog;
@@ -53,6 +55,7 @@ public Q_SLOTS:
     void updateTabsAndLabels();
     void setBalance(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance,
                     const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance);
+    void onCashedTransactionUpdate();
 
 private:
     Ui::SendCoinsDialog *ui;
@@ -62,6 +65,12 @@ private:
     bool fFeeMinimized;
     const PlatformStyle *platformStyle;
 
+    LastSendTransactionView* view1;
+    LastSendTransactionView* view2;
+    LastSendTransactionView* view3;
+    QSpacerItem* spacer1;
+    QSpacerItem* spacer2;
+
     // Process WalletModel::SendCoinsReturn and generate a pair consisting
     // of a message and message flags for use in Q_EMIT message().
     // Additional parameter msgArg can be used via .arg(msgArg).
@@ -70,6 +79,7 @@ private:
     void updateFeeMinimizedLabel();
     // Update the passed in CCoinControl with state from the GUI
     void updateCoinControlState(CCoinControl& ctrl);
+    void updateLastTransactions();
 
 private Q_SLOTS:
     void on_sendButton_clicked();

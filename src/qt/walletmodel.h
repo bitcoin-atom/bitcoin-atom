@@ -21,6 +21,7 @@ class PlatformStyle;
 class RecentRequestsTableModel;
 class TransactionTableModel;
 class WalletModelTransaction;
+class TransactionRecord;
 
 class CCoinControl;
 class CKeyID;
@@ -218,6 +219,7 @@ public:
 
     bool getDefaultWalletRbf() const;
 
+    int getLastTransactions(TransactionRecord& tr1, TransactionRecord& tr2, TransactionRecord& tr3);
 private:
     CWallet *wallet;
     bool fHaveWatchOnly;
@@ -247,6 +249,8 @@ private:
     void unsubscribeFromCoreSignals();
     void checkBalanceChanged();
 
+    void onCashedTransactionsUpdateCallback();
+
 Q_SIGNALS:
     // Signal that balance in wallet changed
     void balanceChanged(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance,
@@ -271,6 +275,8 @@ Q_SIGNALS:
 
     // Watch-only address added
     void notifyWatchonlyChanged(bool fHaveWatchonly);
+
+    void onCashedTransactionUpdate();
 
 public Q_SLOTS:
     /* Wallet status might have changed */

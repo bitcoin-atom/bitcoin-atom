@@ -65,7 +65,7 @@ protected:
 
 private:
     AmountSpinBox *amount;
-    QValueComboBox *unit;
+    //QValueComboBox *unit;
 
 private Q_SLOTS:
     void unitChanged(int idx);
