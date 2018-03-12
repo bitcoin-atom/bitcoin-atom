@@ -52,7 +52,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>Bitcoin atomGUI</name>
+    <name>Bitcoin Atom GUI</name>
     <message>
         <source>&amp;Receiving addresses...</source>
         <translation>Alış adresleri</translation>
@@ -170,6 +170,6 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>Bitcoin atom-core</name>
+    <name>Bitcoin Atom-core</name>
     </context>
 </TS>

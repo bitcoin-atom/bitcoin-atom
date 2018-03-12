@@ -62,12 +62,12 @@
         <translation>Адреса получения</translation>
     </message>
     <message>
-        <source>These are your Bitcoin atom addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Это ваши адреса Bitcoin atom для отправки платежей. Всегда проверяйте сумму и адрес получателя перед отправкой перевода.</translation>
+        <source>These are your Bitcoin Atom addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Это ваши адреса Bitcoin Atom для отправки платежей. Всегда проверяйте сумму и адрес получателя перед отправкой перевода.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin atom addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Это ваши адреса Bitcoin atom для приёма платежей. Рекомендуется использовать новый адрес получения для каждой транзакции.</translation>
+        <source>These are your Bitcoin Atom addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Это ваши адреса Bitcoin Atom для приёма платежей. Рекомендуется использовать новый адрес получения для каждой транзакции.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -232,7 +232,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin atomGUI</name>
+    <name>Bitcoin Atom GUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>&amp;Подписать сообщение...</translation>
@@ -338,8 +338,8 @@
         <translation>Идёт переиндексация блоков на диске...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin atom address</source>
-        <translation>Отправить монеты на указанный адрес Bitcoin atom</translation>
+        <source>Send coins to a Bitcoin Atom address</source>
+        <translation>Отправить монеты на указанный адрес Bitcoin Atom</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -362,8 +362,8 @@
         <translation>&amp;Проверить сообщение...</translation>
     </message>
     <message>
-        <source>Bitcoin atom</source>
-        <translation>Bitcoin atom</translation>
+        <source>Bitcoin Atom</source>
+        <translation>Bitcoin Atom</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -390,12 +390,12 @@
         <translation>Зашифровать приватные ключи, принадлежащие вашему бумажнику</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin atom addresses to prove you own them</source>
-        <translation>Подписать сообщения вашим адресом Bitcoin atom, чтобы доказать, что вы им владеете</translation>
+        <source>Sign messages with your Bitcoin Atom addresses to prove you own them</source>
+        <translation>Подписать сообщения вашим адресом Bitcoin Atom, чтобы доказать, что вы им владеете</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin atom addresses</source>
-        <translation>Проверить сообщения, чтобы удостовериться, что они были подписаны определённым адресом Bitcoin atom</translation>
+        <source>Verify messages to ensure they were signed with specified Bitcoin Atom addresses</source>
+        <translation>Проверить сообщения, чтобы удостовериться, что они были подписаны определённым адресом Bitcoin Atom</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -414,8 +414,8 @@
         <translation>Панель вкладок</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and Bitcoin atom: URIs)</source>
-        <translation>Запросить платежи (создаёт QR-коды и Bitcoin atom: ссылки)</translation>
+        <source>Request payments (generates QR codes and Bitcoin Atom: URIs)</source>
+        <translation>Запросить платежи (создаёт QR-коды и Bitcoin Atom: ссылки)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -426,16 +426,16 @@
         <translation>Показать список использованных адресов и меток получения</translation>
     </message>
     <message>
-        <source>Open a Bitcoin atom: URI or payment request</source>
-        <translation>Открыть Bitcoin atom: URI или запрос платежа</translation>
+        <source>Open a Bitcoin Atom: URI or payment request</source>
+        <translation>Открыть Bitcoin Atom: URI или запрос платежа</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>&amp;Параметры командной строки</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin atom network</source>
-        <translation><numerusform>%n активных соединений с сетью Bitcoin atom</numerusform><numerusform>%n активных соединений с сетью Bitcoin atom</numerusform><numerusform>%n активных соединений с сетью Bitcoin atom</numerusform><numerusform>%n активных соединений с сетью Bitcoin atom</numerusform></translation>
+        <source>%n active connection(s) to Bitcoin Atom network</source>
+        <translation><numerusform>%n активных соединений с сетью Bitcoin Atom</numerusform><numerusform>%n активных соединений с сетью Bitcoin Atom</numerusform><numerusform>%n активных соединений с сетью Bitcoin Atom</numerusform><numerusform>%n активных соединений с сетью Bitcoin Atom</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -478,7 +478,7 @@
         <translation>Синхронизировано</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin atom command-line options</source>
+        <source>Show the %1 help message to get a list with possible Bitcoin Atom command-line options</source>
         <translation>Показать помощь по %1, чтобы получить список доступных параметров командной строки</translation>
     </message>
     <message>
@@ -548,8 +548,8 @@
         <translation>Бумажник &lt;b&gt;зашифрован&lt;/b&gt; и в настоящее время &lt;b&gt;заблокирован&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Bitcoin atom can no longer continue safely and will quit.</source>
-        <translation>Произошла неисправимая ошибка. Bitcoin atom не может безопасно продолжать работу и будет закрыт.</translation>
+        <source>A fatal error occurred. Bitcoin Atom can no longer continue safely and will quit.</source>
+        <translation>Произошла неисправимая ошибка. Bitcoin Atom не может безопасно продолжать работу и будет закрыт.</translation>
     </message>
 </context>
 <context>
@@ -742,8 +742,8 @@
         <translation>Изменить адрес отправки</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin atom address.</source>
-        <translation>Введённый адрес "%1" не является правильным Bitcoin atom-адресом.</translation>
+        <source>The entered address "%1" is not a valid Bitcoin Atom address.</source>
+        <translation>Введённый адрес "%1" не является правильным Bitcoin Atom-адресом.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -851,7 +851,7 @@
         <translation>При первом запуске программы вы можете выбрать где %1 будет хранить свои данные.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Bitcoin atom block chain. At least %2GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <source>%1 will download and store a copy of the Bitcoin Atom block chain. At least %2GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
         <translation>%1 скачает и сохранит копию цепи блоков. Как минимум %2GB будут записаны в этот каталог, и со временем он будет расти. Бумажник также будет сохранен в этом каталоге.</translation>
     </message>
     <message>
@@ -886,7 +886,7 @@
         <translation>Форма</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the Bitcoin atom network, as detailed below.</source>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the Bitcoin Atom network, as detailed below.</source>
         <translation>Недавние транзакции могут быть пока не видны, поэтому ваш баланс может отображаться некорректно. Эта информация станет корректной, как только ваш бумажник будет синхронизирован с сетью, см. подробности ниже.</translation>
     </message>
     <message>
@@ -1048,20 +1048,20 @@
         <translation>&amp;Тратить неподтверждённую сдачу</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin atom client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Автоматически открыть порт для Bitcoin atom-клиента на роутере. Работает только если Ваш роутер поддерживает UPnP, и данная функция включена.</translation>
+        <source>Automatically open the Bitcoin Atom client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Автоматически открыть порт для Bitcoin Atom-клиента на роутере. Работает только если Ваш роутер поддерживает UPnP, и данная функция включена.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
         <translation>Пробросить порт через &amp;UPnP</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin atom network through a SOCKS5 proxy.</source>
-        <translation>Подключаться к сети Bitcoin atom через прокси SOCKS5</translation>
+        <source>Connect to the Bitcoin Atom network through a SOCKS5 proxy.</source>
+        <translation>Подключаться к сети Bitcoin Atom через прокси SOCKS5</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
-        <translation>&amp;Подключаться к сети Bitcoin atom через прокси SOCKS5 (прокси по умолчанию):</translation>
+        <translation>&amp;Подключаться к сети Bitcoin Atom через прокси SOCKS5 (прокси по умолчанию):</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -1096,8 +1096,8 @@
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin atom network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Подключаться к сети Bitcoin atom через прокси SOCKS5 для скрытых сервисов Tor.</translation>
+        <source>Connect to the Bitcoin Atom network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Подключаться к сети Bitcoin Atom через прокси SOCKS5 для скрытых сервисов Tor.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services:</source>
@@ -1195,8 +1195,8 @@
         <translation>Форма</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin atom network after a connection is established, but this process has not completed yet.</source>
-        <translation>Отображаемая информация может быть устаревшей. Ваш бумажник автоматически синхронизируется с сетью Bitcoin atom после подключения, но этот процесс пока не завершён.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin Atom network after a connection is established, but this process has not completed yet.</source>
+        <translation>Отображаемая информация может быть устаревшей. Ваш бумажник автоматически синхронизируется с сетью Bitcoin Atom после подключения, но этот процесс пока не завершён.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1270,8 +1270,8 @@
         <translation>Ошибка запроса платежа</translation>
     </message>
     <message>
-        <source>Cannot start Bitcoin atom: click-to-pay handler</source>
-        <translation>Не удаётся запустить Bitcoin atom: обработчик click-to-pay</translation>
+        <source>Cannot start Bitcoin Atom: click-to-pay handler</source>
+        <translation>Не удаётся запустить Bitcoin Atom: обработчик click-to-pay</translation>
     </message>
     <message>
         <source>URI handling</source>
@@ -1286,8 +1286,8 @@
         <translation>Неверный адрес платежа %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin atom address or malformed URI parameters.</source>
-        <translation>Не удалось обработать URI! Это может быть связано с неверным адресом Bitcoin atom или неправильными параметрами URI.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin Atom address or malformed URI parameters.</source>
+        <translation>Не удалось обработать URI! Это может быть связано с неверным адресом Bitcoin Atom или неправильными параметрами URI.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1380,8 +1380,8 @@
         <translation>Сумма</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin atom address (e.g. %1)</source>
-        <translation>Введите адрес Bitcoin atom (например, %1)</translation>
+        <source>Enter a Bitcoin Atom address (e.g. %1)</source>
+        <translation>Введите адрес Bitcoin Atom (например, %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1804,8 +1804,8 @@
         <translation>&amp;Повторно использовать существующий адрес получения (не рекомендуется)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin atom network.</source>
-        <translation>Необязательное сообщение для запроса платежа, которое будет показано при открытии запроса. Заметьте: сообщение не будет отправлено вместе с платежом через сеть Bitcoin atom.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin Atom network.</source>
+        <translation>Необязательное сообщение для запроса платежа, которое будет показано при открытии запроса. Заметьте: сообщение не будет отправлено вместе с платежом через сеть Bitcoin Atom.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -2037,7 +2037,7 @@
         <translation>Итого как минимум</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for Bitcoin atom transactions than the network can process.</source>
+        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for Bitcoin Atom transactions than the network can process.</source>
         <translation>Уплата минимальной комиссии — не проблема, пока объём транзакций меньше, чем свободное место в блоках. Учтите, однако, что такая транзакция может никогда не подтвердиться, если спрос на транзакции превышает возможности сети по их обработке.</translation>
     </message>
     <message>
@@ -2201,8 +2201,8 @@
         <translation><numerusform>Начало подтверждения ожидается через %n блок.</numerusform><numerusform>Начало подтверждения ожидается через %n блока.</numerusform><numerusform>Начало подтверждения ожидается через %n блоков.</numerusform><numerusform>Начало подтверждения ожидается через %n блоков.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin atom address</source>
-        <translation>Внимание: неверный адрес Bitcoin atom</translation>
+        <source>Warning: Invalid Bitcoin Atom address</source>
+        <translation>Внимание: неверный адрес Bitcoin Atom</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -2244,8 +2244,8 @@
         <translation>Это нормальный платёж.</translation>
     </message>
     <message>
-        <source>The Bitcoin atom address to send the payment to</source>
-        <translation>Адрес Bitcoin atom, на который отправить платёж</translation>
+        <source>The Bitcoin Atom address to send the payment to</source>
+        <translation>Адрес Bitcoin Atom, на который отправить платёж</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -2288,8 +2288,8 @@
         <translation>Введите метку для этого адреса, чтобы добавить его в список использованных</translation>
     </message>
     <message>
-        <source>A message that was attached to the Bitcoin atom: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin atom network.</source>
-        <translation>К Bitcoin atom: URI было прикреплено сообщение, которое будет сохранено вместе с транзакцией для вашего сведения. Заметьте: сообщение не будет отправлено через сеть Bitcoin atom.</translation>
+        <source>A message that was attached to the Bitcoin Atom: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin Atom network.</source>
+        <translation>К Bitcoin Atom: URI было прикреплено сообщение, которое будет сохранено вместе с транзакцией для вашего сведения. Заметьте: сообщение не будет отправлено через сеть Bitcoin Atom.</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2337,8 +2337,8 @@
         <translation>Вы можете подписывать сообщения/соглашения своими адресами, чтобы доказать свою возможность получать BCA на них. Будьте осторожны, не подписывайте что-то неопределённое или случайное, так как фишинговые атаки могут обманным путём заставить вас подписать нежелательные сообщения. Подписывайте только те сообщения, с которыми вы согласны вплоть до мелочей.</translation>
     </message>
     <message>
-        <source>The Bitcoin atom address to sign the message with</source>
-        <translation>Адрес Bitcoin atom, которым подписать сообщение</translation>
+        <source>The Bitcoin Atom address to sign the message with</source>
+        <translation>Адрес Bitcoin Atom, которым подписать сообщение</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2369,8 +2369,8 @@
         <translation>Скопировать текущую подпись в системный буфер обмена</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin atom address</source>
-        <translation>Подписать сообщение, чтобы доказать владение адресом Bitcoin atom</translation>
+        <source>Sign the message to prove you own this Bitcoin Atom address</source>
+        <translation>Подписать сообщение, чтобы доказать владение адресом Bitcoin Atom</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -2393,12 +2393,12 @@
         <translation>Введите ниже адрес получателя, сообщение (убедитесь, что переводы строк, пробелы, табы и т.п. в точности скопированы) и подпись, чтобы проверить сообщение. Убедитесь, что не скопировали лишнего в подпись, по сравнению с самим подписываемым сообщением, чтобы не стать жертвой атаки "man-in-the-middle". Заметьте, что эта операция удостоверяет лишь авторство подписавшего, но не может удостоверить отправителя транзакции.</translation>
     </message>
     <message>
-        <source>The Bitcoin atom address the message was signed with</source>
-        <translation>Адрес Bitcoin atom, которым было подписано сообщение</translation>
+        <source>The Bitcoin Atom address the message was signed with</source>
+        <translation>Адрес Bitcoin Atom, которым было подписано сообщение</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin atom address</source>
-        <translation>Проверить сообщение, чтобы убедиться, что оно было подписано указанным адресом Bitcoin atom</translation>
+        <source>Verify the message to ensure it was signed with the specified Bitcoin Atom address</source>
+        <translation>Проверить сообщение, чтобы убедиться, что оно было подписано указанным адресом Bitcoin Atom</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2988,7 +2988,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin atom-core</name>
+    <name>Bitcoin Atom-core</name>
     <message>
         <source>Options:</source>
         <translation>Параметры:</translation>
@@ -3058,8 +3058,8 @@
         <translation>Невозможно запустить HTTP сервер. Смотри debug лог для подробностей.</translation>
     </message>
     <message>
-        <source>Bitcoin atom Core</source>
-        <translation>Bitcoin atom Core</translation>
+        <source>Bitcoin Atom Core</source>
+        <translation>Bitcoin Atom Core</translation>
     </message>
     <message>
         <source>The %s developers</source>

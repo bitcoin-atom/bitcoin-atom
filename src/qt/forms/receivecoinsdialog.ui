@@ -10,6 +10,9 @@
     <height>629</height>
    </rect>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #e8e8e8;</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
@@ -44,11 +47,16 @@
        </property>
        <property name="font">
         <font>
-         <family>Liberation Mono</family>
-         <pointsize>24</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
+         <family>Roboto Mono</family>
+         <pointsize>-1</pointsize>
+         <weight>62</weight>
+         <bold>true</bold>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 24px;
+font-weight: 500;</string>
        </property>
        <property name="text">
         <string>Receive:</string>
@@ -108,12 +116,36 @@
          </item>
          <item>
           <widget class="QLabel" name="label_6">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>17</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>17</height>
+            </size>
+           </property>
            <property name="font">
             <font>
-             <pointsize>13</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
+             <family>Roboto Mono</family>
+             <pointsize>-1</pointsize>
+             <weight>62</weight>
+             <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 500;</string>
            </property>
            <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
@@ -158,11 +190,16 @@
            </property>
            <property name="font">
             <font>
-             <family>Liberation Mono</family>
-             <pointsize>16</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
+             <family>Roboto Mono</family>
+             <pointsize>-1</pointsize>
+             <weight>62</weight>
+             <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 16px;
+font-weight: 500;</string>
            </property>
            <property name="text">
             <string>Label:</string>
@@ -191,7 +228,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Liberation Mono</family>
+             <family>Roboto Mono</family>
             </font>
            </property>
            <property name="styleSheet">
@@ -200,7 +237,8 @@ border-top: 2px inset rgba(0, 0, 0, 33);
 border-left: 2px inset rgba(0, 0, 0, 33); 
 border-bottom: 2px solid rgba(170, 170, 186, 33); 
 border-right: 2px solid rgba(170, 170, 186, 33); 
-border-radius: 4px;</string>
+border-radius: 4px;
+font-family: &quot;Roboto Mono&quot;;</string>
            </property>
           </widget>
          </item>
@@ -239,11 +277,16 @@ border-radius: 4px;</string>
            </property>
            <property name="font">
             <font>
-             <family>Liberation Mono</family>
-             <pointsize>16</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
+             <family>Roboto Mono</family>
+             <pointsize>-1</pointsize>
+             <weight>62</weight>
+             <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 16px;
+font-weight: 500;</string>
            </property>
            <property name="text">
             <string>Amount:</string>
@@ -272,7 +315,7 @@ border-radius: 4px;</string>
            </property>
            <property name="font">
             <font>
-             <family>Liberation Mono</family>
+             <family>Roboto Mono</family>
             </font>
            </property>
            <property name="styleSheet">
@@ -282,7 +325,8 @@ border-left: 2px inset rgba(0, 0, 0, 33);
 border-bottom: 2px solid rgba(170, 170, 186, 33); 
 border-right: 2px solid rgba(170, 170, 186, 33); 
 border-radius: 4px;
-margin-right: 10px;</string>
+margin-right: 10px;
+font-family: &quot;Roboto Mono&quot;;</string>
            </property>
           </widget>
          </item>
@@ -290,14 +334,17 @@ margin-right: 10px;</string>
           <widget class="QLabel" name="label_5">
            <property name="font">
             <font>
-             <family>Liberation Mono</family>
-             <pointsize>16</pointsize>
-             <weight>75</weight>
+             <family>Roboto Mono</family>
+             <pointsize>-1</pointsize>
+             <weight>62</weight>
              <bold>true</bold>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">color: #b2b2c0;</string>
+            <string notr="true">color: #b2b2c0;
+font-family: &quot;Roboto Mono&quot;;
+font-size: 16px;
+font-weight: 500;</string>
            </property>
            <property name="text">
             <string>BCA</string>
@@ -330,7 +377,7 @@ margin-right: 10px;</string>
         <number>10</number>
        </property>
        <property name="topMargin">
-        <number>50</number>
+        <number>43</number>
        </property>
        <property name="bottomMargin">
         <number>0</number>
@@ -357,11 +404,16 @@ margin-right: 10px;</string>
          </property>
          <property name="font">
           <font>
-           <family>Liberation Mono</family>
-           <pointsize>16</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
+           <family>Roboto Mono</family>
+           <pointsize>-1</pointsize>
+           <weight>62</weight>
+           <bold>true</bold>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 16px;
+font-weight: 500;</string>
          </property>
          <property name="text">
           <string>Message:</string>
@@ -393,7 +445,7 @@ margin-right: 10px;</string>
          </property>
          <property name="font">
           <font>
-           <family>Liberation Mono</family>
+           <family>Roboto Mono</family>
           </font>
          </property>
          <property name="styleSheet">
@@ -402,7 +454,8 @@ border-top: 2px inset rgba(0, 0, 0, 33);
 border-left: 2px inset rgba(0, 0, 0, 33); 
 border-bottom: 2px solid rgba(170, 170, 186, 33); 
 border-right: 2px solid rgba(170, 170, 186, 33); 
-border-radius: 4px;</string>
+border-radius: 4px;
+font-family: &quot;Roboto Mono&quot;;</string>
          </property>
         </widget>
        </item>
@@ -468,9 +521,9 @@ border-radius: 4px;</string>
        </property>
        <property name="font">
         <font>
-         <family>Liberation Mono</family>
-         <pointsize>13</pointsize>
-         <weight>75</weight>
+         <family>Roboto Mono</family>
+         <pointsize>-1</pointsize>
+         <weight>87</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -478,7 +531,10 @@ border-radius: 4px;</string>
         <string notr="true">background-color: #4f9600;
 color: #ffffff;
 border: 2px solid #4f9600;
-border-radius: 4px;</string>
+border-radius: 4px;
+font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 700;</string>
        </property>
        <property name="text">
         <string>REQUEST</string>
@@ -535,16 +591,19 @@ border-radius: 4px;</string>
        </property>
        <property name="font">
         <font>
-         <family>Liberation Mono</family>
-         <pointsize>13</pointsize>
-         <weight>75</weight>
+         <family>Roboto Mono</family>
+         <pointsize>-1</pointsize>
+         <weight>87</weight>
          <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: transparent;
 border: 2px solid #f5a623;
-border-radius: 4px;</string>
+border-radius: 4px;
+font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 700;</string>
        </property>
        <property name="text">
         <string>CLEAR ALL</string>
@@ -578,11 +637,16 @@ border-radius: 4px;</string>
       <widget class="QLabel" name="label_7">
        <property name="font">
         <font>
-         <family>Liberation Mono</family>
-         <pointsize>16</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
+         <family>Roboto Mono</family>
+         <pointsize>-1</pointsize>
+         <weight>62</weight>
+         <bold>true</bold>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 16px;
+font-weight: 500;</string>
        </property>
        <property name="text">
         <string>Request payments history:</string>
@@ -609,6 +673,9 @@ border-radius: 4px;</string>
      <property name="spacing">
       <number>0</number>
      </property>
+     <property name="bottomMargin">
+      <number>17</number>
+     </property>
      <item>
       <widget class="QLabel" name="label_8">
        <property name="sizePolicy">
@@ -631,14 +698,18 @@ border-radius: 4px;</string>
        </property>
        <property name="font">
         <font>
-         <family>Liberation Mono</family>
-         <weight>75</weight>
+         <family>Roboto Mono</family>
+         <pointsize>-1</pointsize>
+         <weight>62</weight>
          <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: #b2b2c0;
-padding-left: 10px;</string>
+        <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 500;
+color: #b2b2c0;
+padding-left: 46px;</string>
        </property>
        <property name="text">
         <string>Date</string>
@@ -667,14 +738,18 @@ padding-left: 10px;</string>
        </property>
        <property name="font">
         <font>
-         <family>Liberation Mono</family>
-         <weight>75</weight>
+         <family>Roboto Mono</family>
+         <pointsize>-1</pointsize>
+         <weight>62</weight>
          <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: #b2b2c0;
-padding-left: 10px;</string>
+        <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 500;
+color: #b2b2c0;
+padding-left: 46px;</string>
        </property>
        <property name="text">
         <string>Label</string>
@@ -691,14 +766,18 @@ padding-left: 10px;</string>
        </property>
        <property name="font">
         <font>
-         <family>Liberation Mono</family>
-         <weight>75</weight>
+         <family>Roboto Mono</family>
+         <pointsize>-1</pointsize>
+         <weight>62</weight>
          <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: #b2b2c0;
-padding-left: 10px;</string>
+        <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 500;
+color: #b2b2c0;
+padding-left: 46px;</string>
        </property>
        <property name="text">
         <string>Message</string>
@@ -727,14 +806,18 @@ padding-left: 10px;</string>
        </property>
        <property name="font">
         <font>
-         <family>Liberation Mono</family>
-         <weight>75</weight>
+         <family>Roboto Mono</family>
+         <pointsize>-1</pointsize>
+         <weight>62</weight>
          <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: #b2b2c0;
-padding-left: 10px;</string>
+        <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 500;
+color: #b2b2c0;
+padding-left: 15px;</string>
        </property>
        <property name="text">
         <string>Requested amount</string>
@@ -752,7 +835,8 @@ border-left: 2px inset rgba(0, 0, 0, 33);
 border-bottom: 2px solid rgba(170, 170, 186, 33); 
 border-right: 2px solid rgba(170, 170, 186, 33); 
 border-radius: 8px;
-padding: 4px;</string>
+padding: 4px;
+font-family: &quot;Roboto Mono&quot;;</string>
      </property>
     </widget>
    </item>

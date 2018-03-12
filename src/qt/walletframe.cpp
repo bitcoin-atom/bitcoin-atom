@@ -13,6 +13,7 @@
 
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QFontDatabase>
 
 WalletFrame::WalletFrame(const PlatformStyle *_platformStyle, BitcoinGUI *_gui) :
     QFrame(_gui),
@@ -20,16 +21,29 @@ WalletFrame::WalletFrame(const PlatformStyle *_platformStyle, BitcoinGUI *_gui) 
     platformStyle(_platformStyle),
     mainMenuPanel(nullptr)
 {
+    QFontDatabase::addApplicationFont(":/fonts/RobotoMono-Bold");
+    QFontDatabase::addApplicationFont(":/fonts/RobotoMono-BoldItalic");
+    QFontDatabase::addApplicationFont(":/fonts/RobotoMono-Italic");
+    QFontDatabase::addApplicationFont(":/fonts/RobotoMono-Light");
+    QFontDatabase::addApplicationFont(":/fonts/RobotoMono-LightItalic");
+    QFontDatabase::addApplicationFont(":/fonts/RobotoMono-Medium");
+    QFontDatabase::addApplicationFont(":/fonts/RobotoMono-MediumItalic");
+    QFontDatabase::addApplicationFont(":/fonts/RobotoMono-Regular");
+    QFontDatabase::addApplicationFont(":/fonts/RobotoMono-Thin");
+    QFontDatabase::addApplicationFont(":/fonts/RobotoMono-ThinItalic");
+
     setContentsMargins(0,0,0,0);
 
     QHBoxLayout *mainLayout = new QHBoxLayout(this);
     mainLayout->setContentsMargins(0,0,0,0);
+    mainLayout->setSpacing(0);
     setLayout(mainLayout);
 
     mainMenuPanel = new MainMenuPanel(this, platformStyle, this);
 
     walletStack = new QStackedWidget(this);
     walletStack->setContentsMargins(0,0,0,0);
+    walletStack->setStyleSheet("background-color: #e8e8e8;");
 
     QLabel *noWallet = new QLabel(tr("No wallet has been loaded."));
     noWallet->setAlignment(Qt::AlignCenter);

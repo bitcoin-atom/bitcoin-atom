@@ -76,7 +76,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>Bitcoin atomGUI</name>
+    <name>Bitcoin Atom GUI</name>
     <message>
         <source>Synchronizing with network...</source>
         <translation>Синхронизација са мрежом у току...</translation>
@@ -130,8 +130,8 @@
         <translation>Промени &amp;лозинку...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin atom address</source>
-        <translation>Пошаљите новац на Bitcoin atom адресу</translation>
+        <source>Send coins to a Bitcoin Atom address</source>
+        <translation>Пошаљите новац на Bitcoin Atom адресу</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
@@ -442,7 +442,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>Bitcoin atom-core</name>
+    <name>Bitcoin Atom-core</name>
     <message>
         <source>Options:</source>
         <translation>Opcije</translation>

@@ -64,7 +64,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>Bitcoin atomGUI</name>
+    <name>Bitcoin Atom GUI</name>
     <message>
         <source>Synchronizing with network...</source>
         <translation>Sincronizando con la red...</translation>
@@ -126,8 +126,8 @@
         <translation>Abrir &amp;URL...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin atom address</source>
-        <translation>Enviando monedas a una dirección de Bitcoin atom</translation>
+        <source>Send coins to a Bitcoin Atom address</source>
+        <translation>Enviando monedas a una dirección de Bitcoin Atom</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
@@ -146,8 +146,8 @@
         <translation>&amp;Verificar Mensaje...</translation>
     </message>
     <message>
-        <source>Bitcoin atom</source>
-        <translation>Bitcoin atom</translation>
+        <source>Bitcoin Atom</source>
+        <translation>Bitcoin Atom</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -294,10 +294,10 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>Bitcoin atom-core</name>
+    <name>Bitcoin Atom-core</name>
     <message>
-        <source>Bitcoin atom Core</source>
-        <translation>Bitcoin atom Core</translation>
+        <source>Bitcoin Atom Core</source>
+        <translation>Bitcoin Atom Core</translation>
     </message>
     <message>
         <source>Insufficient funds</source>

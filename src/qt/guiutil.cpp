@@ -106,7 +106,7 @@ QFont fixedPitchFont()
 static const uint8_t dummydata[] = {0xeb,0x15,0x23,0x1d,0xfc,0xeb,0x60,0x92,0x58,0x86,0xb6,0x7d,0x06,0x52,0x99,0x92,0x59,0x15,0xae,0xb1,0x72,0xc0,0x66,0x47};
 
 // Generate a dummy address with invalid CRC, starting with the network prefix.
-static std::string DummyAddress(const CChainParams &params)
+/*static std::string DummyAddress(const CChainParams &params)
 {
     std::vector<unsigned char> sourcedata = params.Base58Prefix(CChainParams::PUBKEY_ADDRESS);
     sourcedata.insert(sourcedata.end(), dummydata, dummydata + sizeof(dummydata));
@@ -118,7 +118,7 @@ static std::string DummyAddress(const CChainParams &params)
         sourcedata[sourcedata.size()-1] += 1;
     }
     return "";
-}
+}*/
 
 void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 {
@@ -128,8 +128,8 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 #if QT_VERSION >= 0x040700
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter a Bitcoin atom address (e.g. %1)").arg(
-        QString::fromStdString(DummyAddress(Params()))));
+    widget->setPlaceholderText(QObject::tr("Enter a Bitcoin Atom address (e.g. %1)").arg(
+        "ATSECm5ouBcmYFd4NNi49xyf7dJKXEQ34M"));
 #endif
     widget->setValidator(new BitcoinAddressEntryValidator(parent));
     widget->setCheckValidator(new BitcoinAddressCheckValidator(parent));

@@ -249,17 +249,17 @@ void SendCoinsDialog::updateLastTransactions()
         view2->setVisible(false);
         view3->setVisible(false);
     }
-    view1->setAmount(tr1.debit);
+    view1->setAmount(tr1.debit + tr1.credit);
     view1->setStatus(tr1.status);
     view1->setTime(tr1.time);
     view1->setAdress(tr1.address);
 
-    view2->setAmount(tr2.debit);
+    view2->setAmount(tr2.debit + tr2.credit);
     view2->setStatus(tr2.status);
     view2->setTime(tr2.time);
     view2->setAdress(tr2.address);
 
-    view3->setAmount(tr3.debit);
+    view3->setAmount(tr3.debit + tr3.credit);
     view3->setStatus(tr3.status);
     view3->setTime(tr3.time);
     view3->setAdress(tr3.address);
@@ -586,7 +586,7 @@ void SendCoinsDialog::setBalance(const CAmount& balance, const CAmount& unconfir
 
     if(model && model->getOptionsModel())
     {
-        ui->labelBalance->setText(BitcoinUnits::format(model->getOptionsModel()->getDisplayUnit(), balance));
+        ui->labelBalance->setText(BitcoinUnits::format(BitcoinUnits::Unit::BTC_rounded, balance));
     }
 }
 

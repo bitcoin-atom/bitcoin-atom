@@ -176,7 +176,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>Bitcoin atomGUI</name>
+    <name>Bitcoin Atom GUI</name>
     <message>
         <source>Synchronizing with network...</source>
         <translation>Sinchroniseer met die netwerk ...</translation>
@@ -214,8 +214,8 @@
         <translation>&amp;Opsies</translation>
     </message>
     <message>
-        <source>Bitcoin atom</source>
-        <translation>Bitcoin atom</translation>
+        <source>Bitcoin Atom</source>
+        <translation>Bitcoin Atom</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -770,7 +770,7 @@
     </message>
     </context>
 <context>
-    <name>Bitcoin atom-core</name>
+    <name>Bitcoin Atom-core</name>
     <message>
         <source>Options:</source>
         <translation>Opsies:</translation>

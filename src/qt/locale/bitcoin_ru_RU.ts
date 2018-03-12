@@ -152,7 +152,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>Bitcoin atomGUI</name>
+    <name>Bitcoin Atom GUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Подписать &amp;сообщение...</translation>
@@ -230,8 +230,8 @@
         <translation>&amp;Проверить сообщение...</translation>
     </message>
     <message>
-        <source>Bitcoin atom</source>
-        <translation>Bitcoin atom Core</translation>
+        <source>Bitcoin Atom</source>
+        <translation>Bitcoin Atom Core</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -442,8 +442,8 @@
         <translation>Пробросить порт через &amp;UPnP</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin atom network through a SOCKS5 proxy.</source>
-        <translation>Подключится к сети Bitcoin atom через SOCKS5 прокси.</translation>
+        <source>Connect to the Bitcoin Atom network through a SOCKS5 proxy.</source>
+        <translation>Подключится к сети Bitcoin Atom через SOCKS5 прокси.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -522,8 +522,8 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>Enter a Bitcoin atom address (e.g. %1)</source>
-        <translation>Введите Bitcoin atom-адрес (напр. %1)</translation>
+        <source>Enter a Bitcoin Atom address (e.g. %1)</source>
+        <translation>Введите Bitcoin Atom-адрес (напр. %1)</translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
@@ -830,14 +830,14 @@
     </message>
     </context>
 <context>
-    <name>Bitcoin atom-core</name>
+    <name>Bitcoin Atom-core</name>
     <message>
-        <source>Bitcoin atom Core</source>
-        <translation>Bitcoin atom Core</translation>
+        <source>Bitcoin Atom Core</source>
+        <translation>Bitcoin Atom Core</translation>
     </message>
     <message>
         <source>Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool, useful e.g. for a gateway</source>
-        <translation>Bitcoin atom-core</translation>
+        <translation>Bitcoin Atom-core</translation>
     </message>
     <message>
         <source>Information</source>

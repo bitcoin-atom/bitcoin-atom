@@ -62,12 +62,12 @@
         <translation>Ontvangstadressen</translation>
     </message>
     <message>
-        <source>These are your Bitcoin atom addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Dit zijn uw Bitcoin atomadressen om betalingen mee te verzenden. Controleer altijd het bedrag en het ontvangstadres voordat u uw BCA verzendt.</translation>
+        <source>These are your Bitcoin Atom addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Dit zijn uw Bitcoin Atomadressen om betalingen mee te verzenden. Controleer altijd het bedrag en het ontvangstadres voordat u uw BCA verzendt.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin atom addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Dit zijn uw Bitcoin atom-adressen waarmee u betalingen kunt ontvangen. We raden u aan om een nieuw ontvangstadres voor elke transactie te gebruiken.</translation>
+        <source>These are your Bitcoin Atom addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Dit zijn uw Bitcoin Atom-adressen waarmee u betalingen kunt ontvangen. We raden u aan om een nieuw ontvangstadres voor elke transactie te gebruiken.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -232,7 +232,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin atomGUI</name>
+    <name>Bitcoin Atom GUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>&amp;Onderteken bericht...</translation>
@@ -338,8 +338,8 @@
         <translation>Bezig met herindexeren van blokken op harde schijf...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin atom address</source>
-        <translation>Verstuur munten naar een Bitcoin atomadres</translation>
+        <source>Send coins to a Bitcoin Atom address</source>
+        <translation>Verstuur munten naar een Bitcoin Atomadres</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -362,8 +362,8 @@
         <translation>&amp;Verifiëer bericht...</translation>
     </message>
     <message>
-        <source>Bitcoin atom</source>
-        <translation>Bitcoin atom</translation>
+        <source>Bitcoin Atom</source>
+        <translation>Bitcoin Atom</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -390,12 +390,12 @@
         <translation>Versleutel de geheime sleutels die bij uw portemonnee horen</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin atom addresses to prove you own them</source>
-        <translation>Onderteken berichten met uw Bitcoin atomadressen om te bewijzen dat u deze adressen bezit</translation>
+        <source>Sign messages with your Bitcoin Atom addresses to prove you own them</source>
+        <translation>Onderteken berichten met uw Bitcoin Atomadressen om te bewijzen dat u deze adressen bezit</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin atom addresses</source>
-        <translation>Verifiëer handtekeningen om zeker te zijn dat de berichten zijn ondertekend met de gespecificeerde Bitcoin atomadressen</translation>
+        <source>Verify messages to ensure they were signed with specified Bitcoin Atom addresses</source>
+        <translation>Verifiëer handtekeningen om zeker te zijn dat de berichten zijn ondertekend met de gespecificeerde Bitcoin Atomadressen</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -414,8 +414,8 @@
         <translation>Tab-werkbalk</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and Bitcoin atom: URIs)</source>
-        <translation>Vraag betaling aan (genereert QR-codes en Bitcoin atom: URI's)</translation>
+        <source>Request payments (generates QR codes and Bitcoin Atom: URIs)</source>
+        <translation>Vraag betaling aan (genereert QR-codes en Bitcoin Atom: URI's)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -426,16 +426,16 @@
         <translation>Toon de lijst met gebruikte ontvangst adressen en labels</translation>
     </message>
     <message>
-        <source>Open a Bitcoin atom: URI or payment request</source>
-        <translation>Open een Bitcoin atom: URI of betalingsverzoek</translation>
+        <source>Open a Bitcoin Atom: URI or payment request</source>
+        <translation>Open een Bitcoin Atom: URI of betalingsverzoek</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>&amp;Opdrachtregelopties</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin atom network</source>
-        <translation><numerusform>%n actieve verbinding met Bitcoin atomnetwerk</numerusform><numerusform>%n actieve verbindingen met Bitcoin atomnetwerk</numerusform></translation>
+        <source>%n active connection(s) to Bitcoin Atom network</source>
+        <translation><numerusform>%n actieve verbinding met Bitcoin Atomnetwerk</numerusform><numerusform>%n actieve verbindingen met Bitcoin Atomnetwerk</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -478,8 +478,8 @@
         <translation>Bijgewerkt</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin atom command-line options</source>
-        <translation>Toon het %1 hulpbericht om een lijst te krijgen met mogelijke Bitcoin atom commandoregelopties</translation>
+        <source>Show the %1 help message to get a list with possible Bitcoin Atom command-line options</source>
+        <translation>Toon het %1 hulpbericht om een lijst te krijgen met mogelijke Bitcoin Atom commandoregelopties</translation>
     </message>
     <message>
         <source>%1 client</source>
@@ -548,8 +548,8 @@
         <translation>Portemonnee is &lt;b&gt;versleuteld&lt;/b&gt; en momenteel &lt;b&gt;gesloten&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Bitcoin atom can no longer continue safely and will quit.</source>
-        <translation>Een fatale fout heeft zich voorgedaan. Bitcoin atom kan niet veilig worden verdergezet en wordt afgesloten.</translation>
+        <source>A fatal error occurred. Bitcoin Atom can no longer continue safely and will quit.</source>
+        <translation>Een fatale fout heeft zich voorgedaan. Bitcoin Atom kan niet veilig worden verdergezet en wordt afgesloten.</translation>
     </message>
 </context>
 <context>
@@ -742,8 +742,8 @@
         <translation>Bewerk verzendadres</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin atom address.</source>
-        <translation>Het opgegeven adres "%1" is een ongeldig Bitcoin atomadres.</translation>
+        <source>The entered address "%1" is not a valid Bitcoin Atom address.</source>
+        <translation>Het opgegeven adres "%1" is een ongeldig Bitcoin Atomadres.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -851,8 +851,8 @@
         <translation>Omdat dit de eerste keer is dat het programma gestart is, kunt u nu kiezen waar %1 de data moet opslaan.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Bitcoin atom block chain. At least %2GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>%1 zal een kopie van de Bitcoin atom blokketen downloaden en opslaan. Tenminste %2 GB aan data wordt opgeslagen in deze map en het zal groeien in de tijd. De portemonnee wordt ook in deze map opgeslagen.</translation>
+        <source>%1 will download and store a copy of the Bitcoin Atom block chain. At least %2GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>%1 zal een kopie van de Bitcoin Atom blokketen downloaden en opslaan. Tenminste %2 GB aan data wordt opgeslagen in deze map en het zal groeien in de tijd. De portemonnee wordt ook in deze map opgeslagen.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -886,8 +886,8 @@
         <translation>Vorm</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the Bitcoin atom network, as detailed below.</source>
-        <translation>Recente transacties zijn mogelijk nog niet zichtbaar. De balans van de geldbeugel is daarom mogelijk niet correct. Deze informatie is correct van zodra de synchronisatie met het Bitcoin atom-netwerk werd voltooid, zoals onderaan beschreven.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the Bitcoin Atom network, as detailed below.</source>
+        <translation>Recente transacties zijn mogelijk nog niet zichtbaar. De balans van de geldbeugel is daarom mogelijk niet correct. Deze informatie is correct van zodra de synchronisatie met het Bitcoin Atom-netwerk werd voltooid, zoals onderaan beschreven.</translation>
     </message>
     <message>
         <source>Attempting to spend BCA that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
@@ -1048,16 +1048,16 @@
         <translation>&amp;Spendeer onbevestigd wisselgeld</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin atom client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Open de Bitcoin atompoort automatisch op de router. Dit werkt alleen als de router UPnP ondersteunt en het aanstaat.</translation>
+        <source>Automatically open the Bitcoin Atom client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Open de Bitcoin Atompoort automatisch op de router. Dit werkt alleen als de router UPnP ondersteunt en het aanstaat.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
         <translation>Portmapping via &amp;UPnP</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin atom network through a SOCKS5 proxy.</source>
-        <translation>Verbind met het Bitcoin atomnetwerk via een SOCKS5 proxy.</translation>
+        <source>Connect to the Bitcoin Atom network through a SOCKS5 proxy.</source>
+        <translation>Verbind met het Bitcoin Atomnetwerk via een SOCKS5 proxy.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1096,8 +1096,8 @@
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin atom network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Maak verbinding met Bitcoin atomnetwerk door een aparte SOCKS5-proxy voor verborgen diensten van Tor.</translation>
+        <source>Connect to the Bitcoin Atom network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Maak verbinding met Bitcoin Atomnetwerk door een aparte SOCKS5-proxy voor verborgen diensten van Tor.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services:</source>
@@ -1195,8 +1195,8 @@
         <translation>Vorm</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin atom network after a connection is established, but this process has not completed yet.</source>
-        <translation>De weergegeven informatie kan verouderd zijn. Uw portemonnee synchroniseert automatisch met het Bitcoin atomnetwerk nadat een verbinding is gelegd, maar dit proces is nog niet voltooid.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin Atom network after a connection is established, but this process has not completed yet.</source>
+        <translation>De weergegeven informatie kan verouderd zijn. Uw portemonnee synchroniseert automatisch met het Bitcoin Atomnetwerk nadat een verbinding is gelegd, maar dit proces is nog niet voltooid.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1270,8 +1270,8 @@
         <translation>Fout bij betalingsverzoek</translation>
     </message>
     <message>
-        <source>Cannot start Bitcoin atom: click-to-pay handler</source>
-        <translation>Kan Bitcoin atom niet starten: click-to-pay handler</translation>
+        <source>Cannot start Bitcoin Atom: click-to-pay handler</source>
+        <translation>Kan Bitcoin Atom niet starten: click-to-pay handler</translation>
     </message>
     <message>
         <source>URI handling</source>
@@ -1286,8 +1286,8 @@
         <translation>Ongeldig betalingsadres %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin atom address or malformed URI parameters.</source>
-        <translation>URI kan niet verwerkt worden! Dit kan het gevolg zijn van een ongeldig Bitcoin atom adres of misvormde URI parameters.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin Atom address or malformed URI parameters.</source>
+        <translation>URI kan niet verwerkt worden! Dit kan het gevolg zijn van een ongeldig Bitcoin Atom adres of misvormde URI parameters.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1380,8 +1380,8 @@
         <translation>Bedrag</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin atom address (e.g. %1)</source>
-        <translation>Voer een Bitcoin atomadres in (bijv. %1)</translation>
+        <source>Enter a Bitcoin Atom address (e.g. %1)</source>
+        <translation>Voer een Bitcoin Atomadres in (bijv. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1804,8 +1804,8 @@
         <translation>H&amp;ergebruik en bestaand ontvangstadres (niet aanbevolen)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin atom network.</source>
-        <translation>Een optioneel bericht om bij te voegen aan het betalingsverzoek, welke zal getoond worden wanneer het verzoek is geopend. Opmerking: Het bericht zal niet worden verzonden met de betaling over het Bitcoin atomnetwerk.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin Atom network.</source>
+        <translation>Een optioneel bericht om bij te voegen aan het betalingsverzoek, welke zal getoond worden wanneer het verzoek is geopend. Opmerking: Het bericht zal niet worden verzonden met de betaling over het Bitcoin Atomnetwerk.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -2037,8 +2037,8 @@
         <translation>totaal ten minste</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for Bitcoin atom transactions than the network can process.</source>
-        <translation>De minimale toeslag betalen is prima mits het transactievolume kleiner is dan de ruimte in de blokken. Let wel op dat dit tot gevolg kan hebben dat een transactie nooit wordt bevestigd als er meer vraag is naar Bitcoin atomtransacties dan het netwerk kan verwerken.</translation>
+        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for Bitcoin Atom transactions than the network can process.</source>
+        <translation>De minimale toeslag betalen is prima mits het transactievolume kleiner is dan de ruimte in de blokken. Let wel op dat dit tot gevolg kan hebben dat een transactie nooit wordt bevestigd als er meer vraag is naar Bitcoin Atomtransacties dan het netwerk kan verwerken.</translation>
     </message>
     <message>
         <source>(read the tooltip)</source>
@@ -2201,8 +2201,8 @@
         <translation><numerusform>Schatting is dat bevestiging begint over %n blok.</numerusform><numerusform>Schatting is dat bevestiging begint over %n blokken.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin atom address</source>
-        <translation>Waarschuwing: Ongeldig Bitcoin atomadres</translation>
+        <source>Warning: Invalid Bitcoin Atom address</source>
+        <translation>Waarschuwing: Ongeldig Bitcoin Atomadres</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -2244,8 +2244,8 @@
         <translation>Dit is een normale betaling.</translation>
     </message>
     <message>
-        <source>The Bitcoin atom address to send the payment to</source>
-        <translation>Het Bitcoin atomadres om betaling aan te versturen</translation>
+        <source>The Bitcoin Atom address to send the payment to</source>
+        <translation>Het Bitcoin Atomadres om betaling aan te versturen</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -2288,8 +2288,8 @@
         <translation>Vul een label voor dit adres in om het aan de lijst met gebruikte adressen toe te voegen</translation>
     </message>
     <message>
-        <source>A message that was attached to the Bitcoin atom: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin atom network.</source>
-        <translation>Een bericht dat werd toegevoegd aan de Bitcoin atom: URI welke wordt opgeslagen met de transactie ter referentie. Opmerking: Dit bericht zal niet worden verzonden over het Bitcoin atomnetwerk.</translation>
+        <source>A message that was attached to the Bitcoin Atom: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin Atom network.</source>
+        <translation>Een bericht dat werd toegevoegd aan de Bitcoin Atom: URI welke wordt opgeslagen met de transactie ter referentie. Opmerking: Dit bericht zal niet worden verzonden over het Bitcoin Atomnetwerk.</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2337,8 +2337,8 @@
         <translation>U kunt berichten/overeenkomsten ondertekenen met uw adres om te bewijzen dat u BCA kunt versturen. Wees voorzichtig met het ondertekenen van iets vaags of willekeurigs, omdat phishingaanvallen u kunnen proberen te misleiden tot het ondertekenen van overeenkomsten om uw identiteit aan hen toe te vertrouwen. Onderteken alleen volledig gedetailleerde verklaringen voordat u akkoord gaat.</translation>
     </message>
     <message>
-        <source>The Bitcoin atom address to sign the message with</source>
-        <translation>Het Bitcoin atomadres om bericht mee te ondertekenen</translation>
+        <source>The Bitcoin Atom address to sign the message with</source>
+        <translation>Het Bitcoin Atomadres om bericht mee te ondertekenen</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2369,8 +2369,8 @@
         <translation>Kopieer de huidige handtekening naar het systeemklembord</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin atom address</source>
-        <translation>Onderteken een bericht om te bewijzen dat u een bepaald Bitcoin atomadres bezit</translation>
+        <source>Sign the message to prove you own this Bitcoin Atom address</source>
+        <translation>Onderteken een bericht om te bewijzen dat u een bepaald Bitcoin Atomadres bezit</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -2393,12 +2393,12 @@
         <translation>Voer het adres van de ontvanger in, bericht (zorg ervoor dat de regeleinden, spaties, tabs etc. precies kloppen) en onderteken onderaan om het bericht te verifiëren. Wees voorzicht om niet meer in de ondertekening te lezen dan in het getekende bericht zelf, om te voorkomen dat je wordt aangevallen met een man-in-the-middle attack. Houd er mee rekening dat dit alleen de ondertekende partij bewijst met het ontvangen adres, er kan niet bewezen worden dat er een transactie heeft plaatsgevonden!</translation>
     </message>
     <message>
-        <source>The Bitcoin atom address the message was signed with</source>
-        <translation>Het Bitcoin atomadres waarmee het bericht ondertekend is</translation>
+        <source>The Bitcoin Atom address the message was signed with</source>
+        <translation>Het Bitcoin Atomadres waarmee het bericht ondertekend is</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin atom address</source>
-        <translation>Controleer een bericht om te verifiëren dat het gespecificeerde Bitcoin atomadres het bericht heeft ondertekend.</translation>
+        <source>Verify the message to ensure it was signed with the specified Bitcoin Atom address</source>
+        <translation>Controleer een bericht om te verifiëren dat het gespecificeerde Bitcoin Atomadres het bericht heeft ondertekend.</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2984,7 +2984,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin atom-core</name>
+    <name>Bitcoin Atom-core</name>
     <message>
         <source>Options:</source>
         <translation>Opties:</translation>
@@ -3054,8 +3054,8 @@
         <translation>Niet mogelijk ok HTTP-server te starten. Zie debuglogboek voor details.</translation>
     </message>
     <message>
-        <source>Bitcoin atom Core</source>
-        <translation>Bitcoin atom Core</translation>
+        <source>Bitcoin Atom Core</source>
+        <translation>Bitcoin Atom Core</translation>
     </message>
     <message>
         <source>The %s developers</source>

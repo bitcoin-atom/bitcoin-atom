@@ -43,7 +43,10 @@ WalletView::WalletView(const PlatformStyle *_platformStyle, QWidget *parent):
     overviewPage->setContentsMargins(0,0,0,0);
 
     transactionsPage = new QWidget(this);
+    transactionsPage->setContentsMargins(0,0,0,0);
+    transactionsPage->setStyleSheet("background-color: #e8e8e8;");
     QVBoxLayout *vbox = new QVBoxLayout();
+    vbox->setContentsMargins(0,0,0,0);
     QHBoxLayout *hbox_buttons = new QHBoxLayout();
     transactionView = new TransactionView(platformStyle, this);
     vbox->addWidget(transactionView);

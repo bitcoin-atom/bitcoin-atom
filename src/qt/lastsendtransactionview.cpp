@@ -23,7 +23,7 @@ void LastSendTransactionView::setAmount(const CAmount& balance)
     if (amount < 0) {
         amount = -amount;
     }
-    ui->amountLabel->setText(BitcoinUnits::format(BitcoinUnits::BTC, amount, false, BitcoinUnits::separatorAlways));
+    ui->amountLabel->setText(BitcoinUnits::format(BitcoinUnits::Unit::BTC_rounded, amount, false, BitcoinUnits::separatorAlways));
 }
 
 void LastSendTransactionView::setStatus(TransactionStatus& status)

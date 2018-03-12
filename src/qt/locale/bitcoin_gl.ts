@@ -64,7 +64,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>Bitcoin atomGUI</name>
+    <name>Bitcoin Atom GUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>&amp;Asinar mensaxe...</translation>
@@ -130,8 +130,8 @@
         <translation>Reindexando bloques no disco...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin atom address</source>
-        <translation>Enviar moedas a unha dirección Bitcoin atom</translation>
+        <source>Send coins to a Bitcoin Atom address</source>
+        <translation>Enviar moedas a unha dirección Bitcoin Atom</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -154,8 +154,8 @@
         <translation>&amp;Verificar mensaxe...</translation>
     </message>
     <message>
-        <source>Bitcoin atom</source>
-        <translation>Bitcoin atom</translation>
+        <source>Bitcoin Atom</source>
+        <translation>Bitcoin Atom</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -182,12 +182,12 @@
         <translation>Encriptar as claves privadas que pertencen ao teu moedeiro</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin atom addresses to prove you own them</source>
-        <translation>Asina mensaxes coas túas direccións Bitcoin atom para probar que te pertencen</translation>
+        <source>Sign messages with your Bitcoin Atom addresses to prove you own them</source>
+        <translation>Asina mensaxes coas túas direccións Bitcoin Atom para probar que te pertencen</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin atom addresses</source>
-        <translation>Verificar mensaxes para asegurar que foron asinados con direccións Bitcoin atom dadas.</translation>
+        <source>Verify messages to ensure they were signed with specified Bitcoin Atom addresses</source>
+        <translation>Verificar mensaxes para asegurar que foron asinados con direccións Bitcoin Atom dadas.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -206,8 +206,8 @@
         <translation>Barra de ferramentas</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and Bitcoin atom: URIs)</source>
-        <translation>Solicitar pagos (xenera códigos QR e Bitcoin atom: URIs)</translation>
+        <source>Request payments (generates QR codes and Bitcoin Atom: URIs)</source>
+        <translation>Solicitar pagos (xenera códigos QR e Bitcoin Atom: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -218,8 +218,8 @@
         <translation>Amosar a listaxe de etiquetas e direccións para recibir empregadas</translation>
     </message>
     <message>
-        <source>Open a Bitcoin atom: URI or payment request</source>
-        <translation>Abrir un Bitcoin atom: URI ou solicitude de pago</translation>
+        <source>Open a Bitcoin Atom: URI or payment request</source>
+        <translation>Abrir un Bitcoin Atom: URI ou solicitude de pago</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -466,8 +466,8 @@
         <translation>Moedeiro</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin atom client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Abrir automáticamente o porto do cliente Bitcoin atom no router. Esto so funciona se o teu router soporta UPnP e está habilitado.</translation>
+        <source>Automatically open the Bitcoin Atom client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Abrir automáticamente o porto do cliente Bitcoin Atom no router. Esto so funciona se o teu router soporta UPnP e está habilitado.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -545,8 +545,8 @@
         <translation>Formulario</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin atom network after a connection is established, but this process has not completed yet.</source>
-        <translation>A información amosada por estar desactualizada. O teu moedeiro sincronízase automáticamente coa rede Bitcoin atom despois de que se estableza unha conexión, pero este proceso non está todavía rematado.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin Atom network after a connection is established, but this process has not completed yet.</source>
+        <translation>A información amosada por estar desactualizada. O teu moedeiro sincronízase automáticamente coa rede Bitcoin Atom despois de que se estableza unha conexión, pero este proceso non está todavía rematado.</translation>
     </message>
     <message>
         <source>Your current spendable balance</source>
@@ -927,8 +927,8 @@
         <translation>Copiar a sinatura actual ao portapapeis do sistema</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin atom address</source>
-        <translation>Asina a mensaxe para probar que posees esta dirección Bitcoin atom</translation>
+        <source>Sign the message to prove you own this Bitcoin Atom address</source>
+        <translation>Asina a mensaxe para probar que posees esta dirección Bitcoin Atom</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -947,8 +947,8 @@
         <translation>&amp;Verificar Mensaxe</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin atom address</source>
-        <translation>Verificar a mensaxe para asegurar que foi asinada coa dirección Bitcoin atom especificada</translation>
+        <source>Verify the message to ensure it was signed with the specified Bitcoin Atom address</source>
+        <translation>Verificar a mensaxe para asegurar que foi asinada coa dirección Bitcoin Atom especificada</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -1002,7 +1002,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>Bitcoin atom-core</name>
+    <name>Bitcoin Atom-core</name>
     <message>
         <source>Options:</source>
         <translation>Opcións:</translation>
@@ -1028,8 +1028,8 @@
         <translation>Executar no fondo como un demo e aceptar comandos</translation>
     </message>
     <message>
-        <source>Bitcoin atom Core</source>
-        <translation>Core de Bitcoin atom</translation>
+        <source>Bitcoin Atom Core</source>
+        <translation>Core de Bitcoin Atom</translation>
     </message>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>

@@ -157,7 +157,7 @@
     </message>
     <message>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BCA&lt;/b&gt;!</source>
-        <translation>警告: 如果你將錢包加密後又忘記密碼，你就會&lt;b&gt;失去所有 Bitcoin atom 了&lt;/b&gt;！</translation>
+        <translation>警告: 如果你將錢包加密後又忘記密碼，你就會&lt;b&gt;失去所有 Bitcoin Atom 了&lt;/b&gt;！</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -220,7 +220,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin atomGUI</name>
+    <name>Bitcoin Atom GUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>簽署訊息... &amp;m</translation>
@@ -310,8 +310,8 @@
         <translation>正在為磁碟區塊重建索引...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin atom address</source>
-        <translation>付款至一個 Bitcoin atom 位址</translation>
+        <source>Send coins to a Bitcoin Atom address</source>
+        <translation>付款至一個 Bitcoin Atom 位址</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -334,8 +334,8 @@
         <translation>驗證訊息... &amp;V</translation>
     </message>
     <message>
-        <source>Bitcoin atom</source>
-        <translation>Bitcoin atom</translation>
+        <source>Bitcoin Atom</source>
+        <translation>Bitcoin Atom</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -370,8 +370,8 @@
         <translation>說明 &amp;H</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and Bitcoin atom: URIs)</source>
-        <translation>要求付款 (產生QR碼 Bitcoin atom: URIs)</translation>
+        <source>Request payments (generates QR codes and Bitcoin Atom: URIs)</source>
+        <translation>要求付款 (產生QR碼 Bitcoin Atom: URIs)</translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -440,8 +440,8 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>Enter a Bitcoin atom address (e.g. %1)</source>
-        <translation>輸入一個 Bitcoin atom 位址 (例如 %1)</translation>
+        <source>Enter a Bitcoin Atom address (e.g. %1)</source>
+        <translation>輸入一個 Bitcoin Atom 位址 (例如 %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -660,7 +660,7 @@
     </message>
     </context>
 <context>
-    <name>Bitcoin atom-core</name>
+    <name>Bitcoin Atom-core</name>
     <message>
         <source>Information</source>
         <translation>資訊</translation>

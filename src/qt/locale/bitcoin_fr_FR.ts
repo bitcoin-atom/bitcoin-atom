@@ -148,7 +148,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin atomGUI</name>
+    <name>Bitcoin Atom GUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Signer un &amp;message...</translation>
@@ -238,8 +238,8 @@
         <translation>Réindexer les blocs sur le disque...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin atom address</source>
-        <translation>Envoyer des pièces à une adresse Bitcoin atom</translation>
+        <source>Send coins to a Bitcoin Atom address</source>
+        <translation>Envoyer des pièces à une adresse Bitcoin Atom</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -262,8 +262,8 @@
         <translation>&amp;Vérification du message</translation>
     </message>
     <message>
-        <source>Bitcoin atom</source>
-        <translation>Bitcoin atom</translation>
+        <source>Bitcoin Atom</source>
+        <translation>Bitcoin Atom</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -290,8 +290,8 @@
         <translation>Crypter les clé privées qui appartiennent votre portefeuille</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin atom addresses to prove you own them</source>
-        <translation>Signer vos messages avec vos adresses Bitcoin atom pour prouver que vous les détenez</translation>
+        <source>Sign messages with your Bitcoin Atom addresses to prove you own them</source>
+        <translation>Signer vos messages avec vos adresses Bitcoin Atom pour prouver que vous les détenez</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -310,24 +310,24 @@
         <translation>Barre d'outils des onglets</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and Bitcoin atom: URIs)</source>
-        <translation>Demander des paiements (générer QR codes et Bitcoin atom: URIs)</translation>
+        <source>Request payments (generates QR codes and Bitcoin Atom: URIs)</source>
+        <translation>Demander des paiements (générer QR codes et Bitcoin Atom: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
         <translation>Montrer la liste des adresses d'envois utilisées et les étiquettes</translation>
     </message>
     <message>
-        <source>Open a Bitcoin atom: URI or payment request</source>
-        <translation>Ouvrir un Bitcoin atom: URI ou demande de paiement</translation>
+        <source>Open a Bitcoin Atom: URI or payment request</source>
+        <translation>Ouvrir un Bitcoin Atom: URI ou demande de paiement</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>&amp;Options de ligne de commande</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin atom network</source>
-        <translation><numerusform>%n connexion active au réseau Bitcoin atom</numerusform><numerusform>%n connexions actives au réseau Bitcoin atom</numerusform></translation>
+        <source>%n active connection(s) to Bitcoin Atom network</source>
+        <translation><numerusform>%n connexion active au réseau Bitcoin Atom</numerusform><numerusform>%n connexions actives au réseau Bitcoin Atom</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -712,8 +712,8 @@
         <translation>Expert</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin atom client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Ouvrir le port du client Bitcoin atom automatiquement sur le routeur. Cela ne fonctionne que si votre routeur supporte l'UPnP et si la fonctionnalité est activée.</translation>
+        <source>Automatically open the Bitcoin Atom client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Ouvrir le port du client Bitcoin Atom automatiquement sur le routeur. Cela ne fonctionne que si votre routeur supporte l'UPnP et si la fonctionnalité est activée.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -872,8 +872,8 @@
         <translation>Montant</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin atom address (e.g. %1)</source>
-        <translation>Entrer une adresse Bitcoin atom (e.g. %1)</translation>
+        <source>Enter a Bitcoin Atom address (e.g. %1)</source>
+        <translation>Entrer une adresse Bitcoin Atom (e.g. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1708,7 +1708,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>Bitcoin atom-core</name>
+    <name>Bitcoin Atom-core</name>
     <message>
         <source>Options:</source>
         <translation>Options :</translation>
@@ -1734,8 +1734,8 @@
         <translation>Impossible de démarrer le serveur HTTP. Voir le journal de débogage pour plus de détails.</translation>
     </message>
     <message>
-        <source>Bitcoin atom Core</source>
-        <translation>Bitcoin atom Core</translation>
+        <source>Bitcoin Atom Core</source>
+        <translation>Bitcoin Atom Core</translation>
     </message>
     <message>
         <source>&lt;category&gt; can be:</source>

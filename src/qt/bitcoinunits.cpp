@@ -26,6 +26,7 @@ bool BitcoinUnits::valid(int unit)
     switch(unit)
     {
     case BTC:
+    case BTC_rounded:
     case mBTC:
     case uBTC:
         return true;
@@ -39,6 +40,7 @@ QString BitcoinUnits::name(int unit)
     switch(unit)
     {
     case BTC: return QString("BCA");
+    case BTC_rounded: return QString("BCA");
     case mBTC: return QString("mBTC");
     case uBTC: return QString::fromUtf8("μBTC");
     default: return QString("???");
@@ -49,7 +51,8 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("Bitcoins");
+    case BTC: return QString("Bitcoin Atom");
+    case BTC_rounded: return QString("Bitcoin Atom");
     case mBTC: return QString("Milli-Bitcoins (1 / 1" THIN_SP_UTF8 "000)");
     case uBTC: return QString("Micro-Bitcoins (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     default: return QString("???");
@@ -61,6 +64,7 @@ qint64 BitcoinUnits::factor(int unit)
     switch(unit)
     {
     case BTC:  return 100000000;
+    case BTC_rounded: return 100000000;
     case mBTC: return 100000;
     case uBTC: return 100;
     default:   return 100000000;
@@ -72,8 +76,21 @@ int BitcoinUnits::decimals(int unit)
     switch(unit)
     {
     case BTC: return 8;
+    case BTC_rounded: return 8;
     case mBTC: return 5;
     case uBTC: return 2;
+    default: return 0;
+    }
+}
+
+int BitcoinUnits::roundDecs(int unit)
+{
+    switch(unit)
+    {
+    case BTC: return 0;
+    case BTC_rounded: return 4;
+    case mBTC: return 0;
+    case uBTC: return 0;
     default: return 0;
     }
 }
@@ -93,13 +110,18 @@ QString BitcoinUnits::format(int unit, const CAmount& nIn, bool fPlus, Separator
     QString quotient_str = QString::number(quotient);
     QString remainder_str = QString::number(remainder).rightJustified(num_decimals, '0');
 
+    int roundDecsNum = roundDecs(unit);
+    if (roundDecsNum && roundDecsNum < remainder_str.length()) {
+        remainder_str.remove(roundDecsNum, remainder_str.length() - roundDecsNum);
+    }
+
     // Use SI-style thin space separators as these are locale independent and can't be
     // confused with the decimal marker.
-    QChar thin_sp(THIN_SP_CP);
+    /*QChar thin_sp(THIN_SP_CP);
     int q_size = quotient_str.size();
     if (separators == separatorAlways || (separators == separatorStandard && q_size > 4))
         for (int i = 3; i < q_size; i += 3)
-            quotient_str.insert(q_size - i, thin_sp);
+            quotient_str.insert(q_size - i, thin_sp);*/
 
     if (n < 0)
         quotient_str.insert(0, '-');

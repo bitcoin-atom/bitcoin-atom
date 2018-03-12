@@ -57,6 +57,7 @@ public:
     enum Unit
     {
         BTC,
+        BTC_rounded,
         mBTC,
         uBTC
     };
@@ -84,6 +85,7 @@ public:
     static qint64 factor(int unit);
     //! Number of decimals left
     static int decimals(int unit);
+    static int roundDecs(int unit);
     //! Format as string
     static QString format(int unit, const CAmount& amount, bool plussign=false, SeparatorStyle separators=separatorStandard);
     //! Format as string (with unit)

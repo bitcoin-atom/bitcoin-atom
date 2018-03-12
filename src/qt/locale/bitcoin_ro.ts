@@ -76,7 +76,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin atomGUI</name>
+    <name>Bitcoin Atom GUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Semnează &amp;mesajul...</translation>
@@ -142,8 +142,8 @@
         <translation>Deschide &amp;URI...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin atom address</source>
-        <translation>Trimite monedele către o adresă Bitcoin atom</translation>
+        <source>Send coins to a Bitcoin Atom address</source>
+        <translation>Trimite monedele către o adresă Bitcoin Atom</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -166,8 +166,8 @@
         <translation>&amp;Verifică mesajul...</translation>
     </message>
     <message>
-        <source>Bitcoin atom</source>
-        <translation>Bitcoin atom</translation>
+        <source>Bitcoin Atom</source>
+        <translation>Bitcoin Atom</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -194,12 +194,12 @@
         <translation>Criptează cheile private care aparțin portofelului tău.</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin atom addresses to prove you own them</source>
-        <translation>Semnează mesajele cu adresa ta de Bitcoin atom pentru a face dovada că îți aparțin.</translation>
+        <source>Sign messages with your Bitcoin Atom addresses to prove you own them</source>
+        <translation>Semnează mesajele cu adresa ta de Bitcoin Atom pentru a face dovada că îți aparțin.</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin atom addresses</source>
-        <translation>Verifică mesajele cu scopul de a asigura faptul că au fost semnate cu adresa de Bitcoin atom specificată.</translation>
+        <source>Verify messages to ensure they were signed with specified Bitcoin Atom addresses</source>
+        <translation>Verifică mesajele cu scopul de a asigura faptul că au fost semnate cu adresa de Bitcoin Atom specificată.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -214,12 +214,12 @@
         <translation>&amp;Ajutor</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and Bitcoin atom: URIs)</source>
-        <translation>Cerere plată (generează coduri QR și Bitcoin atom: URIs)</translation>
+        <source>Request payments (generates QR codes and Bitcoin Atom: URIs)</source>
+        <translation>Cerere plată (generează coduri QR și Bitcoin Atom: URIs)</translation>
     </message>
     <message>
-        <source>Open a Bitcoin atom: URI or payment request</source>
-        <translation>Deschide un Bitcoin atom: URI sau cerere de plată</translation>
+        <source>Open a Bitcoin Atom: URI or payment request</source>
+        <translation>Deschide un Bitcoin Atom: URI sau cerere de plată</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -746,10 +746,10 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>Bitcoin atom-core</name>
+    <name>Bitcoin Atom-core</name>
     <message>
-        <source>Bitcoin atom Core</source>
-        <translation>Bitcoin atom Core</translation>
+        <source>Bitcoin Atom Core</source>
+        <translation>Bitcoin Atom Core</translation>
     </message>
     <message>
         <source>Information</source>

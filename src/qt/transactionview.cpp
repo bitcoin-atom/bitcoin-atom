@@ -42,7 +42,7 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     transactionView(0), abandonAction(0), bumpFeeAction(0), columnResizingFixer(0)
 {
     // Build filter row  54,40,62,40
-    setContentsMargins(40,34,62,40);
+    setContentsMargins(54,40,62,40);
 
     QHBoxLayout *hlayout = new QHBoxLayout();
     hlayout->setContentsMargins(0,0,0,0);
@@ -64,9 +64,7 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
 
     QLabel* labelChoose = new QLabel(this);
     labelChoose->setText("Choose");
-    QFont labelChooseFont("Liberation Mono", 12, QFont::Normal);
-    labelChoose->setFont(labelChooseFont);
-    labelChoose->setStyleSheet("color: #b2b2c0;");
+    labelChoose->setStyleSheet("color: #b2b2c0; font-family: \"Roboto Mono\"; font-size: 12px; font-weight: 500;");
     hlayout->addWidget(labelChoose);
 
     dateWidget = new QComboBox(this);
@@ -75,6 +73,7 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     } else {
         dateWidget->setFixedWidth(120);
     }
+    dateWidget->setStyleSheet("font-family: \"Roboto Mono\";");
     dateWidget->addItem(tr("All"), All);
     dateWidget->addItem(tr("Today"), Today);
     dateWidget->addItem(tr("This week"), ThisWeek);
@@ -107,6 +106,7 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     } else {
         typeWidget->setFixedWidth(120);
     }
+    typeWidget->setStyleSheet("font-family: \"Roboto Mono\";");
 
     typeWidget->addItem(tr("All"), TransactionFilterProxy::ALL_TYPES);
     typeWidget->addItem(tr("Received with"), TransactionFilterProxy::TYPE(TransactionRecord::RecvWithAddress) |
@@ -138,14 +138,14 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     hlayout->addWidget(typeWidget);
 
     search_widget = new QLineEdit(this);
-    search_widget->setStyleSheet("background-color: rgba(170, 170, 186, 33); border-top: 2px inset rgba(0, 0, 0, 33); border-left: 2px inset rgba(0, 0, 0, 33); border-bottom: 2px solid rgba(170, 170, 186, 33); border-right: 2px solid rgba(170, 170, 186, 33); border-radius: 4px;");
+    search_widget->setStyleSheet("background-color: rgba(170, 170, 186, 33); border-top: 2px inset rgba(0, 0, 0, 33); border-left: 2px inset rgba(0, 0, 0, 33); border-bottom: 2px solid rgba(170, 170, 186, 33); border-right: 2px solid rgba(170, 170, 186, 33); border-radius: 4px; font-family: \"Roboto Mono\";");
 #if QT_VERSION >= 0x040700
     search_widget->setPlaceholderText(tr("Enter address, transaction id, or label to search"));
 #endif
     hlayout->addWidget(search_widget);
 
     amountWidget = new QLineEdit(this);
-    amountWidget->setStyleSheet("background-color: rgba(170, 170, 186, 33); border-top: 2px inset rgba(0, 0, 0, 33); border-left: 2px inset rgba(0, 0, 0, 33); border-bottom: 2px solid rgba(170, 170, 186, 33); border-right: 2px solid rgba(170, 170, 186, 33); border-radius: 4px;");
+    amountWidget->setStyleSheet("background-color: rgba(170, 170, 186, 33); border-top: 2px inset rgba(0, 0, 0, 33); border-left: 2px inset rgba(0, 0, 0, 33); border-bottom: 2px solid rgba(170, 170, 186, 33); border-right: 2px solid rgba(170, 170, 186, 33); border-radius: 4px; font-family: \"Roboto Mono\";");
 #if QT_VERSION >= 0x040700
     amountWidget->setPlaceholderText(tr("Min amount"));
 #endif
@@ -173,11 +173,11 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
 
     QLabel* labelTrans = new QLabel(this);
     labelTrans->setText("Transactions:");
-    QFont labelTransFont("Liberation Mono", 24, QFont::Normal);
-    labelTrans->setFont(labelTransFont);
+    labelTrans->setStyleSheet("font-family: \"Roboto Mono\"; font-size: 24px; font-weight: 500;");
     vlayout->addWidget(labelTrans);
 
     QTableView *view = new QTableView(this);
+    view->setStyleSheet("font-family: \"Roboto Mono\";");
     vlayout->addLayout(hlayout);
     vlayout->addWidget(createDateRangeWidget());
     vlayout->addWidget(view);

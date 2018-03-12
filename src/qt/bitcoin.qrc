@@ -1,4 +1,16 @@
 <!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/fonts">
+        <file alias="RobotoMono-Bold">res/fonts/RobotoMono-Bold.ttf</file>
+        <file alias="RobotoMono-BoldItalic">res/fonts/RobotoMono-BoldItalic.ttf</file>
+        <file alias="RobotoMono-Italic">res/fonts/RobotoMono-Italic.ttf</file>
+        <file alias="RobotoMono-Light">res/fonts/RobotoMono-Light.ttf</file>
+        <file alias="RobotoMono-LightItalic">res/fonts/RobotoMono-LightItalic.ttf</file>
+        <file alias="RobotoMono-Medium">res/fonts/RobotoMono-Medium.ttf</file>
+        <file alias="RobotoMono-MediumItalic">res/fonts/RobotoMono-MediumItalic.ttf</file>
+        <file alias="RobotoMono-Regular">res/fonts/RobotoMono-Regular.ttf</file>
+        <file alias="RobotoMono-Thin">res/fonts/RobotoMono-Thin.ttf</file>
+        <file alias="RobotoMono-ThinItalic">res/fonts/RobotoMono-ThinItalic.ttf</file>
+    </qresource>
     <qresource prefix="/icons">
         <file alias="bitcoin">res/icons/bitcoin.png</file>
         <file alias="address-book">res/icons/address-book.png</file>

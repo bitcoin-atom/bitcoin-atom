@@ -653,15 +653,22 @@
            </property>
            <property name="font">
             <font>
-             <family>Liberation Mono</family>
-             <pointsize>10</pointsize>
+             <family>Roboto Mono</family>
+             <pointsize>-1</pointsize>
+             <weight>37</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">QToolButton#btnOverview { 
+            <string notr="true">QToolButton {
+	font-family: &quot;Roboto Mono&quot;;
+	font-size: 10px;
+	font-weight: 300;
+}
+QToolButton#btnOverview { 
     background-color: #ffffff;
 	border: none;
-	padding-top: 14px;
+	padding-top: 17px;
 }
 QToolButton#btnOverview:checked { 
     background-color: #e8e8e8;
@@ -730,15 +737,22 @@ QToolButton#btnOverview:checked {
            </property>
            <property name="font">
             <font>
-             <family>Liberation Mono</family>
-             <pointsize>10</pointsize>
+             <family>Roboto Mono</family>
+             <pointsize>-1</pointsize>
+             <weight>37</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">QToolButton#btnSend { 
+            <string notr="true">QToolButton {
+	font-family: &quot;Roboto Mono&quot;;
+	font-size: 10px;
+	font-weight: 300;
+}
+QToolButton#btnSend { 
     background-color: #ffffff;
 	border: none;
-	padding-top: 14px;
+	padding-top: 17px;
 }
 QToolButton#btnSend:checked { 
     background-color: #e8e8e8;
@@ -804,15 +818,22 @@ QToolButton#btnSend:checked {
            </property>
            <property name="font">
             <font>
-             <family>Liberation Mono</family>
-             <pointsize>10</pointsize>
+             <family>Roboto Mono</family>
+             <pointsize>-1</pointsize>
+             <weight>37</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">QToolButton#btnReceive { 
+            <string notr="true">QToolButton {
+	font-family: &quot;Roboto Mono&quot;;
+	font-size: 10px;
+	font-weight: 300;
+}
+QToolButton#btnReceive { 
     background-color: #ffffff;
 	border: none;
-	padding-top: 14px;
+	padding-top: 17px;
 }
 QToolButton#btnReceive:checked { 
     background-color: #e8e8e8;
@@ -886,15 +907,22 @@ QToolButton#btnReceive:checked {
            </property>
            <property name="font">
             <font>
-             <family>Liberation Mono</family>
-             <pointsize>10</pointsize>
+             <family>Roboto Mono</family>
+             <pointsize>-1</pointsize>
+             <weight>37</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">QToolButton#btnTransactions { 
+            <string notr="true">QToolButton {
+	font-family: &quot;Roboto Mono&quot;;
+	font-size: 10px;
+	font-weight: 300;
+}
+QToolButton#btnTransactions { 
     background-color: #ffffff;
 	border: none;
-	padding-top: 14px;
+	padding-top: 17px;
 }
 QToolButton#btnTransactions:checked { 
     background-color: #e8e8e8;
@@ -1048,9 +1076,16 @@ QToolButton#btnTransactions:checked {
            </property>
            <property name="font">
             <font>
-             <family>Liberation Mono</family>
-             <pointsize>10</pointsize>
+             <family>Roboto Mono</family>
+             <pointsize>-1</pointsize>
+             <weight>37</weight>
+             <bold>false</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">	font-family: &quot;Roboto Mono&quot;;
+	font-size: 10px;
+	font-weight: 300;</string>
            </property>
            <property name="text">
             <string>v.0.1 b</string>

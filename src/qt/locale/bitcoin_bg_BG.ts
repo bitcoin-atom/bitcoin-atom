@@ -62,11 +62,11 @@
         <translation>Адрес за получаване</translation>
     </message>
     <message>
-        <source>These are your Bitcoin atom addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Bitcoin Atom addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>Тези са вашите Биткойн адреси за изпращане на монети. Винаги проверявайте количеството и получаващия адрес преди изпращане. </translation>
     </message>
     <message>
-        <source>These are your Bitcoin atom addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your Bitcoin Atom addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>Това са вашите Биткойн адреси за получаване на монети. Препоръчително е да ползвате нов адрес на всяка транзакция.</translation>
     </message>
     <message>
@@ -172,7 +172,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin atomGUI</name>
+    <name>Bitcoin Atom GUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Подпиши съобщение...</translation>
@@ -418,9 +418,9 @@
     </message>
     </context>
 <context>
-    <name>Bitcoin atom-core</name>
+    <name>Bitcoin Atom-core</name>
     <message>
-        <source>Bitcoin atom Core</source>
+        <source>Bitcoin Atom Core</source>
         <translation>Биткойн ядро</translation>
     </message>
     </context>

@@ -62,12 +62,12 @@
         <translation>Vastaanotto-osoitteet</translation>
     </message>
     <message>
-        <source>These are your Bitcoin atom addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Nämä ovat Bitcoin atom-osoitteesi maksujen lähettämistä varten. Tarkista aina määrä ja vastaanotto-osoite ennen kolikoiden lähettämistä.</translation>
+        <source>These are your Bitcoin Atom addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Nämä ovat Bitcoin Atom-osoitteesi maksujen lähettämistä varten. Tarkista aina määrä ja vastaanotto-osoite ennen kolikoiden lähettämistä.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin atom addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Tässä ovat Bitcoin atom vastaanotto-osoitteesi. On suositeltavaa käyttää uutta vastaanotto-osoitetta jokaista lähetystä varten.</translation>
+        <source>These are your Bitcoin Atom addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Tässä ovat Bitcoin Atom vastaanotto-osoitteesi. On suositeltavaa käyttää uutta vastaanotto-osoitetta jokaista lähetystä varten.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -169,7 +169,7 @@
     </message>
     <message>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BCA&lt;/b&gt;!</source>
-        <translation>Varoitus: Jos salaat lompakkosi ja menetät tunnuslauseesi, &lt;b&gt;MENETÄT KAIKKI Bitcoin atomISI&lt;/b&gt;!</translation>
+        <translation>Varoitus: Jos salaat lompakkosi ja menetät tunnuslauseesi, &lt;b&gt;MENETÄT KAIKKI Bitcoin AtomISI&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -232,7 +232,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin atomGUI</name>
+    <name>Bitcoin Atom GUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>&amp;Allekirjoita viesti...</translation>
@@ -338,8 +338,8 @@
         <translation>Ladataan lohkoindeksiä...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin atom address</source>
-        <translation>Lähetä kolikoita Bitcoin atom-osoitteeseen</translation>
+        <source>Send coins to a Bitcoin Atom address</source>
+        <translation>Lähetä kolikoita Bitcoin Atom-osoitteeseen</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -362,8 +362,8 @@
         <translation>Varmista &amp;viesti...</translation>
     </message>
     <message>
-        <source>Bitcoin atom</source>
-        <translation>Bitcoin atom</translation>
+        <source>Bitcoin Atom</source>
+        <translation>Bitcoin Atom</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -383,19 +383,19 @@
     </message>
     <message>
         <source>Show or hide the main Window</source>
-        <translation>Näytä tai piilota Bitcoin atom-ikkuna</translation>
+        <translation>Näytä tai piilota Bitcoin Atom-ikkuna</translation>
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
         <translation>Suojaa yksityiset avaimet, jotka kuuluvat lompakkoosi</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin atom addresses to prove you own them</source>
-        <translation>Allekirjoita viestisi omalla Bitcoin atom -osoitteellasi todistaaksesi, että omistat ne</translation>
+        <source>Sign messages with your Bitcoin Atom addresses to prove you own them</source>
+        <translation>Allekirjoita viestisi omalla Bitcoin Atom -osoitteellasi todistaaksesi, että omistat ne</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin atom addresses</source>
-        <translation>Varmista, että viestisi on allekirjoitettu määritetyllä Bitcoin atom -osoitteella</translation>
+        <source>Verify messages to ensure they were signed with specified Bitcoin Atom addresses</source>
+        <translation>Varmista, että viestisi on allekirjoitettu määritetyllä Bitcoin Atom -osoitteella</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -414,8 +414,8 @@
         <translation>Välilehtipalkki</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and Bitcoin atom: URIs)</source>
-        <translation>Pyydä maksuja (Luo QR koodit ja Bitcoin atom: URIt)</translation>
+        <source>Request payments (generates QR codes and Bitcoin Atom: URIs)</source>
+        <translation>Pyydä maksuja (Luo QR koodit ja Bitcoin Atom: URIt)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -426,16 +426,16 @@
         <translation>Näytä vastaanottamiseen käytettyjen osoitteiden ja nimien lista</translation>
     </message>
     <message>
-        <source>Open a Bitcoin atom: URI or payment request</source>
-        <translation>Avaa Bitcoin atom: URI tai maksupyyntö</translation>
+        <source>Open a Bitcoin Atom: URI or payment request</source>
+        <translation>Avaa Bitcoin Atom: URI tai maksupyyntö</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>&amp;Komentorivin valinnat</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin atom network</source>
-        <translation><numerusform>%n aktiivinen yhteys Bitcoin atom-verkkoon</numerusform><numerusform>%n aktiivista yhteyttä Bitcoin atom-verkkoon</numerusform></translation>
+        <source>%n active connection(s) to Bitcoin Atom network</source>
+        <translation><numerusform>%n aktiivinen yhteys Bitcoin Atom-verkkoon</numerusform><numerusform>%n aktiivista yhteyttä Bitcoin Atom-verkkoon</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -478,8 +478,8 @@
         <translation>Rahansiirtohistoria on ajan tasalla</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin atom command-line options</source>
-        <translation>Näytä %1 ohjeet saadaksesi listan mahdollisista Bitcoin atomin komentorivivalinnoista</translation>
+        <source>Show the %1 help message to get a list with possible Bitcoin Atom command-line options</source>
+        <translation>Näytä %1 ohjeet saadaksesi listan mahdollisista Bitcoin Atomin komentorivivalinnoista</translation>
     </message>
     <message>
         <source>%1 client</source>
@@ -548,8 +548,8 @@
         <translation>Lompakko on &lt;b&gt;salattu&lt;/b&gt; ja tällä hetkellä &lt;b&gt;lukittuna&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Bitcoin atom can no longer continue safely and will quit.</source>
-        <translation>Peruuttamaton virhe on tapahtunut. Bitcoin atom ei voi enää jatkaa turvallisesti ja sammutetaan.</translation>
+        <source>A fatal error occurred. Bitcoin Atom can no longer continue safely and will quit.</source>
+        <translation>Peruuttamaton virhe on tapahtunut. Bitcoin Atom ei voi enää jatkaa turvallisesti ja sammutetaan.</translation>
     </message>
 </context>
 <context>
@@ -734,8 +734,8 @@
         <translation>Muokkaa lähettävää osoitetta</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin atom address.</source>
-        <translation>Antamasi osoite "%1" ei ole kelvollinen Bitcoin atom-osoite.</translation>
+        <source>The entered address "%1" is not a valid Bitcoin Atom address.</source>
+        <translation>Antamasi osoite "%1" ei ole kelvollinen Bitcoin Atom-osoite.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -843,8 +843,8 @@
         <translation>Tämä on ensimmäinen kerta, kun %1 on käynnistetty, joten voit valita data-hakemiston paikan.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Bitcoin atom block chain. At least %2GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>%1 lataa ja tallentaa kopion Bitcoin atomin lohkoketjusta. Vähintään %2Gt dataa tullaan tallentamaan tähän hakemistoon, ja tarve kasvaa ajan myötä. Lompakko tullaan myös tallentamaan tähän hakemistoon.</translation>
+        <source>%1 will download and store a copy of the Bitcoin Atom block chain. At least %2GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>%1 lataa ja tallentaa kopion Bitcoin Atomin lohkoketjusta. Vähintään %2Gt dataa tullaan tallentamaan tähän hakemistoon, ja tarve kasvaa ajan myötä. Lompakko tullaan myös tallentamaan tähän hakemistoon.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1020,16 +1020,16 @@
         <translation>&amp;Käytä varmistamattomia vaihtorahoja</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin atom client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Avaa Bitcoin atom-asiakasohjelman portti reitittimellä automaattisesti. Tämä toimii vain, jos reitittimesi tukee UPnP:tä ja se on käytössä.</translation>
+        <source>Automatically open the Bitcoin Atom client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Avaa Bitcoin Atom-asiakasohjelman portti reitittimellä automaattisesti. Tämä toimii vain, jos reitittimesi tukee UPnP:tä ja se on käytössä.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
         <translation>Portin uudelleenohjaus &amp;UPnP:llä</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin atom network through a SOCKS5 proxy.</source>
-        <translation>Yhdistä Bitcoin atom-verkkoon SOCKS5-välityspalvelimen kautta.</translation>
+        <source>Connect to the Bitcoin Atom network through a SOCKS5 proxy.</source>
+        <translation>Yhdistä Bitcoin Atom-verkkoon SOCKS5-välityspalvelimen kautta.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1068,8 +1068,8 @@
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin atom network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Yhdistä Bitcoin atom-verkkoon erillisen SOCKS5-välityspalvelimen kautta piilotettuja Tor-palveluja varten.</translation>
+        <source>Connect to the Bitcoin Atom network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Yhdistä Bitcoin Atom-verkkoon erillisen SOCKS5-välityspalvelimen kautta piilotettuja Tor-palveluja varten.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services:</source>
@@ -1105,11 +1105,11 @@
     </message>
     <message>
         <source>&amp;Unit to show amounts in:</source>
-        <translation>Yksikkö jona Bitcoin atom-määrät näytetään</translation>
+        <translation>Yksikkö jona Bitcoin Atom-määrät näytetään</translation>
     </message>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Valitse mitä yksikköä käytetään ensisijaisesti Bitcoin atom-määrien näyttämiseen.</translation>
+        <translation>Valitse mitä yksikköä käytetään ensisijaisesti Bitcoin Atom-määrien näyttämiseen.</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -1159,8 +1159,8 @@
         <translation>Lomake</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin atom network after a connection is established, but this process has not completed yet.</source>
-        <translation>Näytetyt tiedot eivät välttämättä ole ajantasalla. Lompakkosi synkronoituu Bitcoin atom-verkon kanssa automaattisesti yhteyden muodostamisen jälkeen, mutta synkronointi on vielä meneillään.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin Atom network after a connection is established, but this process has not completed yet.</source>
+        <translation>Näytetyt tiedot eivät välttämättä ole ajantasalla. Lompakkosi synkronoituu Bitcoin Atom-verkon kanssa automaattisesti yhteyden muodostamisen jälkeen, mutta synkronointi on vielä meneillään.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1200,7 +1200,7 @@
     </message>
     <message>
         <source>Your current total balance</source>
-        <translation>Tililläsi tällä hetkellä olevien Bitcoin atomien määrä</translation>
+        <translation>Tililläsi tällä hetkellä olevien Bitcoin Atomien määrä</translation>
     </message>
     <message>
         <source>Your current balance in watch-only addresses</source>
@@ -1252,8 +1252,8 @@
         <translation>Määrä</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin atom address (e.g. %1)</source>
-        <translation>Syötä Bitcoin atom-osoite (esim. %1)</translation>
+        <source>Enter a Bitcoin Atom address (e.g. %1)</source>
+        <translation>Syötä Bitcoin Atom-osoite (esim. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1620,8 +1620,8 @@
         <translation>&amp;Uudelleenkäytä vastaanotto-osoitetta (ei suositella)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin atom network.</source>
-        <translation>Valinnainen viesti liitetään maksupyyntöön ja näytetään avattaessa. Viestiä ei lähetetä Bitcoin atom-verkkoon.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin Atom network.</source>
+        <translation>Valinnainen viesti liitetään maksupyyntöön ja näytetään avattaessa. Viestiä ei lähetetä Bitcoin Atom-verkkoon.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -1746,7 +1746,7 @@
     <name>SendCoinsDialog</name>
     <message>
         <source>Send Coins</source>
-        <translation>Lähetä Bitcoin atomeja</translation>
+        <translation>Lähetä Bitcoin Atomeja</translation>
     </message>
     <message>
         <source>Coin Control Features</source>
@@ -1940,8 +1940,8 @@
         <translation>Tämä on normaali maksu.</translation>
     </message>
     <message>
-        <source>The Bitcoin atom address to send the payment to</source>
-        <translation>Bitcoin atom-osoite johon maksu lähetetään</translation>
+        <source>The Bitcoin Atom address to send the payment to</source>
+        <translation>Bitcoin Atom-osoite johon maksu lähetetään</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -1961,7 +1961,7 @@
     </message>
     <message>
         <source>The fee will be deducted from the amount being sent. The recipient will receive less BCA than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>Kulu vähennetään lähetettävästä määrästä. Saaja vastaanottaa vähemmän Bitcoin atomeja kuin merkitset Määrä-kenttään. Jos saajia on monia, kulu jaetaan tasan.</translation>
+        <translation>Kulu vähennetään lähetettävästä määrästä. Saaja vastaanottaa vähemmän Bitcoin Atomeja kuin merkitset Määrä-kenttään. Jos saajia on monia, kulu jaetaan tasan.</translation>
     </message>
     <message>
         <source>S&amp;ubtract fee from amount</source>
@@ -1984,8 +1984,8 @@
         <translation>Aseta nimi tälle osoitteelle lisätäksesi sen käytettyjen osoitteiden listalle.</translation>
     </message>
     <message>
-        <source>A message that was attached to the Bitcoin atom: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin atom network.</source>
-        <translation>Viesti joka liitettiin Bitcoin atom: URI:iin tallennetaan rahansiirtoon viitteeksi. Tätä viestiä ei lähetetä Bitcoin atom-verkkoon.</translation>
+        <source>A message that was attached to the Bitcoin Atom: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin Atom network.</source>
+        <translation>Viesti joka liitettiin Bitcoin Atom: URI:iin tallennetaan rahansiirtoon viitteeksi. Tätä viestiä ei lähetetä Bitcoin Atom-verkkoon.</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2025,8 +2025,8 @@
         <translation>&amp;Allekirjoita viesti</translation>
     </message>
     <message>
-        <source>The Bitcoin atom address to sign the message with</source>
-        <translation>Bitcoin atom-osoite jolla viesti allekirjoitetaan</translation>
+        <source>The Bitcoin Atom address to sign the message with</source>
+        <translation>Bitcoin Atom-osoite jolla viesti allekirjoitetaan</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2057,8 +2057,8 @@
         <translation>Kopioi tämänhetkinen allekirjoitus leikepöydälle</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin atom address</source>
-        <translation>Allekirjoita viesti todistaaksesi, että omistat tämän Bitcoin atom-osoitteen</translation>
+        <source>Sign the message to prove you own this Bitcoin Atom address</source>
+        <translation>Allekirjoita viesti todistaaksesi, että omistat tämän Bitcoin Atom-osoitteen</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -2077,12 +2077,12 @@
         <translation>&amp;Varmista viesti</translation>
     </message>
     <message>
-        <source>The Bitcoin atom address the message was signed with</source>
-        <translation>Bitcoin atom-osoite jolla viesti on allekirjoitettu</translation>
+        <source>The Bitcoin Atom address the message was signed with</source>
+        <translation>Bitcoin Atom-osoite jolla viesti on allekirjoitettu</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin atom address</source>
-        <translation>Tarkista viestin allekirjoitus varmistaaksesi, että se allekirjoitettiin tietyllä Bitcoin atom-osoitteella</translation>
+        <source>Verify the message to ensure it was signed with the specified Bitcoin Atom address</source>
+        <translation>Tarkista viestin allekirjoitus varmistaaksesi, että se allekirjoitettiin tietyllä Bitcoin Atom-osoitteella</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2372,7 +2372,7 @@
     </message>
     </context>
 <context>
-    <name>Bitcoin atom-core</name>
+    <name>Bitcoin Atom-core</name>
     <message>
         <source>Options:</source>
         <translation>Asetukset:</translation>
@@ -2430,8 +2430,8 @@
         <translation>HTTP-palvelinta ei voitu käynnistää. Katso debug-lokista lisätietoja.</translation>
     </message>
     <message>
-        <source>Bitcoin atom Core</source>
-        <translation>Bitcoin atom-ydin</translation>
+        <source>Bitcoin Atom Core</source>
+        <translation>Bitcoin Atom-ydin</translation>
     </message>
     <message>
         <source>The %s developers</source>

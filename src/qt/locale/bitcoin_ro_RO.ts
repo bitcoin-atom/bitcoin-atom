@@ -76,7 +76,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin atomGUI</name>
+    <name>Bitcoin Atom GUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Semnează &amp;mesaj...</translation>
@@ -154,8 +154,8 @@
         <translation>Se reindexează blocurile pe disc...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin atom address</source>
-        <translation>Trimite monede către o adresă Bitcoin atom</translation>
+        <source>Send coins to a Bitcoin Atom address</source>
+        <translation>Trimite monede către o adresă Bitcoin Atom</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -178,8 +178,8 @@
         <translation>&amp;Verifică mesaj...</translation>
     </message>
     <message>
-        <source>Bitcoin atom</source>
-        <translation>Bitcoin atom</translation>
+        <source>Bitcoin Atom</source>
+        <translation>Bitcoin Atom</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -206,12 +206,12 @@
         <translation>Criptează cheile private ale portofelului dvs.</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin atom addresses to prove you own them</source>
-        <translation>Semnaţi mesaje cu adresa dvs. Bitcoin atom pentru a dovedi că vă aparţin</translation>
+        <source>Sign messages with your Bitcoin Atom addresses to prove you own them</source>
+        <translation>Semnaţi mesaje cu adresa dvs. Bitcoin Atom pentru a dovedi că vă aparţin</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin atom addresses</source>
-        <translation>Verificaţi mesaje pentru a vă asigura că au fost semnate cu adresa Bitcoin atom specificată</translation>
+        <source>Verify messages to ensure they were signed with specified Bitcoin Atom addresses</source>
+        <translation>Verificaţi mesaje pentru a vă asigura că au fost semnate cu adresa Bitcoin Atom specificată</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -230,8 +230,8 @@
         <translation>Bara de unelte</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and Bitcoin atom: URIs)</source>
-        <translation>Cereţi plăţi (generează coduri QR şi Bitcoin atom-uri: URls)</translation>
+        <source>Request payments (generates QR codes and Bitcoin Atom: URIs)</source>
+        <translation>Cereţi plăţi (generează coduri QR şi Bitcoin Atom-uri: URls)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -242,16 +242,16 @@
         <translation>Arată lista de adrese pentru primire şi etichetele</translation>
     </message>
     <message>
-        <source>Open a Bitcoin atom: URI or payment request</source>
-        <translation>Deschidere Bitcoin atom: o adresa URI sau o cerere de plată</translation>
+        <source>Open a Bitcoin Atom: URI or payment request</source>
+        <translation>Deschidere Bitcoin Atom: o adresa URI sau o cerere de plată</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>Opţiuni linie de &amp;comandă</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin atom network</source>
-        <translation><numerusform>%n conexiune activă către reţeaua Bitcoin atom</numerusform><numerusform>%n conexiuni active către reţeaua Bitcoin atom</numerusform><numerusform>%n de conexiuni active către reţeaua Bitcoin atom</numerusform></translation>
+        <source>%n active connection(s) to Bitcoin Atom network</source>
+        <translation><numerusform>%n conexiune activă către reţeaua Bitcoin Atom</numerusform><numerusform>%n conexiuni active către reţeaua Bitcoin Atom</numerusform><numerusform>%n de conexiuni active către reţeaua Bitcoin Atom</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
@@ -656,16 +656,16 @@
         <translation>Cheltuire rest neconfirmat</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin atom client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Deschide automat în router portul aferent clientului Bitcoin atom. Funcţionează doar dacă routerul duportă UPnP şi e activat.</translation>
+        <source>Automatically open the Bitcoin Atom client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Deschide automat în router portul aferent clientului Bitcoin Atom. Funcţionează doar dacă routerul duportă UPnP şi e activat.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
         <translation>Mapare port folosind &amp;UPnP</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin atom network through a SOCKS5 proxy.</source>
-        <translation>Conectare la reţeaua Bitcoin atom printr-un proxy SOCKS.</translation>
+        <source>Connect to the Bitcoin Atom network through a SOCKS5 proxy.</source>
+        <translation>Conectare la reţeaua Bitcoin Atom printr-un proxy SOCKS.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -725,7 +725,7 @@
     </message>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Alegeţi subdiviziunea folosită la afişarea interfeţei şi la trimiterea de Bitcoin atom.</translation>
+        <translation>Alegeţi subdiviziunea folosită la afişarea interfeţei şi la trimiterea de Bitcoin Atom.</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -765,7 +765,7 @@
     </message>
     <message>
         <source>The supplied proxy address is invalid.</source>
-        <translation>Adresa Bitcoin atom pe care aţi specificat-o nu este validă.</translation>
+        <translation>Adresa Bitcoin Atom pe care aţi specificat-o nu este validă.</translation>
     </message>
 </context>
 <context>
@@ -775,8 +775,8 @@
         <translation>Form</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin atom network after a connection is established, but this process has not completed yet.</source>
-        <translation>Informaţiile afişate pot fi neactualizate. Portofelul dvs. se sincronizează automat cu reţeaua Bitcoin atom după ce o conexiune este stabilită, dar acest proces nu a fost finalizat încă.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin Atom network after a connection is established, but this process has not completed yet.</source>
+        <translation>Informaţiile afişate pot fi neactualizate. Portofelul dvs. se sincronizează automat cu reţeaua Bitcoin Atom după ce o conexiune este stabilită, dar acest proces nu a fost finalizat încă.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -864,8 +864,8 @@
         <translation>Cantitate</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin atom address (e.g. %1)</source>
-        <translation>Introduceţi o adresă Bitcoin atom (de exemplu %1)</translation>
+        <source>Enter a Bitcoin Atom address (e.g. %1)</source>
+        <translation>Introduceţi o adresă Bitcoin Atom (de exemplu %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1164,8 +1164,8 @@
         <translation>R&amp;efoloseşte o adresă de primire (nu este recomandat)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin atom network.</source>
-        <translation>Un mesaj opţional de ataşat la cererea de plată, care va fi afişat cînd cererea este deschisă. Notă: Acest mesaj nu va fi trimis cu plata către reţeaua Bitcoin atom.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin Atom network.</source>
+        <translation>Un mesaj opţional de ataşat la cererea de plată, care va fi afişat cînd cererea este deschisă. Notă: Acest mesaj nu va fi trimis cu plata către reţeaua Bitcoin Atom.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -1384,8 +1384,8 @@
         <translation>Aceasta este o tranzacţie normală.</translation>
     </message>
     <message>
-        <source>The Bitcoin atom address to send the payment to</source>
-        <translation>Adresa Bitcoin atom către care se face plata</translation>
+        <source>The Bitcoin Atom address to send the payment to</source>
+        <translation>Adresa Bitcoin Atom către care se face plata</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -1412,8 +1412,8 @@
         <translation>Introduceţi eticheta pentru ca această adresa să fie introdusă în lista de adrese folosite</translation>
     </message>
     <message>
-        <source>A message that was attached to the Bitcoin atom: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin atom network.</source>
-        <translation>un mesaj a fost ataşat la Bitcoin atom: URI care va fi stocat cu tranzacţia pentru referinţa dvs. Notă: Acest mesaj nu va fi trimis către reţeaua Bitcoin atom.</translation>
+        <source>A message that was attached to the Bitcoin Atom: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin Atom network.</source>
+        <translation>un mesaj a fost ataşat la Bitcoin Atom: URI care va fi stocat cu tranzacţia pentru referinţa dvs. Notă: Acest mesaj nu va fi trimis către reţeaua Bitcoin Atom.</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -1449,7 +1449,7 @@
         <translation>&amp;Semnează mesaj</translation>
     </message>
     <message>
-        <source>The Bitcoin atom address to sign the message with</source>
+        <source>The Bitcoin Atom address to sign the message with</source>
         <translation>Adresa cu care semnaţi mesajul</translation>
     </message>
     <message>
@@ -1481,8 +1481,8 @@
         <translation>Copiază semnatura curentă în clipboard-ul sistemului</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin atom address</source>
-        <translation>Semnează mesajul pentru a dovedi ca deţineţi acestă adresă Bitcoin atom</translation>
+        <source>Sign the message to prove you own this Bitcoin Atom address</source>
+        <translation>Semnează mesajul pentru a dovedi ca deţineţi acestă adresă Bitcoin Atom</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -1501,12 +1501,12 @@
         <translation>&amp;Verifică mesaj</translation>
     </message>
     <message>
-        <source>The Bitcoin atom address the message was signed with</source>
-        <translation>Introduceţi o adresă Bitcoin atom</translation>
+        <source>The Bitcoin Atom address the message was signed with</source>
+        <translation>Introduceţi o adresă Bitcoin Atom</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin atom address</source>
-        <translation>Verificaţi mesajul pentru a vă asigura că a fost semnat cu adresa Bitcoin atom specificată</translation>
+        <source>Verify the message to ensure it was signed with the specified Bitcoin Atom address</source>
+        <translation>Verificaţi mesajul pentru a vă asigura că a fost semnat cu adresa Bitcoin Atom specificată</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -1568,7 +1568,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>Bitcoin atom-core</name>
+    <name>Bitcoin Atom-core</name>
     <message>
         <source>Options:</source>
         <translation>Opţiuni:</translation>
@@ -1594,8 +1594,8 @@
         <translation>Rulează în fundal ca un demon şi acceptă comenzi</translation>
     </message>
     <message>
-        <source>Bitcoin atom Core</source>
-        <translation>Nucleul Bitcoin atom</translation>
+        <source>Bitcoin Atom Core</source>
+        <translation>Nucleul Bitcoin Atom</translation>
     </message>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>

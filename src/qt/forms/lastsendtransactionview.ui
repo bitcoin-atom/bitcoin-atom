@@ -83,11 +83,25 @@
           </property>
           <item>
            <widget class="QLabel" name="label_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
-              <family>Liberation Mono</family>
-              <pointsize>11</pointsize>
+              <family>Roboto Mono</family>
+              <pointsize>-1</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 11px;
+font-weight: 400;
+padding-left: 18px;</string>
             </property>
             <property name="text">
              <string>To:</string>
@@ -104,9 +118,17 @@
             </property>
             <property name="font">
              <font>
-              <weight>75</weight>
+              <family>Roboto Mono</family>
+              <pointsize>-1</pointsize>
+              <weight>87</weight>
               <bold>true</bold>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 11px;
+font-weight: 700;
+padding-right: 17px;</string>
             </property>
             <property name="text">
              <string/>
@@ -128,11 +150,25 @@
           </property>
           <item>
            <widget class="QLabel" name="label_4">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
-              <family>Liberation Mono</family>
-              <pointsize>11</pointsize>
+              <family>Roboto Mono</family>
+              <pointsize>-1</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 11px;
+font-weight: 400;
+padding-left: 18px;</string>
             </property>
             <property name="text">
              <string>When:</string>
@@ -146,6 +182,12 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 11px;
+font-weight: 400;
+padding-right: 17px;</string>
             </property>
             <property name="text">
              <string/>
@@ -167,11 +209,25 @@
           </property>
           <item>
            <widget class="QLabel" name="label">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
-              <family>Liberation Mono</family>
-              <pointsize>11</pointsize>
+              <family>Roboto Mono</family>
+              <pointsize>-1</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 11px;
+font-weight: 400;
+padding-left: 18px;</string>
             </property>
             <property name="text">
              <string>Amount:</string>
@@ -182,11 +238,16 @@
            <widget class="QLabel" name="amountLabel">
             <property name="font">
              <font>
-              <family>Liberation Mono</family>
-              <pointsize>18</pointsize>
-              <weight>75</weight>
+              <family>Roboto Mono</family>
+              <pointsize>-1</pointsize>
+              <weight>87</weight>
               <bold>true</bold>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 18px;
+font-weight: 700;</string>
             </property>
             <property name="text">
              <string>0.00</string>
@@ -206,9 +267,18 @@
             </property>
             <property name="font">
              <font>
-              <family>Liberation Mono</family>
-              <pointsize>11</pointsize>
+              <family>Roboto Mono</family>
+              <pointsize>-1</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 11px;
+font-weight: 400;
+padding-left: 4px;
+padding-right: 17px;</string>
             </property>
             <property name="text">
              <string>[BCA]</string>

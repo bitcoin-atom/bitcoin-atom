@@ -6,28 +6,31 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1164</width>
-    <height>623</height>
+    <width>1175</width>
+    <height>703</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #e8e8e8;</string>
   </property>
   <layout class="QVBoxLayout" name="topLayout">
    <property name="spacing">
     <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>54</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>40</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>62</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>40</number>
+    <number>0</number>
    </property>
    <item>
     <widget class="QFrame" name="frameOverView">
@@ -45,16 +48,16 @@
        <number>0</number>
       </property>
       <property name="leftMargin">
-       <number>0</number>
+       <number>54</number>
       </property>
       <property name="topMargin">
-       <number>0</number>
+       <number>40</number>
       </property>
       <property name="rightMargin">
-       <number>0</number>
+       <number>62</number>
       </property>
       <property name="bottomMargin">
-       <number>0</number>
+       <number>40</number>
       </property>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
@@ -66,13 +69,36 @@
         </property>
         <item>
          <widget class="QLabel" name="label_5">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>31</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>31</height>
+           </size>
+          </property>
           <property name="font">
            <font>
-            <family>Liberation Mono</family>
-            <pointsize>24</pointsize>
-            <weight>50</weight>
-            <bold>false</bold>
+            <family>Roboto Mono</family>
+            <pointsize>-1</pointsize>
+            <weight>62</weight>
+            <bold>true</bold>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 24px;
+font-weight: 500;</string>
           </property>
           <property name="text">
            <string>Balances:</string>
@@ -171,7 +197,7 @@ QProgressBar::chunk:vertical {
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>80</height>
+              <height>90</height>
              </size>
             </property>
             <property name="maximumSize">
@@ -199,22 +225,27 @@ QProgressBar::chunk:vertical {
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>26</height>
+              <height>21</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>26</height>
+              <height>21</height>
              </size>
             </property>
             <property name="font">
              <font>
-              <family>Liberation Mono</family>
-              <pointsize>16</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
+              <family>Roboto Mono</family>
+              <pointsize>-1</pointsize>
+              <weight>62</weight>
+              <bold>true</bold>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 16px;
+font-weight: 500;</string>
             </property>
             <property name="text">
              <string>Available:</string>
@@ -238,7 +269,7 @@ QProgressBar::chunk:vertical {
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>22</height>
+              <height>18</height>
              </size>
             </property>
             <property name="frameShape">
@@ -273,11 +304,16 @@ QProgressBar::chunk:vertical {
               </property>
               <property name="font">
                <font>
-                <family>Liberation Mono</family>
-                <pointsize>28</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
+                <family>Roboto Mono</family>
+                <pointsize>-1</pointsize>
+                <weight>87</weight>
+                <bold>true</bold>
                </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-weight: 700;
+font-size: 28px;</string>
               </property>
               <property name="text">
                <string>0.00</string>
@@ -297,9 +333,17 @@ QProgressBar::chunk:vertical {
               </property>
               <property name="font">
                <font>
-                <family>Liberation Mono</family>
-                <pointsize>16</pointsize>
+                <family>Roboto Mono</family>
+                <pointsize>-1</pointsize>
+                <weight>50</weight>
+                <bold>false</bold>
                </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 16px;
+font-weight: 400;
+margin-left: 5px;</string>
               </property>
               <property name="text">
                <string>[BCA]</string>
@@ -328,7 +372,7 @@ QProgressBar::chunk:vertical {
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>21</height>
+              <height>17</height>
              </size>
             </property>
             <property name="frameShape">
@@ -343,16 +387,20 @@ QProgressBar::chunk:vertical {
            <widget class="QPushButton" name="btnSend">
             <property name="font">
              <font>
-              <family>Liberation Mono</family>
-              <pointsize>13</pointsize>
-              <weight>75</weight>
+              <family>Roboto Mono</family>
+              <pointsize>-1</pointsize>
+              <weight>62</weight>
               <bold>true</bold>
               <underline>true</underline>
              </font>
             </property>
             <property name="styleSheet">
              <string notr="true">background-color: transparent;
-border: none;</string>
+border: none;
+font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 500;
+text-decoration: underline;</string>
             </property>
             <property name="text">
              <string>Send</string>
@@ -471,7 +519,7 @@ QProgressBar::chunk:vertical {
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>80</height>
+              <height>90</height>
              </size>
             </property>
             <property name="maximumSize">
@@ -499,22 +547,27 @@ QProgressBar::chunk:vertical {
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>26</height>
+              <height>21</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>26</height>
+              <height>21</height>
              </size>
             </property>
             <property name="font">
              <font>
-              <family>Liberation Mono</family>
-              <pointsize>16</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
+              <family>Roboto Mono</family>
+              <pointsize>-1</pointsize>
+              <weight>62</weight>
+              <bold>true</bold>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 16px;
+font-weight: 500;</string>
             </property>
             <property name="text">
              <string>Pending:</string>
@@ -538,7 +591,7 @@ QProgressBar::chunk:vertical {
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>22</height>
+              <height>18</height>
              </size>
             </property>
             <property name="frameShape">
@@ -573,11 +626,16 @@ QProgressBar::chunk:vertical {
               </property>
               <property name="font">
                <font>
-                <family>Liberation Mono</family>
-                <pointsize>28</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
+                <family>Roboto Mono</family>
+                <pointsize>-1</pointsize>
+                <weight>87</weight>
+                <bold>true</bold>
                </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-weight: 700;
+font-size: 28px;</string>
               </property>
               <property name="text">
                <string>0.00</string>
@@ -597,9 +655,17 @@ QProgressBar::chunk:vertical {
               </property>
               <property name="font">
                <font>
-                <family>Liberation Mono</family>
-                <pointsize>16</pointsize>
+                <family>Roboto Mono</family>
+                <pointsize>-1</pointsize>
+                <weight>50</weight>
+                <bold>false</bold>
                </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 16px;
+font-weight: 400;
+margin-left: 5px;</string>
               </property>
               <property name="text">
                <string>[BCA]</string>
@@ -628,7 +694,7 @@ QProgressBar::chunk:vertical {
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>22</height>
+              <height>17</height>
              </size>
             </property>
             <property name="frameShape">
@@ -643,16 +709,20 @@ QProgressBar::chunk:vertical {
            <widget class="QPushButton" name="btnTransactions">
             <property name="font">
              <font>
-              <family>Liberation Mono</family>
-              <pointsize>13</pointsize>
-              <weight>75</weight>
+              <family>Roboto Mono</family>
+              <pointsize>-1</pointsize>
+              <weight>62</weight>
               <bold>true</bold>
               <underline>true</underline>
              </font>
             </property>
             <property name="styleSheet">
              <string notr="true">background-color: transparent;
-border: none;</string>
+border: none;
+font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 500;
+text-decoration: underline;</string>
             </property>
             <property name="text">
              <string>Transactions</string>
@@ -756,15 +826,16 @@ border: none;</string>
              </rect>
             </property>
             <property name="styleSheet">
-             <string notr="true">border-image: url(:/icons/qr_ico);</string>
+             <string notr="true">background-color: transparent;
+border-image: url(:/icons/qr_ico);</string>
             </property>
            </widget>
            <widget class="QFrame" name="frameTotal">
             <property name="geometry">
              <rect>
-              <x>8</x>
+              <x>31</x>
               <y>124</y>
-              <width>301</width>
+              <width>281</width>
               <height>41</height>
              </rect>
             </property>
@@ -773,6 +844,9 @@ border: none;</string>
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: transparent;</string>
             </property>
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>
@@ -818,21 +892,24 @@ border: none;</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Liberation Mono</family>
-                 <pointsize>20</pointsize>
-                 <weight>50</weight>
-                 <bold>false</bold>
+                 <family>Roboto Mono</family>
+                 <pointsize>-1</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">color: rgb(255, 255, 255);
-</string>
+                <string notr="true">background-color: transparent;
+color: rgb(255, 255, 255);
+font-family: &quot;Roboto Mono&quot;;
+font-size: 20px;
+font-weight: 600;</string>
                </property>
                <property name="text">
                 <string>Total:</string>
                </property>
                <property name="alignment">
-                <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
@@ -858,9 +935,9 @@ border: none;</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Liberation Mono</family>
-                 <pointsize>35</pointsize>
-                 <weight>75</weight>
+                 <family>Roboto Mono</family>
+                 <pointsize>-1</pointsize>
+                 <weight>87</weight>
                  <bold>true</bold>
                 </font>
                </property>
@@ -868,7 +945,11 @@ border: none;</string>
                 <bool>false</bool>
                </property>
                <property name="styleSheet">
-                <string notr="true">color: rgb(255, 198, 0);</string>
+                <string notr="true">background-color: transparent; 
+color: rgb(255, 198, 0); 
+font-family: &quot;Roboto Mono&quot;; 
+font-weight: 700; 
+font-size: 28px;</string>
                </property>
                <property name="text">
                 <string>0.00</string>
@@ -880,7 +961,7 @@ border: none;</string>
                 <bool>false</bool>
                </property>
                <property name="alignment">
-                <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
@@ -906,11 +987,19 @@ border: none;</string>
                </property>
                <property name="font">
                 <font>
-                 <pointsize>20</pointsize>
+                 <family>Roboto Mono</family>
+                 <pointsize>-1</pointsize>
+                 <weight>50</weight>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">color: rgb(255, 198, 0);</string>
+                <string notr="true">background-color: transparent;
+color: rgb(255, 198, 0);
+font-family: &quot;Roboto Mono&quot;;
+font-size: 16px;
+font-weight: 400;
+margin-left: 2px;</string>
                </property>
                <property name="text">
                 <string>[BCA]</string>
@@ -942,18 +1031,72 @@ border: none;</string>
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="spacing">
+         <number>0</number>
+        </property>
         <item>
          <widget class="QLabel" name="label_9">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>23</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>23</height>
+           </size>
+          </property>
           <property name="font">
            <font>
-            <family>Liberation Mono</family>
-            <pointsize>18</pointsize>
-            <weight>50</weight>
-            <bold>false</bold>
+            <family>Roboto Mono</family>
+            <pointsize>-1</pointsize>
+            <weight>62</weight>
+            <bold>true</bold>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 18px;
+font-weight: 500;</string>
+          </property>
           <property name="text">
-           <string>Syncing Headers:</string>
+           <string>Sync progress:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="frame_10">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
           </property>
          </widget>
         </item>
@@ -1041,14 +1184,65 @@ QProgressBar::chunk:horizontal {
          </widget>
         </item>
         <item>
+         <widget class="QFrame" name="frame_11">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>7</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>7</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="labelProgressSync">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>21</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>21</height>
+           </size>
+          </property>
           <property name="font">
            <font>
-            <family>Cantarell</family>
-            <pointsize>16</pointsize>
-            <weight>75</weight>
+            <family>Roboto Mono</family>
+            <pointsize>-1</pointsize>
+            <weight>87</weight>
             <bold>true</bold>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 16px;
+font-weight: 700;</string>
           </property>
           <property name="text">
            <string>85%</string>
@@ -1122,13 +1316,36 @@ QProgressBar::chunk:horizontal {
            </property>
            <item>
             <widget class="QLabel" name="label_10">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>23</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>23</height>
+              </size>
+             </property>
              <property name="font">
               <font>
-               <family>Liberation Mono</family>
-               <pointsize>18</pointsize>
-               <weight>50</weight>
-               <bold>false</bold>
+               <family>Roboto Mono</family>
+               <pointsize>-1</pointsize>
+               <weight>62</weight>
+               <bold>true</bold>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 18px;
+font-weight: 500;</string>
              </property>
              <property name="text">
               <string>Recent transactions:</string>
@@ -1136,16 +1353,206 @@ QProgressBar::chunk:horizontal {
             </widget>
            </item>
            <item>
-            <widget class="QListView" name="listTransactions">
+            <widget class="QFrame" name="frame_12">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_11">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>209</width>
+                 <height>17</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>209</width>
+                 <height>17</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 500;
+color: #b2b2c0;
+padding-left: 46px;</string>
+               </property>
+               <property name="text">
+                <string>Date</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>400</width>
+                 <height>17</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>400</width>
+                 <height>17</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 500;
+color: #b2b2c0;
+padding-left: 20px;</string>
+               </property>
+               <property name="text">
+                <string>Label</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="label">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>410</width>
+                 <height>17</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>415</width>
+                 <height>17</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 500;
+color: #b2b2c0;
+padding-right: 46px;</string>
+               </property>
+               <property name="text">
+                <string>Amount</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_13">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>17</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>17</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QListView" name="listTransactions">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>120</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>120</height>
+              </size>
+             </property>
              <property name="font">
               <font>
-               <family>Liberation Mono</family>
+               <family>Roboto Mono</family>
               </font>
              </property>
              <property name="styleSheet">
@@ -1154,7 +1561,9 @@ border-top: 2px inset rgba(0, 0, 0, 33);
 border-left: 2px inset rgba(0, 0, 0, 33); 
 border-bottom: 2px solid rgba(170, 170, 186, 33); 
 border-right: 2px solid rgba(170, 170, 186, 33); 
-border-radius: 8px;</string>
+border-radius: 8px;
+font-family: &quot;Roboto Mono&quot;;
+font-weight: 400;</string>
              </property>
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
