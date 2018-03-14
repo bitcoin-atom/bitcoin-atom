@@ -49,9 +49,16 @@ static const int MAX_URI_LENGTH = 255;
 /* Number of frames in spinner animation */
 #define SPINNER_FRAMES 36
 
+<<<<<<< HEAD
 #define QAPP_ORG_NAME "Bitcoin-Atom"
 #define QAPP_ORG_DOMAIN "bitcoinatom.io"
 #define QAPP_APP_NAME_DEFAULT "Bitcoin-Atom-Qt"
 #define QAPP_APP_NAME_TESTNET "Bitcoin-Atom-Qt-testnet"
+=======
+#define QAPP_ORG_NAME "Bitcoin"
+#define QAPP_ORG_DOMAIN "bitcoin.org"
+#define QAPP_APP_NAME_DEFAULT "Atom-Qt"
+#define QAPP_APP_NAME_TESTNET "Atom-Qt-testnet"
+>>>>>>> 307f64cab... fix - replace bitcoin-qt to atom-qt
 
 #endif // BITCOIN_QT_GUICONSTANTS_H

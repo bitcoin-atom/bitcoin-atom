@@ -43,7 +43,7 @@ bitcoin (0.13.1-trusty2) trusty; urgency=medium
 bitcoin (0.13.1-trusty1) trusty; urgency=medium
 
   * New upstream release.
-  * Backport updated bitcoin-qt.desktop from upstream master
+  * Backport updated atom-qt.desktop from upstream master
   * Add zmq dependency
   * Switch to Qt5 (breaks precise, but that was already broken by C++11)
 
@@ -278,7 +278,7 @@ bitcoin (0.6.1-natty0) natty; urgency=low
 bitcoin (0.6.0-natty0) natty; urgency=low
 
   * New upstream release.
-  * Add GNOME/KDE support for bitcoin-qt's bitcoin: URI support.
+  * Add GNOME/KDE support for atom-qt's bitcoin: URI support.
     Thanks to luke-jr for the KDE .protocol file.
 
  -- Matt Corallo <matt@bluematt.me>  Sat, 31 Mar 2012 15:35:00 -0500
@@ -331,7 +331,7 @@ bitcoin (0.5.0~rc7-natty0) natty; urgency=low
 bitcoin (0.5.0~rc3-natty0) natty; urgency=low
 
   * New upstream release candidate.
-  * Don't set rpcpassword for bitcoin-qt.
+  * Don't set rpcpassword for atom-qt.
 
  -- Matt Corallo <matt@bluematt.me>  Tue, 8 Nov 2011 11:56:00 -0400
 
@@ -354,7 +354,7 @@ bitcoin (0.5.0~rc1-natty0) natty; urgency=low
 
 bitcoin (0.5.0~rc1-2) experimental; urgency=low
 
-  * Add bitcoin-qt
+  * Add atom-qt
 
  -- Matt Corallo <matt@bluematt.me>  Tue, 25 Oct 2011 15:24:18 -0400
 

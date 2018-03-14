@@ -75,12 +75,12 @@ src/qt/test/moc*.cpp
 *.qm
 Makefile
 atom-qt
-Bitcoin-Qt.app
+Atom-Qt.app
 background.tiff*
 
 # Unit-tests
 Makefile.test
-bitcoin-qt_test
+atom-qt_test
 
 # Resources cpp
 qrc_*.cpp
