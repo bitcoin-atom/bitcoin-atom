@@ -18,7 +18,6 @@
 
 #include <QAbstractItemDelegate>
 #include <QPainter>
-#include <QFontMetrics>
 
 #define DECORATION_SIZE 54
 #define NUM_ITEMS 4
@@ -206,28 +205,18 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     currentWatchOnlyBalance = watchOnlyBalance;
     currentWatchUnconfBalance = watchUnconfBalance;
     currentWatchImmatureBalance = watchImmatureBalance;
-    ui->labelBalance->setText(BitcoinUnits::format(BitcoinUnits::Unit::BTC_rounded, balance, false, BitcoinUnits::separatorAlways));
-    ui->labelUnconfirmed->setText(BitcoinUnits::format(BitcoinUnits::Unit::BTC_rounded, unconfirmedBalance, false, BitcoinUnits::separatorAlways));
+    ui->labelBalance->setText(BitcoinUnits::format(BitcoinUnits::Unit::BTC, balance, false, BitcoinUnits::separatorAlways));
+    ui->labelUnconfirmed->setText(BitcoinUnits::format(BitcoinUnits::Unit::BTC, unconfirmedBalance, false, BitcoinUnits::separatorAlways));
     //ui->labelImmature->setText(BitcoinUnits::formatWithUnit(unit, immatureBalance, false, BitcoinUnits::separatorAlways));
 
     //ui->labelTotal->setText(BitcoinUnits::format(unit, balance + unconfirmedBalance + immatureBalance, false, BitcoinUnits::separatorAlways));
-    /*QString textTotal = BitcoinUnits::format(unit, balance + unconfirmedBalance + immatureBalance, false, BitcoinUnits::separatorAlways);
-    int totalLabelWidth = ui->labelTotal->width();
-    int minFontSize = 5;
-    for (int i = 28; i >= minFontSize; --i) {
-        QFont font("Roboto Mono", i);
-        QFontMetrics fm(font);
-        QRect rect = fm.boundingRect(totalLabelWidth);
-        if (rect.width() <= totalLabelWidth || i == minFontSize) {
-            QString totalLabelStyle = "background-color: transparent; color: rgb(255, 198, 0); font-family: \"Roboto Mono\"; font-weight: 700; font-size: ";
-            totalLabelStyle = totalLabelStyle + QString(std::to_string(i).c_str()) + QString("px;");
-            ui->labelTotal->setStyleSheet(totalLabelStyle);
-            ui->labelTotal->setText(textTotal);
-            break;
-        }
-    }*/
-
-    ui->labelTotal->setText(BitcoinUnits::format(BitcoinUnits::Unit::BTC_rounded, balance + unconfirmedBalance, false, BitcoinUnits::separatorAlways));
+    QString textTotal = BitcoinUnits::format(BitcoinUnits::Unit::BTC, balance + unconfirmedBalance, false, BitcoinUnits::separatorAlways);
+    int labelTotalMaxWidth = ui->frameTotal->width() - ui->labelTotalCaption->width() - ui->labelTotalUnit->width();
+    int fontSize = GUIUtil::getFontPixelSize(textTotal, 5, 28, labelTotalMaxWidth, QString("Roboto Mono"), 700);
+    QString totalLabelStyle = "background-color: transparent; color: rgb(255, 198, 0); font-family: \"Roboto Mono\"; font-weight: 700; font-size: ";
+    totalLabelStyle = totalLabelStyle + QString(std::to_string(fontSize).c_str()) + QString("px;");
+    ui->labelTotal->setStyleSheet(totalLabelStyle);
+    ui->labelTotal->setText(textTotal);
 
     //ui->labelWatchAvailable->setText(BitcoinUnits::formatWithUnit(unit, watchOnlyBalance, false, BitcoinUnits::separatorAlways));
     //ui->labelWatchPending->setText(BitcoinUnits::formatWithUnit(unit, watchUnconfBalance, false, BitcoinUnits::separatorAlways));

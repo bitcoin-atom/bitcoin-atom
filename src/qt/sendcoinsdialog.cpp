@@ -586,7 +586,12 @@ void SendCoinsDialog::setBalance(const CAmount& balance, const CAmount& unconfir
 
     if(model && model->getOptionsModel())
     {
-        ui->labelBalance->setText(BitcoinUnits::format(BitcoinUnits::Unit::BTC_rounded, balance));
+        QString balanceStr = BitcoinUnits::format(BitcoinUnits::Unit::BTC, balance);
+        int fontSize = GUIUtil::getFontPixelSize(balanceStr, 5, 28, 198, QString("Roboto Mono"), 700);
+        QString labelBalanceStyle = "background-color: transparent; font-family: \"Roboto Mono\"; font-weight: 700; font-size: ";
+        labelBalanceStyle = labelBalanceStyle + QString(std::to_string(fontSize).c_str()) + QString("px;");
+        ui->labelBalance->setStyleSheet(labelBalanceStyle);
+        ui->labelBalance->setText(balanceStr);
     }
 }
 

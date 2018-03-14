@@ -52,6 +52,7 @@
 #include <QTextDocument> // for Qt::mightBeRichText
 #include <QThread>
 #include <QMouseEvent>
+#include <QFontMetrics>
 
 #if QT_VERSION < 0x050000
 #include <QUrl>
@@ -76,6 +77,24 @@ extern double NSAppKitVersionNumber;
 #endif
 
 namespace GUIUtil {
+
+int getFontPixelSize(const QString& str, int minFontPixelSize, int maxFontPixelSize, int maxRectWidth, QString fontFamilyName, int fontWeight)
+{
+    int res = minFontPixelSize;
+    for (int i = maxFontPixelSize; i >= minFontPixelSize; --i) {
+        QFont font(fontFamilyName);
+        font.setPixelSize(i);
+        font.setWeight(fontWeight);
+        QFontMetrics fm(font);
+        QRect rect = fm.boundingRect(str);
+        int textWidth = rect.width();
+        if (textWidth <= maxRectWidth) {
+            res = i;
+            break;
+        }
+    }
+    return res;
+}
 
 QString dateTimeStr(const QDateTime &date)
 {

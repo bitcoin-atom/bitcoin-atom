@@ -871,9 +871,9 @@ border-image: url(:/icons/qr_ico);</string>
               <number>0</number>
              </property>
              <item alignment="Qt::AlignBottom">
-              <widget class="QLabel" name="label_7">
+              <widget class="QLabel" name="labelTotalCaption">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
@@ -961,14 +961,14 @@ font-size: 28px;</string>
                 <bool>false</bool>
                </property>
                <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
              <item alignment="Qt::AlignBottom">
-              <widget class="QLabel" name="label_8">
+              <widget class="QLabel" name="labelTotalUnit">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>

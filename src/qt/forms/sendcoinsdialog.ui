@@ -253,8 +253,8 @@ font-weight: 500;</string>
                  <property name="styleSheet">
                   <string notr="true">background-color: transparent;
 font-family: &quot;Roboto Mono&quot;;
-font-size: 28px;
-font-weight: 700;</string>
+font-weight: 700;
+font-size: 28px;</string>
                  </property>
                  <property name="text">
                   <string>0.00</string>

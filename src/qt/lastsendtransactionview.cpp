@@ -4,6 +4,7 @@
 #include <qt/platformstyle.h>
 #include <qt/bitcoinunits.h>
 #include <qt/transactionrecord.h>
+#include <qt/guiutil.h>
 
 LastSendTransactionView::LastSendTransactionView(const PlatformStyle *platformStyle, QWidget *parent) :
     QWidget(parent),
@@ -23,7 +24,13 @@ void LastSendTransactionView::setAmount(const CAmount& balance)
     if (amount < 0) {
         amount = -amount;
     }
-    ui->amountLabel->setText(BitcoinUnits::format(BitcoinUnits::Unit::BTC_rounded, amount, false, BitcoinUnits::separatorAlways));
+
+    QString amountStr = BitcoinUnits::format(BitcoinUnits::Unit::BTC, amount, false, BitcoinUnits::separatorAlways);
+    int fontSize = GUIUtil::getFontPixelSize(amountStr, 5, 18, 85, QString("Roboto Mono"), 700);
+    QString labelAmountStyle = "font-family: \"Roboto Mono\"; font-weight: 700; font-size: ";
+    labelAmountStyle = labelAmountStyle + QString(std::to_string(fontSize).c_str()) + QString("px;");
+    ui->amountLabel->setStyleSheet(labelAmountStyle);
+    ui->amountLabel->setText(amountStr);
 }
 
 void LastSendTransactionView::setStatus(TransactionStatus& status)

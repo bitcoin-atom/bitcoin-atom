@@ -33,6 +33,8 @@ QT_END_NAMESPACE
  */
 namespace GUIUtil
 {
+    int getFontPixelSize(const QString& str, int minFontPixelSize, int maxFontPixelSize, int maxRectWidth, QString fontFamilyName, int fontWeight);
+
     // Create human-readable string from date
     QString dateTimeStr(const QDateTime &datetime);
     QString dateTimeStr(qint64 nTime);
