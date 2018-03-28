@@ -1,5 +1,35 @@
 <TS language="ja" version="2.1">
 <context>
+    <name>MainMenuPanel</name>
+    <message>
+        <source>Overview</source>
+        <translation>概要</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>送信</translation>
+    </message>
+    <message>
+        <source>Receive</source>
+        <translation>受信</translation>
+    </message>
+    <message>
+        <source>Transactions</source>
+        <translation>トランザクション</translation>
+    </message>
+</context>
+<context>
+    <name>PriceWidget</name>
+    <message>
+        <source>Price</source>
+        <translation>価格</translation>
+    </message>
+    <message>
+        <source>Volume (24)</source>
+        <translation>スコープ (24)</translation>
+    </message>
+</context>
+<context>
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
@@ -232,7 +262,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin Atom GUI</name>
+    <name>BitcoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>メッセージの署名... (&amp;m)</translation>
@@ -1191,6 +1221,38 @@
 <context>
     <name>OverviewPage</name>
     <message>
+        <source>Balances:</source>
+        <translation>バランス:</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>送信</translation>
+    </message>
+    <message>
+        <source>Transactions</source>
+        <translation>トランザクション</translation>
+    </message>
+    <message>
+        <source>Sync progress:</source>
+        <translation>同期:</translation>
+    </message>
+    <message>
+        <source>Recent transactions:</source>
+        <translation>最近の取引:</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>日付</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>ラベル</translation>
+    </message>
+    <message>
+        <source>Amount</source>
+        <translation>量</translation>
+    </message>
+    <message>
         <source>Form</source>
         <translation>フォーム</translation>
     </message>
@@ -1784,6 +1846,50 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
+        <source>Receive:</source>
+        <translation>受信:</translation>
+    </message>
+    <message>
+        <source>All fields are optional:</source>
+        <translation>すべてのフィールドはオプションです:</translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation>ラベル:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>量:</translation>
+    </message>
+    <message>
+        <source>Message:</source>
+        <translation>メッセージ:</translation>
+    </message>
+    <message>
+        <source>REQUEST</source>
+        <translation>要求</translation>
+    </message>
+    <message>
+        <source>CLEAR ALL</source>
+        <translation>すべてクリア</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>日付</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>ラベル</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>メッセージ</translation>
+    </message>
+    <message>
+        <source>Requested amount</source>
+        <translation>要求額</translation>
+    </message>
+    <message>
         <source>&amp;Amount:</source>
         <translation>総額:(&amp;A)</translation>
     </message>
@@ -1828,7 +1934,7 @@
         <translation>クリア</translation>
     </message>
     <message>
-        <source>Requested payments history</source>
+        <source>Request payments history:</source>
         <translation>支払リクエスト履歴</translation>
     </message>
     <message>
@@ -1955,7 +2061,85 @@
     </message>
 </context>
 <context>
+    <name>LastSendTransactionView</name>
+    <message>
+        <source>To:</source>
+        <translation>に:</translation>
+    </message>
+    <message>
+        <source>When:</source>
+        <translation>いつ:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>量:</translation>
+    </message>
+</context>
+<context>
+    <name>SendCoinsEntry</name>
+    <message>
+        <source>Fill the form:</source>
+        <translation>フォームに記入してください:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>に:</translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation>ラベル:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>量:</translation>
+    </message>
+    <message>
+        <source>CLEAR ALL</source>
+        <translation>すべてクリア</translation>
+    </message>
+    <message>
+        <source>Subtract fee from amount</source>
+        <translation>金額から引き落とす</translation>
+    </message>
+</context>
+<context>
     <name>SendCoinsDialog</name>
+    <message>
+        <source>Send:</source>
+        <translation>送信:</translation>
+    </message>
+    <message>
+        <source>Including transaction fee:</source>
+        <translation>取引手数料を含む:</translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation>変化する</translation>
+    </message>
+    <message>
+        <source>Are you sure ?</source>
+        <translation>本気ですか ?</translation>
+    </message>
+    <message>
+        <source>SEND</source>
+        <translation>送信</translation>
+    </message>
+    <message>
+        <source>Last:</source>
+        <translation>最終:</translation>
+    </message>
+    <message>
+        <source>Pending</source>
+        <translation>検証待ち</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>完了</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>エラー</translation>
+    </message>
     <message>
         <source>Send Coins</source>
         <translation>コインを送る</translation>
@@ -2053,8 +2237,8 @@
         <translation>カスタム：</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>（スマート手数料はまだ初期化されていません。これにはおおよそ数ブロックほどかかります……）</translation>
+        <source>[ Smart fee not initialized yet. This usualy takes a few blocks ... ]</source>
+        <translation>スマートフィー 初期化されていません。これは通常 いくつかのブロックを取る</translation>
     </message>
     <message>
         <source>normal</source>
@@ -2777,7 +2961,63 @@
     </message>
 </context>
 <context>
+    <name>ChangeFeeDialog</name>
+    <message>
+        <source>Transaction fee:</source>
+        <translation>取引手数料:</translation>
+    </message>
+    <message>
+        <source>Recommended:</source>
+        <translation>おすすめ:</translation>
+    </message>
+    <message>
+        <source>Confirmation time target:</source>
+        <translation>確認時間の目標:</translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation>ノーマル</translation>
+    </message>
+    <message>
+        <source>Fast</source>
+        <translation>速い</translation>
+    </message>
+    <message>
+        <source>Custom:</source>
+        <translation>カスタム:</translation>
+    </message>
+    <message>
+        <source>Per Kbyte</source>
+        <translation>ペール Kbyte</translation>
+    </message>
+    <message>
+        <source>Pay only the required fee of 0.00001000 BCA/kB</source>
+        <translation>只支付所需的费用 0.00001000 BCA/kB</translation>
+    </message>
+    <message>
+        <source>[ Smart fee not initialized yet. This usualy takes a few blocks ... ]</source>
+        <translation>スマートフィー 初期化されていません。これは通常 いくつかのブロックを取る</translation>
+    </message>
+    <message numerus="yes">
+        <source>Estimated to begin confirmation within %n block(s).</source>
+        <translation><numerusform>%n ブロック以内に検証が開始されると予想されます。</numerusform></translation>
+    </message>
+</context>
+
+<context>
     <name>TransactionView</name>
+    <message>
+        <source>Transactions:</source>
+        <translation>トランザクション:</translation>
+    </message>
+    <message>
+        <source>Choose</source>
+        <translation>選択する</translation>
+    </message>
+    <message>
+        <source>Enter address, transaction id, or label to search</source>
+        <translation>住所を入力し、トランザクションID、検索するラベル</translation>
+    </message>
     <message>
         <source>All</source>
         <translation>すべて</translation>
@@ -2988,7 +3228,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin Atom-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>Options:</source>
         <translation>オプション:</translation>

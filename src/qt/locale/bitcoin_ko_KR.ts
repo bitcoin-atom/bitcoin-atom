@@ -1,5 +1,35 @@
 <TS language="ko_KR" version="2.1">
 <context>
+    <name>MainMenuPanel</name>
+    <message>
+        <source>Overview</source>
+        <translation>개요</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>发送</translation>
+    </message>
+    <message>
+        <source>Receive</source>
+        <translation>接收</translation>
+    </message>
+    <message>
+        <source>Transactions</source>
+        <translation>交易</translation>
+    </message>
+</context>
+<context>
+    <name>PriceWidget</name>
+    <message>
+        <source>Price</source>
+        <translation>价钱</translation>
+    </message>
+    <message>
+        <source>Volume (24)</source>
+        <translation>범위 (24)</translation>
+    </message>
+</context>
+<context>
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>

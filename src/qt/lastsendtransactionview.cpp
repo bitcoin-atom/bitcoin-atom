@@ -69,5 +69,10 @@ void LastSendTransactionView::setTime(qint64 time)
 
 void LastSendTransactionView::setAdress(const std::string& adress)
 {
-    ui->labelTo->setText(adress.c_str());
+    QString adressStr = QString(adress.c_str());
+    int fontSize = GUIUtil::getFontPixelSize(adressStr, 5, 11, 178, QString("Roboto Mono"), 700);
+    QString labelAdressStyle = "font-family: \"Roboto Mono\"; font-weight: 700; font-size: ";
+    labelAdressStyle = labelAdressStyle + QString(std::to_string(fontSize).c_str()) + QString("px; padding-right: 17px;");
+    ui->labelTo->setStyleSheet(labelAdressStyle);
+    ui->labelTo->setText(adressStr);
 }

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>871</width>
-    <height>602</height>
+    <height>610</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -60,7 +60,7 @@
        <number>40</number>
       </property>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QHBoxLayout" name="priceLayout">
         <property name="spacing">
          <number>0</number>
         </property>
@@ -69,6 +69,24 @@
         </property>
         <item>
          <widget class="QLabel" name="label">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>267</width>
+            <height>31</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>267</width>
+            <height>31</height>
+           </size>
+          </property>
           <property name="font">
            <font>
             <family>Roboto Mono</family>
@@ -220,7 +238,7 @@ font-weight: 500;</string>
                 <number>0</number>
                </property>
                <item alignment="Qt::AlignBottom">
-                <widget class="QLabel" name="labelBalance">
+                <widget class="QLabel" name="labelCurAmount">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -257,7 +275,7 @@ font-weight: 700;
 font-size: 28px;</string>
                  </property>
                  <property name="text">
-                  <string>0.00</string>
+                  <string>0.00000000</string>
                  </property>
                  <property name="textFormat">
                   <enum>Qt::AutoText</enum>
@@ -271,9 +289,9 @@ font-size: 28px;</string>
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="label_9">
+                <widget class="QLabel" name="labelBalanceUnit">
                  <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
@@ -312,6 +330,115 @@ padding-left: 5px;</string>
                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                  </property>
                 </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QLabel" name="label_6">
+              <property name="geometry">
+               <rect>
+                <x>30</x>
+                <y>101</y>
+                <width>271</width>
+                <height>20</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: transparent;
+font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 400;</string>
+              </property>
+              <property name="text">
+               <string>Including transaction fee:</string>
+              </property>
+             </widget>
+             <widget class="QFrame" name="frameFee">
+              <property name="geometry">
+               <rect>
+                <x>30</x>
+                <y>141</y>
+                <width>271</width>
+                <height>17</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: transparent;</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QHBoxLayout" name="frameFeeLayout">
+               <property name="spacing">
+                <number>25</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="labelCurFee">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: transparent;
+font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 700;</string>
+                 </property>
+                 <property name="text">
+                  <string>0.00000000</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnChangeFee">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: transparent;
+border: none;
+font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 500;
+text-decoration: underline;</string>
+                 </property>
+                 <property name="text">
+                  <string>Change</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </widget>
@@ -416,6 +543,9 @@ font-weight: 700;</string>
        <layout class="QVBoxLayout" name="verticalLayout">
         <property name="spacing">
          <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>25</number>
         </property>
         <property name="bottomMargin">
          <number>0</number>
@@ -695,7 +825,7 @@ font-weight: 700;</string>
         <item>
          <layout class="QHBoxLayout" name="lastTrLayout">
           <property name="spacing">
-           <number>0</number>
+           <number>68</number>
           </property>
          </layout>
         </item>

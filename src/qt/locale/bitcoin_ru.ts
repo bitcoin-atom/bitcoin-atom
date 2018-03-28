@@ -1,5 +1,35 @@
 <TS language="ru" version="2.1">
 <context>
+    <name>MainMenuPanel</name>
+    <message>
+	    <source>Overview</source>
+	    <translation>Сводка</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Отправить</translation>
+    </message>
+    <message>
+        <source>Receive</source>
+        <translation>Получить</translation>
+    </message>
+    <message>
+        <source>Transactions</source>
+        <translation>Транзакции</translation>
+    </message>
+</context>
+<context>
+    <name>PriceWidget</name>
+    <message>
+        <source>Price</source>
+        <translation>Цена</translation>
+    </message>
+    <message>
+        <source>Volume (24)</source>
+        <translation>Объем (24)</translation>
+    </message>
+</context>
+<context>
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
@@ -232,7 +262,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin Atom GUI</name>
+    <name>BitcoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>&amp;Подписать сообщение...</translation>
@@ -1191,6 +1221,38 @@
 <context>
     <name>OverviewPage</name>
     <message>
+        <source>Balances:</source>
+        <translation>Балансы:</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Отправить</translation>
+    </message>
+    <message>
+        <source>Transactions</source>
+        <translation>Транзакции</translation>
+    </message>
+    <message>
+        <source>Sync progress:</source>
+        <translation>Синхронизация:</translation>
+    </message>
+    <message>
+        <source>Recent transactions:</source>
+        <translation>Недавние транзакции:</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Дата</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Метка</translation>
+    </message>
+    <message>
+        <source>Amount</source>
+        <translation>Сумма</translation>
+    </message>
+    <message>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
@@ -1784,6 +1846,50 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
+        <source>Receive:</source>
+        <translation>Получить:</translation>
+    </message>
+    <message>
+        <source>All fields are optional:</source>
+        <translation>Все поля не обязательны:</translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation>Метка:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Сумма:</translation>
+    </message>
+    <message>
+        <source>Message:</source>
+        <translation>Сообщение:</translation>
+    </message>
+    <message>
+        <source>REQUEST</source>
+        <translation>Запросить</translation>
+    </message>
+    <message>
+        <source>CLEAR ALL</source>
+        <translation>Очистить все</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Дата</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Метка</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>Сообщение</translation>
+    </message>
+    <message>
+        <source>Requested amount</source>
+        <translation>Запрошенная сумма</translation>
+    </message>
+    <message>
         <source>&amp;Amount:</source>
         <translation>&amp;Сумма:</translation>
     </message>
@@ -1828,7 +1934,7 @@
         <translation>Очистить</translation>
     </message>
     <message>
-        <source>Requested payments history</source>
+        <source>Request payments history:</source>
         <translation>История запрошенных платежей</translation>
     </message>
     <message>
@@ -1955,7 +2061,85 @@
     </message>
 </context>
 <context>
+    <name>LastSendTransactionView</name>
+    <message>
+        <source>To:</source>
+        <translation>Кому:</translation>
+    </message>
+    <message>
+        <source>When:</source>
+        <translation>Когда:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Сумма:</translation>
+    </message>
+</context>
+<context>
+    <name>SendCoinsEntry</name>
+    <message>
+        <source>Fill the form:</source>
+        <translation>Заполнитe форму:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Кому:</translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation>Метка:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Сумма:</translation>
+    </message>
+    <message>
+        <source>CLEAR ALL</source>
+        <translation>Очистить все</translation>
+    </message>
+    <message>
+        <source>Subtract fee from amount</source>
+        <translation>Вычесть комиссию из суммы</translation>
+    </message>
+</context>
+<context>
     <name>SendCoinsDialog</name>
+    <message>
+        <source>Send:</source>
+        <translation>Отправить:</translation>
+    </message>
+    <message>
+        <source>Including transaction fee:</source>
+        <translation>Включая транзакционную комиссию:</translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation>Изменить</translation>
+    </message>
+    <message>
+        <source>Are you sure ?</source>
+        <translation>Вы уверены ?</translation>
+    </message>
+    <message>
+        <source>SEND</source>
+        <translation>Отправить</translation>
+    </message>
+    <message>
+        <source>Last:</source>
+        <translation>Последние:</translation>
+    </message>
+    <message>
+        <source>Pending</source>
+        <translation>В ожидании</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Готово</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Ошибка</translation>
+    </message>
     <message>
         <source>Send Coins</source>
         <translation>Отправка</translation>
@@ -2053,8 +2237,8 @@
         <translation>Выборочно:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Умная комиссия пока не инициализирована. Обычно для этого требуется несколько блоков...)</translation>
+        <source>[ Smart fee not initialized yet. This usualy takes a few blocks ... ]</source>
+        <translation>"Умная" комиссия еще не инициализирована. Обычно это занимает несколько блоков</translation>
     </message>
     <message>
         <source>normal</source>
@@ -2777,7 +2961,62 @@
     </message>
 </context>
 <context>
+    <name>ChangeFeeDialog</name>
+    <message>
+        <source>Transaction fee:</source>
+        <translation>Транзакционная комиссия:</translation>
+    </message>
+    <message>
+        <source>Recommended:</source>
+        <translation>Рекомедовано:</translation>
+    </message>
+    <message>
+        <source>Confirmation time target:</source>
+        <translation>Целевое время подтверждения:</translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation>Стандарт</translation>
+    </message>
+    <message>
+        <source>Fast</source>
+        <translation>Быстро</translation>
+    </message>
+    <message>
+        <source>Custom:</source>
+        <translation>Настраиваемый:</translation>
+    </message>
+    <message>
+        <source>Per Kbyte</source>
+        <translation>За  килобайт</translation>
+    </message>
+    <message>
+        <source>Pay only the required fee of 0.00001000 BCA/kB</source>
+        <translation>Оплачивайте только обязательную комиссию 0.00001000 BCA/kB</translation>
+    </message>
+    <message>
+        <source>[ Smart fee not initialized yet. This usualy takes a few blocks ... ]</source>
+        <translation>"Умная" комиссия еще не инициализирована. Обычно это занимает несколько блоков</translation>
+    </message>
+    <message numerus="yes">
+        <source>Estimated to begin confirmation within %n block(s).</source>
+        <translation><numerusform>Начало подтверждения ожидается через %n блок.</numerusform><numerusform>Начало подтверждения ожидается через %n блока.</numerusform><numerusform>Начало подтверждения ожидается через %n блоков.</numerusform><numerusform>Начало подтверждения ожидается через %n блоков.</numerusform></translation>
+    </message>
+</context>
+<context>
     <name>TransactionView</name>
+    <message>
+        <source>Transactions:</source>
+        <translation>Транзакции:</translation>
+    </message>
+    <message>
+        <source>Choose</source>
+        <translation>Выберите</translation>
+    </message>
+    <message>
+        <source>Enter address, transaction id, or label to search</source>
+        <translation>Введите адрес, id транзакции или метку для поиска</translation>
+    </message>
     <message>
         <source>All</source>
         <translation>Все</translation>
@@ -2988,7 +3227,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin Atom-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>Options:</source>
         <translation>Параметры:</translation>

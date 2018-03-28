@@ -20,6 +20,7 @@ class TransactionView;
 class WalletModel;
 class AddressBookPage;
 class MainMenuPanel;
+class StockInfo;
 
 QT_BEGIN_NAMESPACE
 class QModelIndex;
@@ -58,6 +59,8 @@ public:
     void setSyncProgress(double value, double max);
 
     void connectMainMenu(MainMenuPanel* _mainMenu);
+
+    void addPriceWidget(StockInfo* stockInfo);
 private:
     ClientModel *clientModel;
     WalletModel *walletModel;

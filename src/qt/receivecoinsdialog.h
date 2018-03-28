@@ -17,6 +17,7 @@
 
 class PlatformStyle;
 class WalletModel;
+class StockInfo;
 
 namespace Ui {
     class ReceiveCoinsDialog;
@@ -43,7 +44,7 @@ public:
     ~ReceiveCoinsDialog();
 
     void setModel(WalletModel *model);
-
+    void addPriceWidget(StockInfo* stockInfo);
 public Q_SLOTS:
     void clear();
     void reject();

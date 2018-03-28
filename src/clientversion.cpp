@@ -101,3 +101,11 @@ std::string FormatSubVersion(const std::string& name, int nClientVersion, const 
     ss << "/";
     return ss.str();
 }
+
+std::string FormatVersionString(const std::string& prefix, int nClientVersion)
+{
+    std::ostringstream ss;
+    ss << prefix;
+    ss << FormatVersion(nClientVersion);
+    return ss.str();
+}

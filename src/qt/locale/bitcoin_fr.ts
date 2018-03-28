@@ -1,5 +1,35 @@
 <TS language="fr" version="2.1">
 <context>
+    <name>MainMenuPanel</name>
+    <message>
+        <source>Overview</source>
+        <translation>Aperçu</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Envoyer</translation>
+    </message>
+    <message>
+        <source>Receive</source>
+        <translation>Recevoir</translation>
+    </message>
+    <message>
+        <source>Transactions</source>
+        <translation>Transactions</translation>
+    </message>
+</context>
+<context>
+    <name>PriceWidget</name>
+    <message>
+        <source>Price</source>
+        <translation>Prix</translation>
+    </message>
+    <message>
+        <source>Volume (24)</source>
+        <translation>Le volume (24)</translation>
+    </message>
+</context>
+<context>
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>

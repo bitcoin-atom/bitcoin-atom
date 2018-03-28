@@ -513,7 +513,7 @@ std::string LicenseInfo()
     const std::string URL_SOURCE_CODE = "<https://github.com/bitcoin-atom/bitcoin-atom>";
     const std::string URL_WEBSITE = "<https://bitcoinatom.io>";
 
-    return CopyrightHolders(strprintf(_("Copyright (C) %i-%i"), 2009, COPYRIGHT_YEAR) + " ") + "\n" + strprintf(_("Copyright (C) 2018 The Bitcoin Atom developers")) + "\n"
+    return CopyrightHolders(strprintf(_("Copyright (C) %i-%i"), 2009, COPYRIGHT_YEAR) + " ") + "\n" + CopyrightAtomHolders(strprintf(_("Copyright (C) 2018 "))) + "\n"
            "\n" +
            strprintf(_("Please contribute if you find %s useful. "
                        "Visit %s for further information about the software."),

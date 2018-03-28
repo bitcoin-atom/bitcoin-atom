@@ -88,6 +88,11 @@
         <file alias="combo_arrow">res/icons/combo_arrow.png</file>
         <file alias="bitcoin_atom">res/icons/bitcoin_atom.png</file>
         <file alias="bitcoin_atom_caption">res/icons/bitcoin_atom_caption.png</file>
+        <file alias="close_ico">res/icons/close_ico.png</file>
+        <file alias="splitter">res/icons/splitter.png</file>
+        <file alias="triangle">res/icons/triangle.png</file>
+        <file alias="triangle_green">res/icons/triangle_green.png</file>
+        <file alias="triangle_red">res/icons/triangle_red.png</file>
     </qresource>
     <qresource prefix="/movies">
         <file alias="spinner-000">res/movies/spinner-000.png</file>

@@ -7,6 +7,7 @@
 #include <qt/bitcoingui.h>
 #include <qt/walletview.h>
 #include <qt/mainmenupanel.h>
+#include <qt/stockinfo.h>
 
 #include <cassert>
 #include <cstdio>
@@ -18,6 +19,7 @@
 WalletFrame::WalletFrame(const PlatformStyle *_platformStyle, BitcoinGUI *_gui) :
     QFrame(_gui),
     gui(_gui),
+    stockInfo(nullptr),
     platformStyle(_platformStyle),
     mainMenuPanel(nullptr)
 {
@@ -51,6 +53,8 @@ WalletFrame::WalletFrame(const PlatformStyle *_platformStyle, BitcoinGUI *_gui) 
 
     mainLayout->addWidget(mainMenuPanel);
     mainLayout->addWidget(walletStack);
+
+    stockInfo = new StockInfo(this);
 }
 
 WalletFrame::~WalletFrame()
@@ -83,6 +87,7 @@ bool WalletFrame::addWallet(const QString& name, WalletModel *walletModel)
     walletView->setWalletModel(walletModel);
     walletView->showOutOfSyncWarning(bOutOfSync);
     walletView->connectMainMenu(mainMenuPanel);
+    walletView->addPriceWidget(stockInfo);
 
      /* TODO we should goto the currently selected page once dynamically adding wallets is supported */
     //walletView->gotoOverviewPage();
@@ -150,6 +155,10 @@ void WalletFrame::gotoOverviewPage()
     QMap<QString, WalletView*>::const_iterator i;
     for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i)
         i.value()->gotoOverviewPage();
+
+    if (mainMenuPanel) {
+        mainMenuPanel->onLoadedOverviewPage();
+    }
 }
 
 void WalletFrame::gotoHistoryPage()
@@ -157,6 +166,10 @@ void WalletFrame::gotoHistoryPage()
     QMap<QString, WalletView*>::const_iterator i;
     for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i)
         i.value()->gotoHistoryPage();
+
+    if (mainMenuPanel) {
+        mainMenuPanel->onLoadedTransactionPage();
+    }
 }
 
 void WalletFrame::gotoReceiveCoinsPage()
@@ -164,6 +177,10 @@ void WalletFrame::gotoReceiveCoinsPage()
     QMap<QString, WalletView*>::const_iterator i;
     for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i)
         i.value()->gotoReceiveCoinsPage();
+
+    if (mainMenuPanel) {
+        mainMenuPanel->onLoadedReceivePage();
+    }
 }
 
 void WalletFrame::gotoSendCoinsPage(QString addr)
@@ -171,6 +188,10 @@ void WalletFrame::gotoSendCoinsPage(QString addr)
     QMap<QString, WalletView*>::const_iterator i;
     for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i)
         i.value()->gotoSendCoinsPage(addr);
+
+    if (mainMenuPanel) {
+        mainMenuPanel->onLoadedSendPage();
+    }
 }
 
 void WalletFrame::gotoSignMessageTab(QString addr)

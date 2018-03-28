@@ -18,6 +18,8 @@ class SendCoinsEntry;
 class SendCoinsRecipient;
 class LastSendTransactionView;
 class QSpacerItem;
+class ChangeFeeDialog;
+class StockInfo;
 
 namespace Ui {
     class SendCoinsDialog;
@@ -47,6 +49,7 @@ public:
     void pasteEntry(const SendCoinsRecipient &rv);
     bool handlePaymentRequest(const SendCoinsRecipient &recipient);
 
+    void addPriceWidget(StockInfo* stockInfo);
 public Q_SLOTS:
     void clear();
     void reject();
@@ -59,6 +62,7 @@ public Q_SLOTS:
 
 private:
     Ui::SendCoinsDialog *ui;
+    ChangeFeeDialog *changeFeeDialog;
     ClientModel *clientModel;
     WalletModel *model;
     bool fNewRecipientAllowed;
@@ -69,7 +73,6 @@ private:
     LastSendTransactionView* view2;
     LastSendTransactionView* view3;
     QSpacerItem* spacer1;
-    QSpacerItem* spacer2;
 
     // Process WalletModel::SendCoinsReturn and generate a pair consisting
     // of a message and message flags for use in Q_EMIT message().
@@ -81,6 +84,7 @@ private:
     void updateCoinControlState(CCoinControl& ctrl);
     void updateLastTransactions();
 
+    void updateCardInfo();
 private Q_SLOTS:
     void on_sendButton_clicked();
     void on_buttonChooseFee_clicked();
@@ -104,6 +108,7 @@ private Q_SLOTS:
     void updateFeeSectionControls();
     void updateMinFeeLabel();
     void updateSmartFeeLabel();
+    void onChangeClick();
 
 Q_SIGNALS:
     // Fired when a message should be reported to the user

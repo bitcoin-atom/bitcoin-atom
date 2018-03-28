@@ -19,6 +19,7 @@
 #include <qt/transactionview.h>
 #include <qt/walletmodel.h>
 #include <qt/mainmenupanel.h>
+#include <qt/stockinfo.h>
 
 #include <ui_interface.h>
 
@@ -89,6 +90,14 @@ WalletView::WalletView(const PlatformStyle *_platformStyle, QWidget *parent):
 
 WalletView::~WalletView()
 {
+}
+
+void WalletView::addPriceWidget(StockInfo* stockInfo)
+{
+    overviewPage->addPriceWidget(stockInfo);
+    transactionView->addPriceWidget(stockInfo);
+    receiveCoinsPage->addPriceWidget(stockInfo);
+    sendCoinsPage->addPriceWidget(stockInfo);
 }
 
 void WalletView::connectMainMenu(MainMenuPanel* _mainMenu)

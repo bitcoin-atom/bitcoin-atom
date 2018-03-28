@@ -16,6 +16,7 @@ class TxViewDelegate;
 class PlatformStyle;
 class WalletModel;
 class MainMenuPanel;
+class StockInfo;
 
 namespace Ui {
     class OverviewPage;
@@ -40,9 +41,13 @@ public:
     void setSyncProgress(double value, double max);
 
     void connectMainMenu(MainMenuPanel* _mainMenu) { mainMenu = _mainMenu; }
+    void addPriceWidget(StockInfo* stockInfo);
 public Q_SLOTS:
     void setBalance(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance,
                     const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance);
+
+private:
+    bool drawQR(const QString& address);
 
 Q_SIGNALS:
     void transactionClicked(const QModelIndex &index);

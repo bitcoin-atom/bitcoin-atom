@@ -899,6 +899,12 @@ int GetNumCores()
 #endif
 }
 
+std::string CopyrightAtomHolders(const std::string& strPrefix)
+{
+    std::string strCopyrightHolders = strPrefix + strprintf(_(COPYRIGHT_HOLDERS), _("Bitcoin Atom"));
+    return strCopyrightHolders;
+}
+
 std::string CopyrightHolders(const std::string& strPrefix)
 {
     std::string strCopyrightHolders = strPrefix + strprintf(_(COPYRIGHT_HOLDERS), _(COPYRIGHT_HOLDERS_SUBSTITUTION));

@@ -3,6 +3,7 @@
 #include <qt/platformstyle.h>
 #include <qt/mainmenupanel.moc>
 #include <qt/walletframe.h>
+#include <clientversion.h>
 
 MainMenuPanel::MainMenuPanel(WalletFrame *walletFrame, const PlatformStyle *platformStyle, QWidget *parent) :
     QWidget(parent),
@@ -28,6 +29,8 @@ MainMenuPanel::MainMenuPanel(WalletFrame *walletFrame, const PlatformStyle *plat
     connect(ui->btnSend, SIGNAL(clicked()), this, SLOT(gotoSendCoinsPage()));
     connect(ui->btnReceive, SIGNAL(clicked()), this, SLOT(gotoReceiveCoinsPage()));
     connect(ui->btnTransactions, SIGNAL(clicked()), this, SLOT(gotoHistoryPage()));
+
+    ui->labelVersion->setText(QString::fromStdString(FormatVersionString("v.", CLIENT_VERSION)));
 }
 
 MainMenuPanel::~MainMenuPanel()
@@ -47,6 +50,7 @@ void MainMenuPanel::onTransactionsClick()
 
 void MainMenuPanel::gotoOverviewPage()
 {
+    curPage = cpOverview;
     ui->btnSend->setChecked(false);
     ui->btnReceive->setChecked(false);
     ui->btnTransactions->setChecked(false);
@@ -59,6 +63,7 @@ void MainMenuPanel::gotoOverviewPage()
 
 void MainMenuPanel::gotoHistoryPage()
 {
+    curPage = cpTransaction;
     ui->btnOverview->setChecked(false);
     ui->btnSend->setChecked(false);
     ui->btnReceive->setChecked(false);
@@ -71,6 +76,7 @@ void MainMenuPanel::gotoHistoryPage()
 
 void MainMenuPanel::gotoReceiveCoinsPage()
 {
+    curPage = cpReceive;
     ui->btnOverview->setChecked(false);
     ui->btnSend->setChecked(false);
     ui->btnTransactions->setChecked(false);
@@ -83,6 +89,7 @@ void MainMenuPanel::gotoReceiveCoinsPage()
 
 void MainMenuPanel::gotoSendCoinsPage(QString addr)
 {
+    curPage = cpSend;
     ui->btnOverview->setChecked(false);
     ui->btnReceive->setChecked(false);
     ui->btnTransactions->setChecked(false);
@@ -96,4 +103,60 @@ void MainMenuPanel::gotoSendCoinsPage(QString addr)
 void MainMenuPanel::onWalletAdded()
 {
     gotoOverviewPage();
+}
+
+void MainMenuPanel::onLoadedOverviewPage()
+{
+    if (curPage == cpOverview) {
+        return;
+    }
+
+    ui->btnOverview->setChecked(true);
+    ui->btnSend->setChecked(false);
+    ui->btnTransactions->setChecked(false);
+    ui->btnReceive->setChecked(false);
+
+    curCheckedBtn = ui->btnOverview;
+}
+
+void MainMenuPanel::onLoadedSendPage()
+{
+    if (curPage == cpSend) {
+        return;
+    }
+
+    ui->btnOverview->setChecked(false);
+    ui->btnSend->setChecked(true);
+    ui->btnTransactions->setChecked(false);
+    ui->btnReceive->setChecked(false);
+
+    curCheckedBtn = ui->btnSend;
+}
+
+void MainMenuPanel::onLoadedReceivePage()
+{
+    if (curPage == cpReceive) {
+        return;
+    }
+
+    ui->btnOverview->setChecked(false);
+    ui->btnSend->setChecked(false);
+    ui->btnTransactions->setChecked(false);
+    ui->btnReceive->setChecked(true);
+
+    curCheckedBtn = ui->btnReceive;
+}
+
+void MainMenuPanel::onLoadedTransactionPage()
+{
+    if (curPage == cpTransaction) {
+        return;
+    }
+
+    ui->btnOverview->setChecked(false);
+    ui->btnSend->setChecked(false);
+    ui->btnTransactions->setChecked(true);
+    ui->btnReceive->setChecked(false);
+
+    curCheckedBtn = ui->btnTransactions;
 }

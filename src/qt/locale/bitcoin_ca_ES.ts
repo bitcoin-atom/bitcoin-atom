@@ -1,5 +1,35 @@
 <TS language="ca_ES" version="2.1">
 <context>
+    <name>MainMenuPanel</name>
+    <message>
+        <source>Overview</source>
+        <translation>Visión general</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Enviar</translation>
+    </message>
+    <message>
+        <source>Receive</source>
+        <translation>Recibir</translation>
+    </message>
+    <message>
+        <source>Transactions</source>
+        <translation>Actas</translation>
+    </message>
+</context>
+<context>
+    <name>PriceWidget</name>
+    <message>
+        <source>Price</source>
+        <translation>Precio</translation>
+    </message>
+    <message>
+        <source>Volume (24)</source>
+        <translation>Volumen (24)</translation>
+    </message>
+</context>
+<context>
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
@@ -232,7 +262,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin Atom GUI</name>
+    <name>BitcoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Signa el &amp;missatge...</translation>
@@ -1165,7 +1195,39 @@
     </message>
 </context>
 <context>
-    <name>OverviewPage</name>
+    <name>OverviewPage</name> 
+    <message>
+        <source>Balances:</source>
+        <translation>Equilibrar:</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Enviar</translation>
+    </message>
+    <message>
+        <source>Transactions</source>
+        <translation>Actas</translation>
+    </message>
+    <message>
+        <source>Sync progress:</source>
+        <translation>Sincronización:</translation>
+    </message>
+    <message>
+        <source>Recent transactions:</source>
+        <translation>Transacciones Recientes:</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Fecha</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Etiqueta</translation>
+    </message>
+    <message>
+        <source>Amount</source>
+        <translation>Cantidad</translation>
+    </message>
     <message>
         <source>Form</source>
         <translation>Formulari</translation>
@@ -1676,6 +1738,50 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
+        <source>Receive:</source>
+        <translation>Recibir:</translation>
+    </message>
+    <message>
+        <source>All fields are optional:</source>
+        <translation>Todos los campos son opcionales:</translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation>Etiqueta:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Cantidad:</translation>
+    </message>
+    <message>
+        <source>Message:</source>
+        <translation>Mensaje:</translation>
+    </message>
+    <message>
+        <source>REQUEST</source>
+        <translation>Solicitud</translation>
+    </message>
+    <message>
+        <source>CLEAR ALL</source>
+        <translation>Limpiar todo</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Fecha</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Etiqueta</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>Mensaje</translation>
+    </message>
+    <message>
+        <source>Requested amount</source>
+        <translation>Monto requerido</translation>
+    </message>
+    <message>
         <source>&amp;Amount:</source>
         <translation>Im&amp;port:</translation>
     </message>
@@ -1720,7 +1826,7 @@
         <translation>Neteja</translation>
     </message>
     <message>
-        <source>Requested payments history</source>
+        <source>Request payments history:</source>
         <translation>Historial de pagaments sol·licitats</translation>
     </message>
     <message>
@@ -1843,7 +1949,85 @@
     </message>
 </context>
 <context>
+    <name>LastSendTransactionView</name>
+    <message>
+        <source>To:</source>
+        <translation>A:</translation>
+    </message>
+    <message>
+        <source>When:</source>
+        <translation>Cuando:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Cantidad:</translation>
+    </message>
+</context>
+<context>
+    <name>SendCoinsEntry</name>
+    <message>
+        <source>Fill the form:</source>
+        <translation>Completa el formulario:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>A:</translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation>Etiqueta:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Cantidad:</translation>
+    </message>
+    <message>
+        <source>CLEAR ALL</source>
+        <translation>Limpiar todo</translation>
+    </message>
+    <message>
+        <source>Subtract fee from amount</source>
+        <translation>Resta la tarifa de la cantidad</translation>
+    </message>
+</context>
+<context>
     <name>SendCoinsDialog</name>
+    <message>
+        <source>Send:</source>
+        <translation>Enviar:</translation>
+    </message>
+    <message>
+        <source>Including transaction fee:</source>
+        <translation>Incluyendo tarifa de transacción:</translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation>Cambio</translation>
+    </message>
+    <message>
+        <source>Are you sure ?</source>
+        <translation>Estás seguro ?</translation>
+    </message>
+    <message>
+        <source>SEND</source>
+        <translation>Enviar</translation>
+    </message>
+    <message>
+        <source>Last:</source>
+        <translation>Último:</translation>
+    </message>
+    <message>
+        <source>Pending</source>
+        <translation>Pendent</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Hecho</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Error</translation>
+    </message>
     <message>
         <source>Send Coins</source>
         <translation>Envia monedes</translation>
@@ -1941,8 +2125,8 @@
         <translation>Personalitzada:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(No s'ha inicialitzat encara la comissió intel·ligent. Normalment pren uns pocs blocs...)</translation>
+        <source>[ Smart fee not initialized yet. This usualy takes a few blocks ... ]</source>
+        <translation>"Умная" комиссия еще не инициализирована. Обычно это занимает несколько блоков</translation>
     </message>
     <message>
         <source>normal</source>
@@ -2597,7 +2781,58 @@
     </message>
 </context>
 <context>
+    <name>ChangeFeeDialog</name>
+    <message>
+        <source>Transaction fee:</source>
+        <translation>Tarifa de transacción:</translation>
+    </message>
+    <message>
+        <source>Recommended:</source>
+        <translation>Recomendado:</translation>
+    </message>
+    <message>
+        <source>Confirmation time target:</source>
+        <translation>Objetivo de tiempo de confirmación:</translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation>Normal</translation>
+    </message>
+    <message>
+        <source>Fast</source>
+        <translation>Rápido</translation>
+    </message>
+    <message>
+        <source>Custom:</source>
+        <translation>Personalizado:</translation>
+    </message>
+    <message>
+        <source>Per Kbyte</source>
+        <translation>Por Kbyte</translation>
+    </message>
+    <message>
+        <source>Pay only the required fee of 0.00001000 BCA/kB</source>
+        <translation>Pague solo la tarifa requerida de 0.00001000 BCA/kB</translation>
+    </message>
+    <message>
+        <source>[ Smart fee not initialized yet. This usualy takes a few blocks ... ]</source>
+        <translation>Tarifa inteligente no inicializado todavía Esto usualmente toma unos bloques</translation>
+    </message>
+</context>
+<context>
     <name>TransactionView</name>
+    <message>
+        <source>Transactions:</source>
+        <translation>Actas:</translation>
+    </message>
+    <message>
+        <source>Choose</source>
+        <translation>Escoger</translation>
+    </message>
+    <message>
+        <source>Enter address, transaction id, or label to search</source>
+        <translation>Ingresa la direccion, ID de transacción, o etiqueta para buscar</translation>
+    </message>
     <message>
         <source>All</source>
         <translation>Tot</translation>
@@ -2804,7 +3039,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin Atom-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>Options:</source>
         <translation>Opcions:</translation>

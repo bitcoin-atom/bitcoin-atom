@@ -1,5 +1,35 @@
 <TS language="zh_CN" version="2.1">
 <context>
+    <name>MainMenuPanel</name>
+    <message>
+        <source>Overview</source>
+        <translation>概观</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>发送</translation>
+    </message>
+    <message>
+        <source>Receive</source>
+        <translation>接收</translation>
+    </message>
+    <message>
+        <source>Transactions</source>
+        <translation>交易</translation>
+    </message>
+</context>
+<context>
+    <name>PriceWidget</name>
+    <message>
+        <source>Price</source>
+        <translation>가격</translation>
+    </message>
+    <message>
+        <source>Volume (24)</source>
+        <translation>音量 (24)</translation>
+    </message>
+</context>
+<context>
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
@@ -232,7 +262,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin Atom GUI</name>
+    <name>BitcoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>消息签名(&amp;M)...</translation>
@@ -1180,6 +1210,38 @@
 <context>
     <name>OverviewPage</name>
     <message>
+        <source>Balances:</source>
+        <translation>平衡:</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>发送</translation>
+    </message>
+    <message>
+        <source>Transactions</source>
+        <translation>交易</translation>
+    </message>
+    <message>
+        <source>Sync progress:</source>
+        <translation>同步:</translation>
+    </message>
+    <message>
+        <source>Recent transactions:</source>
+        <translation>最近的交易:</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>日期</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>标签</translation>
+    </message>
+    <message>
+        <source>Amount</source>
+        <translation>量</translation>
+    </message>
+    <message>
         <source>Form</source>
         <translation>表单</translation>
     </message>
@@ -1770,6 +1832,50 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
+        <source>Receive:</source>
+        <translation>接收:</translation>
+    </message>
+    <message>
+        <source>All fields are optional:</source>
+        <translation>所有字段都是可选的:</translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation>标签:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>量:</translation>
+    </message>
+    <message>
+        <source>Message:</source>
+        <translation>信息:</translation>
+    </message>
+    <message>
+        <source>REQUEST</source>
+        <translation>请求</translation>
+    </message>
+    <message>
+        <source>CLEAR ALL</source>
+        <translation>全部清除</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>日期</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>标签</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>信息</translation>
+    </message>
+    <message>
+        <source>Requested amount</source>
+        <translation>要求的金额</translation>
+    </message>
+    <message>
         <source>&amp;Amount:</source>
         <translation>总额(&amp;A)：</translation>
     </message>
@@ -1814,7 +1920,7 @@
         <translation>清除</translation>
     </message>
     <message>
-        <source>Requested payments history</source>
+        <source>Requested payments history:</source>
         <translation>请求付款的历史</translation>
     </message>
     <message>
@@ -1941,7 +2047,85 @@
     </message>
 </context>
 <context>
+    <name>LastSendTransactionView</name>
+    <message>
+        <source>To:</source>
+        <translation>至:</translation>
+    </message>
+    <message>
+        <source>When:</source>
+        <translation>什么时候:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>量:</translation>
+    </message>
+</context>
+<context>
+    <name>SendCoinsEntry</name>
+    <message>
+        <source>Fill the form:</source>
+        <translation>填表格:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>至:</translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation>标签:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>量:</translation>
+    </message>
+    <message>
+        <source>CLEAR ALL</source>
+        <translation>全部清除</translation>
+    </message>
+    <message>
+        <source>Subtract fee from amount</source>
+        <translation>从金额中扣除费用</translation>
+    </message>
+</context>
+<context>
     <name>SendCoinsDialog</name>
+    <message>
+        <source>Send:</source>
+        <translation>发送:</translation>
+    </message>
+    <message>
+        <source>Including transaction fee:</source>
+        <translation>包括交易费用:</translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation>更改</translation>
+    </message>
+    <message>
+        <source>Are you sure ?</source>
+        <translation>你确定 ？</translation>
+    </message>
+    <message>
+        <source>SEND</source>
+        <translation>发送</translation>
+    </message>
+    <message>
+        <source>Last:</source>
+        <translation>持续:</translation>
+    </message>
+    <message>
+        <source>Pending</source>
+        <translation>等待中的余额</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>完成</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>错误</translation>
+    </message>
     <message>
         <source>Send Coins</source>
         <translation>发送比特币</translation>
@@ -2039,8 +2223,8 @@
         <translation>自定义：</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(智能交易费用 尚未初始化。 需要再下载一些数据块...)</translation>
+        <source>[ Smart fee not initialized yet. This usualy takes a few blocks ... ]</source>
+        <translation>智能费用 尚未初始化。这通常 需要几个街区</translation>
     </message>
     <message>
         <source>normal</source>
@@ -2743,7 +2927,62 @@
     </message>
 </context>
 <context>
+    <name>ChangeFeeDialog</name>
+    <message>
+        <source>Transaction fee:</source>
+        <translation>手续费:</translation>
+    </message>
+    <message>
+        <source>Recommended:</source>
+        <translation>推荐的:</translation>
+    </message>
+    <message>
+        <source>Confirmation time target:</source>
+        <translation>确认时间目标:</translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation>正常</translation>
+    </message>
+    <message>
+        <source>Fast</source>
+        <translation>快速</translation>
+    </message>
+    <message>
+        <source>Custom:</source>
+        <translation>习惯:</translation>
+    </message>
+    <message>
+        <source>Per Kbyte</source>
+        <translation>每Kbyte</translation>
+    </message>
+    <message>
+        <source>Pay only the required fee of 0.00001000 BCA/kB</source>
+        <translation>必要な料金のみを支払う 0.00001000 BCA/kB</translation>
+    </message>
+    <message>
+        <source>[ Smart fee not initialized yet. This usualy takes a few blocks ... ]</source>
+        <translation>智能费用 尚未初始化。这通常 需要几个街区</translation>
+    </message>
+    <message numerus="yes">
+        <source>Estimated to begin confirmation within %n block(s).</source>
+        <translation><numerusform>预计 %n 个数据块后被确认。</numerusform></translation>
+    </message>
+</context>
+<context>
     <name>TransactionView</name>
+    <message>
+        <source>Transactions:</source>
+        <translation>交易:</translation>
+    </message>
+    <message>
+        <source>Choose</source>
+        <translation>选择</translation>
+    </message>
+    <message>
+        <source>Enter address, transaction id, or label to search</source>
+        <translation>输入地址，交易ID，或标签进行搜索</translation>
+    </message>
     <message>
         <source>All</source>
         <translation>全部</translation>
@@ -2954,7 +3193,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin Atom-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>Options:</source>
         <translation>选项：

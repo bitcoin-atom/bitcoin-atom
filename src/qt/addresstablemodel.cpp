@@ -400,6 +400,40 @@ QString AddressTableModel::addRow(const QString &type, const QString &label, con
     return QString::fromStdString(strAddress);
 }
 
+QString AddressTableModel::getReceiveFirstAddress()
+{
+    LOCK(wallet->cs_wallet);
+    bool isAddressFounded = false;
+    QString address = "";
+    for (const std::pair<CTxDestination, CAddressBookData>& item : wallet->mapAddressBook) {
+        if (item.second.purpose == "receive") {
+            isAddressFounded = true;
+            address = EncodeDestination(item.first).c_str();
+            break;
+        }
+    }
+    if (!isAddressFounded) {
+        CPubKey newKey;
+        if(!wallet->GetKeyFromPool(newKey))
+        {
+            WalletModel::UnlockContext ctx(walletModel->requestUnlock());
+            if(!ctx.isValid())
+            {
+                editStatus = WALLET_UNLOCK_FAILURE;
+                return QString();
+            }
+            if(!wallet->GetKeyFromPool(newKey))
+            {
+                editStatus = KEY_GENERATION_FAILURE;
+                return QString();
+            }
+        }
+       address = EncodeDestination(newKey.GetID()).c_str();
+       wallet->SetAddressBook(DecodeDestination(address.toStdString()), "", "receive");
+    }
+    return address;
+}
+
 bool AddressTableModel::removeRows(int row, int count, const QModelIndex &parent)
 {
     Q_UNUSED(parent);

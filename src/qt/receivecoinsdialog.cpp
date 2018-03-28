@@ -14,6 +14,8 @@
 #include <qt/receiverequestdialog.h>
 #include <qt/recentrequeststablemodel.h>
 #include <qt/walletmodel.h>
+#include <qt/stockinfo.h>
+#include <qt/pricewidget.h>
 
 #include <QAction>
 #include <QCursor>
@@ -21,6 +23,7 @@
 #include <QMessageBox>
 #include <QScrollBar>
 #include <QTextDocument>
+#include <QSpacerItem>
 
 ReceiveCoinsDialog::ReceiveCoinsDialog(const PlatformStyle *_platformStyle, QWidget *parent) :
     QDialog(parent),
@@ -66,6 +69,14 @@ ReceiveCoinsDialog::ReceiveCoinsDialog(const PlatformStyle *_platformStyle, QWid
     connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(clear()));
 }
 
+void ReceiveCoinsDialog::addPriceWidget(StockInfo* stockInfo)
+{
+    PriceWidget *priceWidget = new PriceWidget(stockInfo, this);
+    ui->priceLayout->addWidget(priceWidget);
+    QSpacerItem *spacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Expanding);
+    ui->priceLayout->addItem(spacer);
+}
+
 void ReceiveCoinsDialog::setModel(WalletModel *_model)
 {
     this->model = _model;
@@ -94,7 +105,7 @@ void ReceiveCoinsDialog::setModel(WalletModel *_model)
             SLOT(recentRequestsView_selectionChanged(QItemSelection, QItemSelection)));
         // Last 2 columns are set by the columnResizingFixer, when the table geometry is ready.
         columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer(tableView, AMOUNT_MINIMUM_COLUMN_WIDTH, DATE_COLUMN_WIDTH, this);
-        columnResizingFixer->stretchColumnWidth(RecentRequestsTableModel::Message);
+        columnResizingFixer->stretchColumnWidth(RecentRequestsTableModel::Message, 12, false);
     }
 }
 
@@ -197,7 +208,7 @@ void ReceiveCoinsDialog::on_removeRequestButton_clicked()
 void ReceiveCoinsDialog::resizeEvent(QResizeEvent *event)
 {
     QWidget::resizeEvent(event);
-    columnResizingFixer->stretchColumnWidth(RecentRequestsTableModel::Message);
+    columnResizingFixer->stretchColumnWidth(RecentRequestsTableModel::Message, 12, false);
 }
 
 void ReceiveCoinsDialog::keyPressEvent(QKeyEvent *event)

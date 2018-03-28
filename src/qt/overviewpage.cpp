@@ -15,9 +15,24 @@
 #include <qt/transactiontablemodel.h>
 #include <qt/walletmodel.h>
 #include <qt/mainmenupanel.h>
+#include <qt/stockinfo.h>
+#include <qt/pricewidget.h>
+#include <qt/addresstablemodel.h>
 
 #include <QAbstractItemDelegate>
 #include <QPainter>
+#include <QSpacerItem>
+#include <QPixmap>
+#include <QColor>
+#include <QSettings>
+
+#if defined(HAVE_CONFIG_H)
+#include <config/bitcoin-config.h> /* for USE_QRCODE */
+#endif
+
+#ifdef USE_QRCODE
+#include <qrencode.h>
+#endif
 
 #define DECORATION_SIZE 54
 #define NUM_ITEMS 4
@@ -157,6 +172,8 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
     showOutOfSyncWarning(true);
     //connect(ui->labelWalletStatus, SIGNAL(clicked()), this, SLOT(handleOutOfSyncWarningClicks()));
     //connect(ui->labelTransactionsStatus, SIGNAL(clicked()), this, SLOT(handleOutOfSyncWarningClicks()));
+
+    ui->qrImage->setVisible(false);
 }
 
 void OverviewPage::onSendClick()
@@ -171,6 +188,14 @@ void OverviewPage::onTransactionsClick()
     if (mainMenu) {
         mainMenu->onTransactionsClick();
     }
+}
+
+void OverviewPage::addPriceWidget(StockInfo* stockInfo)
+{
+    PriceWidget *priceWidget = new PriceWidget(stockInfo, this);
+    ui->priceLayout->addWidget(priceWidget);
+    QSpacerItem *spacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Expanding);
+    ui->priceLayout->addItem(spacer);
 }
 
 void OverviewPage::handleTransactionClicked(const QModelIndex &index)
@@ -205,12 +230,12 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     currentWatchOnlyBalance = watchOnlyBalance;
     currentWatchUnconfBalance = watchUnconfBalance;
     currentWatchImmatureBalance = watchImmatureBalance;
-    ui->labelBalance->setText(BitcoinUnits::format(BitcoinUnits::Unit::BTC, balance, false, BitcoinUnits::separatorAlways));
-    ui->labelUnconfirmed->setText(BitcoinUnits::format(BitcoinUnits::Unit::BTC, unconfirmedBalance, false, BitcoinUnits::separatorAlways));
+    ui->labelBalance->setText(BitcoinUnits::format(BitcoinUnits::Unit::BTC_rounded, balance, false, BitcoinUnits::separatorAlways));
+    ui->labelUnconfirmed->setText(BitcoinUnits::format(BitcoinUnits::Unit::BTC_rounded, unconfirmedBalance, false, BitcoinUnits::separatorAlways));
     //ui->labelImmature->setText(BitcoinUnits::formatWithUnit(unit, immatureBalance, false, BitcoinUnits::separatorAlways));
 
     //ui->labelTotal->setText(BitcoinUnits::format(unit, balance + unconfirmedBalance + immatureBalance, false, BitcoinUnits::separatorAlways));
-    QString textTotal = BitcoinUnits::format(BitcoinUnits::Unit::BTC, balance + unconfirmedBalance, false, BitcoinUnits::separatorAlways);
+    QString textTotal = BitcoinUnits::format(BitcoinUnits::Unit::BTC_rounded, balance + unconfirmedBalance, false, BitcoinUnits::separatorAlways);
     int labelTotalMaxWidth = ui->frameTotal->width() - ui->labelTotalCaption->width() - ui->labelTotalUnit->width();
     int fontSize = GUIUtil::getFontPixelSize(textTotal, 5, 28, labelTotalMaxWidth, QString("Roboto Mono"), 700);
     QString totalLabelStyle = "background-color: transparent; color: rgb(255, 198, 0); font-family: \"Roboto Mono\"; font-weight: 700; font-size: ";
@@ -300,6 +325,56 @@ void OverviewPage::setWalletModel(WalletModel *model)
 
     // update the display unit, to not use the default ("BTC")
     updateDisplayUnit();
+
+    if (model && model->getAddressTableModel() ) {
+        QString address = model->getAddressTableModel()->getReceiveFirstAddress();
+        bool qtOk = drawQR(address);
+        if (qtOk) {
+            ui->qrImage->setVisible(true);
+        } else {
+            ui->qrImage->setVisible(false);
+        }
+    } else {
+        ui->qrImage->setVisible(false);
+    }
+}
+
+bool OverviewPage::drawQR(const QString& address)
+{
+    if (address.isEmpty()) {
+        return false;
+    }
+#ifdef USE_QRCODE
+    QRcode *code = QRcode_encodeString(address.toUtf8().constData(), 0, QR_ECLEVEL_L, QR_MODE_8, 1);
+    if (!code)
+    {
+        return false;
+    }
+    QImage qrImage = QImage(code->width, code->width, QImage::Format_RGB32);
+    qrImage.fill(0xffffff);
+    unsigned char *p = code->data;
+    for (int y = 0; y < code->width; y++)
+    {
+        for (int x = 0; x < code->width; x++)
+        {
+            qrImage.setPixel(x, y, ((*p & 1) ? 0xffffff : 0x0));
+            p++;
+        }
+    }
+    QRcode_free(code);
+
+    QImage qrAddrImage = QImage(67, 67, QImage::Format_RGB32);
+    qrAddrImage.fill(0xffffff);
+    QPainter painter(&qrAddrImage);
+    painter.drawImage(0, 0, qrImage.scaled(67, 67));
+    painter.end();
+
+    ui->qrImage->setPixmap(QPixmap::fromImage(qrAddrImage));
+
+    return true;
+#else
+    return false;
+#endif
 }
 
 void OverviewPage::updateDisplayUnit()

@@ -155,7 +155,7 @@ namespace GUIUtil
 
         public:
             TableViewLastColumnResizingFixer(QTableView* table, int lastColMinimumWidth, int allColsMinimumWidth, QObject *parent);
-            void stretchColumnWidth(int column);
+            void stretchColumnWidth(int column, int padding, bool useHeadersWidth = true);
 
         private:
             QTableView* tableView;
@@ -166,7 +166,7 @@ namespace GUIUtil
             int secondToLastColumnIndex;
 
             void adjustTableColumnsWidth();
-            int getAvailableWidthForColumn(int column);
+            int getAvailableWidthForColumn(int column, int padding, bool useHeadersWidth = true);
             int getColumnsWidth();
             void connectViewHeadersSignals();
             void disconnectViewHeadersSignals();

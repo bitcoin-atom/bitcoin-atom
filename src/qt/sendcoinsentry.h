@@ -56,6 +56,7 @@ Q_SIGNALS:
     void useAvailableBalance(SendCoinsEntry* entry);
     void payAmountChanged();
     void subtractFeeFromAmountChanged();
+    void addressChanged();
 
 private Q_SLOTS:
     void deleteClicked();

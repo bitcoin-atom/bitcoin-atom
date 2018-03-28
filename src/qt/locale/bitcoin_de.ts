@@ -1,5 +1,35 @@
 <TS language="de" version="2.1">
 <context>
+    <name>MainMenuPanel</name>
+    <message>
+        <source>Overview</source>
+        <translation>Überblick</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Senden</translation>
+    </message>
+    <message>
+        <source>Receive</source>
+        <translation>Erhalten</translation>
+    </message>
+    <message>
+        <source>Transactions</source>
+        <translation>Transaktionen</translation>
+    </message>
+</context>
+<context>
+    <name>PriceWidget</name>
+    <message>
+        <source>Price</source>
+        <translation>Preis</translation>
+    </message>
+    <message>
+        <source>Volume (24)</source>
+        <translation>Umfang (24)</translation>
+    </message>
+</context>
+<context>
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
@@ -232,7 +262,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin Atom GUI</name>
+    <name>BitcoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Nachricht s&amp;ignieren...</translation>
@@ -1191,6 +1221,38 @@
 <context>
     <name>OverviewPage</name>
     <message>
+        <source>Balances:</source>
+        <translation>Balance:</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Senden</translation>
+    </message>
+    <message>
+        <source>Transactions</source>
+        <translation>Transaktionen</translation>
+    </message>
+    <message>
+        <source>Sync progress:</source>
+        <translation>Synchronisieren:</translation>
+    </message>
+    <message>
+        <source>Recent transactions:</source>
+        <translation>Kürzliche Transaktionen:</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Datum</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Etikette</translation>
+    </message>
+    <message>
+        <source>Amount</source>
+        <translation>Menge</translation>
+    </message>
+    <message>
         <source>Form</source>
         <translation>Formular</translation>
     </message>
@@ -1780,6 +1842,50 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
+        <source>Receive:</source>
+        <translation>Erhalten:</translation>
+    </message>
+    <message>
+        <source>All fields are optional:</source>
+        <translation>Alle Felder sind optional:</translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation>Etikette:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Menge:</translation>
+    </message>
+    <message>
+        <source>Message:</source>
+        <translation>Botschaft:</translation>
+    </message>
+    <message>
+        <source>REQUEST</source>
+        <translation>Anfordern</translation>
+    </message>
+    <message>
+        <source>CLEAR ALL</source>
+        <translation>Alles löschen</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Datum</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Etikette</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>Botschaft</translation>
+    </message>
+    <message>
+        <source>Requested amount</source>
+        <translation>Gewünschter Betrag</translation>
+    </message>
+    <message>
         <source>&amp;Amount:</source>
         <translation>&amp;Betrag:</translation>
     </message>
@@ -1824,7 +1930,7 @@
         <translation>Zurücksetzen</translation>
     </message>
     <message>
-        <source>Requested payments history</source>
+        <source>Request payments history:</source>
         <translation>Verlauf der angeforderten Zahlungen</translation>
     </message>
     <message>
@@ -1951,7 +2057,85 @@
     </message>
 </context>
 <context>
+    <name>LastSendTransactionView</name>
+    <message>
+        <source>To:</source>
+        <translation>Zu:</translation>
+    </message>
+    <message>
+        <source>When:</source>
+        <translation>Wann:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Menge:</translation>
+    </message>
+</context>
+<context>
+    <name>SendCoinsEntry</name>
+    <message>
+        <source>Fill the form:</source>
+        <translation>Fülle das Formular aus:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>Zu:</translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation>Etikette:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Menge:</translation>
+    </message>
+    <message>
+        <source>CLEAR ALL</source>
+        <translation>Alles löschen</translation>
+    </message>
+    <message>
+        <source>Subtract fee from amount</source>
+        <translation>Subtrahieren Sie die Gebühr vom Betrag</translation>
+    </message>
+</context>
+<context>
     <name>SendCoinsDialog</name>
+    <message>
+        <source>Send:</source>
+        <translation>Senden:</translation>
+    </message>
+    <message>
+        <source>Including transaction fee:</source>
+        <translation>Inklusive Transaktionsgebühr:</translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation>Veränderung</translation>
+    </message>
+    <message>
+        <source>Are you sure ?</source>
+        <translation>Bist du sicher ?</translation>
+    </message>
+    <message>
+        <source>SEND</source>
+        <translation>Senden</translation>
+    </message>
+    <message>
+        <source>Last:</source>
+        <translation>Letzte:</translation>
+    </message>
+    <message>
+        <source>Pending</source>
+        <translation>Ausstehend</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Erledigt</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Error</translation>
+    </message>
     <message>
         <source>Send Coins</source>
         <translation>BCA überweisen</translation>
@@ -2049,8 +2233,8 @@
         <translation>Benutzerdefiniert:</translation>
     </message>
     <message>
-        <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Intelligente Gebührenlogik ist noch nicht verfügbar. Normalerweise dauert dies einige Blöcke lang...)</translation>
+        <source>[ Smart fee not initialized yet. This usualy takes a few blocks ... ]</source>
+        <translation>Intelligente Gebühr noch nicht initialisiert. Dies normalerweise dauert ein paar Blocks</translation>
     </message>
     <message>
         <source>normal</source>
@@ -2773,7 +2957,62 @@
     </message>
 </context>
 <context>
+    <name>ChangeFeeDialog</name>
+    <message>
+        <source>Transaction fee:</source>
+        <translation>Transaktionsgebühr:</translation>
+    </message>
+    <message>
+        <source>Recommended:</source>
+        <translation>Empfohlen:</translation>
+    </message>
+    <message>
+        <source>Confirmation time target:</source>
+        <translation>Bestätigungszeit Ziel:</translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation>Normal</translation>
+    </message>
+    <message>
+        <source>Fast</source>
+        <translation>Schnell</translation>
+    </message>
+    <message>
+        <source>Custom:</source>
+        <translation>Brauch:</translation>
+    </message>
+    <message>
+        <source>Per Kbyte</source>
+        <translation>Pro Kbyte</translation>
+    </message>
+    <message>
+        <source>Pay only the required fee of 0.00001000 BCA/kB</source>
+        <translation>Bezahlen Sie nur die erforderliche Gebühr von 0.00001000 BCA/kB</translation>
+    </message>
+    <message>
+        <source>[ Smart fee not initialized yet. This usualy takes a few blocks ... ]</source>
+        <translation>Intelligente Gebühr noch nicht initialisiert. Dies normalerweise dauert ein paar Blocks</translation>
+    </message>
+    <message numerus="yes">
+        <source>Estimated to begin confirmation within %n block(s).</source>
+        <translation><numerusform>Voraussichtlicher Beginn der Bestätigung innerhalb von %n Block.</numerusform><numerusform>Voraussichtlicher Beginn der Bestätigung innerhalb von %n Blöcken.</numerusform></translation>
+    </message>
+</context>
+<context>
     <name>TransactionView</name>
+    <message>
+        <source>Transactions:</source>
+        <translation>Transaktionen:</translation>
+    </message>
+    <message>
+        <source>Choose</source>
+        <translation>Wählen</translation>
+    </message>
+    <message>
+        <source>Enter address, transaction id, or label to search</source>
+        <translation>Adresse eingeben, Transaktions-ID, oder Label zum Suchen</translation>
+    </message>
     <message>
         <source>All</source>
         <translation>Alle</translation>
@@ -2984,7 +3223,7 @@
     </message>
 </context>
 <context>
-    <name>Bitcoin Atom-core</name>
+    <name>bitcoin-core</name>
     <message>
         <source>Options:</source>
         <translation>Optionen:</translation>

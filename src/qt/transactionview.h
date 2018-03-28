@@ -13,6 +13,8 @@
 class PlatformStyle;
 class TransactionFilterProxy;
 class WalletModel;
+class StockInfo;
+class QHBoxLayout;
 
 QT_BEGIN_NAMESPACE
 class QComboBox;
@@ -36,6 +38,7 @@ public:
     explicit TransactionView(const PlatformStyle *platformStyle, QWidget *parent = 0);
 
     void setModel(WalletModel *model);
+    void addPriceWidget(StockInfo* stockInfo);
 
     // Date ranges for filter
     enum DateEnum
@@ -77,6 +80,8 @@ private:
     QDateTimeEdit *dateTo;
     QAction *abandonAction;
     QAction *bumpFeeAction;
+
+    QHBoxLayout *headLayout;
 
     QWidget *createDateRangeWidget();
 

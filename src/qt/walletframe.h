@@ -15,6 +15,7 @@ class SendCoinsRecipient;
 class WalletModel;
 class WalletView;
 class MainMenuPanel;
+class StockInfo;
 
 QT_BEGIN_NAMESPACE
 class QStackedWidget;
@@ -54,6 +55,7 @@ Q_SIGNALS:
 private:
     QStackedWidget *walletStack;
     BitcoinGUI *gui;
+    StockInfo *stockInfo;
     ClientModel *clientModel;
     QMap<QString, WalletView*> mapWalletViews;
 

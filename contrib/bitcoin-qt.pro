@@ -18,6 +18,8 @@ FORMS += \
     ../src/qt/forms/transactiondescdialog.ui \
     ../src/qt/forms/mainmenupanel.ui \
     ../src/qt/forms/lastsendtransactionview.ui \
+    ../src/qt/forms/changefeedialog.ui \
+    ../src/qt/forms/pricewidget.ui
 
 RESOURCES += \
     ../src/qt/bitcoin.qrc

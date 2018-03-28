@@ -17,6 +17,8 @@
 #include <qt/transactionrecord.h>
 #include <qt/transactiontablemodel.h>
 #include <qt/walletmodel.h>
+#include <qt/stockinfo.h>
+#include <qt/pricewidget.h>
 
 #include <ui_interface.h>
 
@@ -36,6 +38,7 @@
 #include <QTimer>
 #include <QUrl>
 #include <QVBoxLayout>
+#include <QSpacerItem>
 
 TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *parent) :
     QWidget(parent), model(0), transactionProxyModel(0),
@@ -63,7 +66,7 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     //hlayout->addWidget(watchOnlyWidget);
 
     QLabel* labelChoose = new QLabel(this);
-    labelChoose->setText("Choose");
+    labelChoose->setText(tr("Choose"));
     labelChoose->setStyleSheet("color: #b2b2c0; font-family: \"Roboto Mono\"; font-size: 12px; font-weight: 500;");
     hlayout->addWidget(labelChoose);
 
@@ -171,10 +174,19 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     QVBoxLayout *vlayout = new QVBoxLayout(this);
     vlayout->setContentsMargins(0,0,0,0);
 
+    headLayout = new QHBoxLayout(this);
+    headLayout->setContentsMargins(0,0,0,0);
+    headLayout->setSpacing(0);
+
     QLabel* labelTrans = new QLabel(this);
-    labelTrans->setText("Transactions:");
+    labelTrans->setText(tr("Transactions:"));
     labelTrans->setStyleSheet("font-family: \"Roboto Mono\"; font-size: 24px; font-weight: 500;");
-    vlayout->addWidget(labelTrans);
+    labelTrans->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    labelTrans->setMinimumSize(267, 31);
+    labelTrans->setMaximumSize(267, 31);
+
+    headLayout->addWidget(labelTrans);
+    vlayout->addLayout(headLayout);
 
     QTableView *view = new QTableView(this);
     view->setStyleSheet("font-family: \"Roboto Mono\";");
@@ -252,6 +264,14 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     connect(copyTxPlainText, SIGNAL(triggered()), this, SLOT(copyTxPlainText()));
     connect(editLabelAction, SIGNAL(triggered()), this, SLOT(editLabel()));
     connect(showDetailsAction, SIGNAL(triggered()), this, SLOT(showDetails()));
+}
+
+void TransactionView::addPriceWidget(StockInfo* stockInfo)
+{
+    PriceWidget *priceWidget = new PriceWidget(stockInfo, this);
+    headLayout->addWidget(priceWidget);
+    QSpacerItem *spacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Fixed);
+    headLayout->addItem(spacer);
 }
 
 void TransactionView::setModel(WalletModel *_model)
@@ -647,7 +667,7 @@ void TransactionView::focusTransaction(const QModelIndex &idx)
 void TransactionView::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);
-    columnResizingFixer->stretchColumnWidth(TransactionTableModel::ToAddress);
+    columnResizingFixer->stretchColumnWidth(TransactionTableModel::ToAddress, 0);
 }
 
 // Need to override default Ctrl+C action for amount as default behaviour is just to copy DisplayRole text

@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ChangeFeeDialog</class>
+ <widget class="QDialog" name="ChangeFeeDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>754</width>
+    <height>446</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>754</width>
+    <height>446</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>754</width>
+    <height>446</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QFrame" name="frame_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>713</width>
+     <height>446</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(0, 0, 0, 179);
+border-radius: 10px;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+  </widget>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>2</x>
+     <y>2</y>
+     <width>709</width>
+     <height>442</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: #e8e8e8;
+border-radius: 10px;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>92</x>
+      <y>36</y>
+      <width>271</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 16px;
+font-weight: 500;</string>
+    </property>
+    <property name="text">
+     <string>Transaction fee:</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioSmartFee">
+    <property name="geometry">
+     <rect>
+      <x>47</x>
+      <y>99</y>
+      <width>17</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: green;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">groupFee</string>
+    </attribute>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>95</x>
+      <y>99</y>
+      <width>141</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 500;</string>
+    </property>
+    <property name="text">
+     <string>Recommended:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelSmartFee">
+    <property name="geometry">
+     <rect>
+      <x>95</x>
+      <y>144</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 18px;
+font-weight: 700;</string>
+    </property>
+    <property name="text">
+     <string>0.00000000</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>145</y>
+      <width>51</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 400;</string>
+    </property>
+    <property name="text">
+     <string>BCA/kB</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelSmartFee2">
+    <property name="geometry">
+     <rect>
+      <x>285</x>
+      <y>145</y>
+      <width>415</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 10px;
+font-weight: 400;
+color: #b2b2c0;</string>
+    </property>
+    <property name="text">
+     <string>[ Smart fee not initialized yet. This usualy takes a few blocks ... ]</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>95</x>
+      <y>196</y>
+      <width>211</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 11px;
+font-weight: 400;</string>
+    </property>
+    <property name="text">
+     <string>Confirmation time target:</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>95</x>
+      <y>271</y>
+      <width>70</width>
+      <height>10</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: transparent;
+border-image: url(:/icons/splitter);</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioCustomFee">
+    <property name="geometry">
+     <rect>
+      <x>47</x>
+      <y>325</y>
+      <width>17</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: green;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">groupFee</string>
+    </attribute>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>95</x>
+      <y>325</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 500;</string>
+    </property>
+    <property name="text">
+     <string>Custom:</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="checkBoxCustomFee">
+    <property name="geometry">
+     <rect>
+      <x>208</x>
+      <y>325</y>
+      <width>17</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">groupCustom</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="checkBoxMinimumFee">
+    <property name="geometry">
+     <rect>
+      <x>208</x>
+      <y>382</y>
+      <width>17</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">groupCustom</string>
+    </attribute>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>235</x>
+      <y>325</y>
+      <width>100</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 500;
+color: #b2b2c0;</string>
+    </property>
+    <property name="text">
+     <string>Per Kbyte</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelMinFeeWarning">
+    <property name="geometry">
+     <rect>
+      <x>235</x>
+      <y>382</y>
+      <width>471</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 13px;
+font-weight: 500;
+color: #b2b2c0;</string>
+    </property>
+    <property name="text">
+     <string>Pay only the required fee of 0.00001000 BCA/kB</string>
+    </property>
+   </widget>
+   <widget class="BitcoinAmountField" name="customFee">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>316</y>
+      <width>160</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(170, 170, 186, 33);
+border-top: 2px inset rgba(0, 0, 0, 33); 
+border-left: 2px inset rgba(0, 0, 0, 33); 
+border-bottom: 2px solid rgba(170, 170, 186, 33); 
+border-right: 2px solid rgba(170, 170, 186, 33); 
+border-radius: 4px;
+margin-right: 10px;
+font-family: &quot;Roboto Mono&quot;;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>316</y>
+      <width>50</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>50</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>50</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Mono</family>
+      <pointsize>-1</pointsize>
+      <weight>87</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #b2b2c0;
+font-family: &quot;Roboto Mono&quot;;
+font-size: 16px;
+font-weight: 700;
+</string>
+    </property>
+    <property name="text">
+     <string>BCA</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>294</x>
+      <y>234</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 11px;
+font-weight: 400;</string>
+    </property>
+    <property name="text">
+     <string>Fast</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelConf">
+    <property name="geometry">
+     <rect>
+      <x>391</x>
+      <y>234</y>
+      <width>170</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 11px;
+font-weight: 400;</string>
+    </property>
+    <property name="text">
+     <string>1h / 6 blocks</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_13">
+    <property name="geometry">
+     <rect>
+      <x>599</x>
+      <y>234</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Roboto Mono&quot;;
+font-size: 11px;
+font-weight: 400;</string>
+    </property>
+    <property name="text">
+     <string>Normal</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QSlider" name="confTargetSelector">
+    <property name="geometry">
+     <rect>
+      <x>285</x>
+      <y>189</y>
+      <width>379</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QSlider::groove:horizontal {
+	margin-left: 9px;
+	margin-right: 9px;
+	position: absolute;
+	top: 13px;
+	height: 7px;
+	background: qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0 rgba(89, 188, 252, 128), stop:1 rgba(0, 78, 254, 255));
+}
+QSlider::add-page:horizontal {
+	margin-right: 9px;
+	height: 7px;
+	background: #aaaaba;
+}
+QSlider::handle:horizontal {
+	margin-left: -9px;
+	margin-right: -9px;
+	width: 18px;
+	margin-bottom: 7px;
+	margin-top: -13px;
+	border-image: url(:/icons/triangle);
+}</string>
+    </property>
+    <property name="value">
+     <number>50</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QFrame" name="frame_3">
+   <property name="geometry">
+    <rect>
+     <x>718</x>
+     <y>0</y>
+     <width>34</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(0, 0, 0, 179);
+border-radius: 17px;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QToolButton" name="closeBtn">
+    <property name="geometry">
+     <rect>
+      <x>2</x>
+      <y>2</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: transparent;
+border: none;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>24</width>
+      <height>24</height>
+     </size>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>BitcoinAmountField</class>
+   <extends>QLineEdit</extends>
+   <header>qt/bitcoinamountfield.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+ <buttongroups>
+  <buttongroup name="groupCustom"/>
+  <buttongroup name="groupFee"/>
+ </buttongroups>
+</ui>
