@@ -66,3 +66,15 @@ CScript CreateMultisigRedeemscript(const int required, const std::vector<CPubKey
 
     return result;
 }
+
+CScript CreateAtomicSwapRedeemscript(CKeyID initiator, CKeyID redeemer, int64_t locktime, int64_t secretSize, std::vector<unsigned char> secretHash)
+{
+    CScript script;
+    script = CScript() << OP_IF;
+    script << OP_SIZE << secretSize << OP_EQUALVERIFY << OP_SHA256 << secretHash << OP_EQUALVERIFY << OP_DUP << OP_HASH160 << ToByteVector(redeemer);
+    script << OP_ELSE;
+    script << locktime << OP_CHECKLOCKTIMEVERIFY << OP_DROP << OP_DUP << OP_HASH160 << ToByteVector(initiator);
+    script << OP_ENDIF;
+    script << OP_EQUALVERIFY << OP_CHECKSIG;
+    return script;
+}
