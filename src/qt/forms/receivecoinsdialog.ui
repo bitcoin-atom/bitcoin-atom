@@ -396,7 +396,7 @@ QCheckBox::indicator:checked {
 }</string>
            </property>
            <property name="text">
-            <string>Use Bech32 address</string>
+            <string>Generate Bech32 address</string>
            </property>
           </widget>
          </item>
