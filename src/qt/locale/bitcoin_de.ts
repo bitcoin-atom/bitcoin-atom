@@ -1842,6 +1842,10 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
+        <source>Generate Bech32 address</source>
+        <translation>Erzeuge Bech32 Adresse</translation>
+    </message>
+    <message>
         <source>Receive:</source>
         <translation>Erhalten:</translation>
     </message>
@@ -2100,6 +2104,14 @@
 </context>
 <context>
     <name>SendCoinsDialog</name>
+    <message>
+        <source>You can increase the fee later (signals Replace-By-Fee, BIP-125).</source>
+        <translation>Du kannst die Gebühr später erhöhen (Zeigt Replace-By-Fee, BIP-125).</translation>
+    </message>
+    <message>
+        <source>Not signalling Replace-By-Fee, BIP-125.</source>
+        <translation>Replace-By-Fee, BIP-125 wird nicht angezeigt.</translation>
+    </message>
     <message>
         <source>Send:</source>
         <translation>Senden:</translation>
@@ -2958,6 +2970,10 @@
 </context>
 <context>
     <name>ChangeFeeDialog</name>
+    <message>
+        <source>Enable Replace-By-Fee</source>
+        <translation>Aktiviere Replace-By-Fee</translation>
+    </message>
     <message>
         <source>Transaction fee:</source>
         <translation>Transaktionsgebühr:</translation>

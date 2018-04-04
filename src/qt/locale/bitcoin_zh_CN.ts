@@ -1832,6 +1832,10 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
+        <source>Generate Bech32 address</source>
+        <translation>Создать Bech32 адрес</translation>
+    </message>
+    <message>
         <source>Receive:</source>
         <translation>接收:</translation>
     </message>

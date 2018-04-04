@@ -1441,6 +1441,14 @@
 <context>
     <name>SendCoinsDialog</name>
     <message>
+        <source>You can increase the fee later (signals Replace-By-Fee, BIP-125).</source>
+        <translation>You can increase the fee later (signals Replace-By-Fee, BIP-125).</translation>
+    </message>
+    <message>
+        <source>Not signalling Replace-By-Fee, BIP-125.</source>
+        <translation>Not signalling Replace-By-Fee, BIP-125.</translation>
+    </message>
+    <message>
         <source>Send Coins</source>
         <translation>Send Coins</translation>
     </message>

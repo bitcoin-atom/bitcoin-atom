@@ -716,6 +716,10 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
+        <source>Generate Bech32 address</source>
+        <translation>Создать Bech32 адрес</translation>
+    </message>
+    <message>
         <source>Receive:</source>
         <translation>Получить:</translation>
     </message>
@@ -859,6 +863,14 @@
 <context>
     <name>SendCoinsDialog</name>
     <message>
+        <source>You can increase the fee later (signals Replace-By-Fee, BIP-125).</source>
+        <translation>Вы можете увеличить комиссию позже (опция Replace-By-Fee, BIP-125).</translation>
+    </message>
+    <message>
+        <source>Not signalling Replace-By-Fee, BIP-125.</source>
+        <translation>Не используется Replace-By-Fee, BIP-125.</translation>
+    </message>
+    <message>
         <source>Send:</source>
         <translation>Отправить:</translation>
     </message>
@@ -972,6 +984,10 @@
 </context>
 <context>
     <name>ChangeFeeDialog</name>
+    <message>
+        <source>Enable Replace-By-Fee</source>
+        <translation>Включить Replace-By-Fee (возможность замены комиссии)</translation>
+    </message>
     <message>
         <source>Transaction fee:</source>
         <translation>Транзакционная комиссия:</translation>

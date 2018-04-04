@@ -1846,6 +1846,10 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
+        <source>Generate Bech32 address</source>
+        <translation>Bech32形式のアドレスを生成</translation>
+    </message>
+    <message>
         <source>Receive:</source>
         <translation>受信:</translation>
     </message>
@@ -2962,6 +2966,10 @@
 </context>
 <context>
     <name>ChangeFeeDialog</name>
+    <message>
+        <source>Enable Replace-By-Fee</source>
+        <translation>Replace-By-Fee を有効</translation>
+    </message>
     <message>
         <source>Transaction fee:</source>
         <translation>取引手数料:</translation>
