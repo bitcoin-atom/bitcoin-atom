@@ -499,6 +499,46 @@ QSlider::handle:horizontal {
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
+   <widget class="QCheckBox" name="optInRBF">
+    <property name="geometry">
+     <rect>
+      <x>47</x>
+      <y>410</y>
+      <width>631</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Indicates that the sender may wish to replace this transaction with a new one paying higher fees (prior to being confirmed).</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QCheckBox {
+	font-family: &quot;Roboto Mono&quot;;
+	font-size: 13px;
+	font-weight: 500;
+	spacing: 31px;
+}
+QCheckBox::indicator:unchecked {
+	background-color: rgba(170, 170, 186, 33);
+	border-top: 2px inset rgba(0, 0, 0, 33); 
+	border-left: 2px inset rgba(0, 0, 0, 33); 
+	border-bottom: 2px solid rgba(170, 170, 186, 33); 
+	border-right: 2px solid rgba(170, 170, 186, 33); 
+	border-radius: 4px;
+}
+QCheckBox::indicator:checked {
+	background-color: rgba(170, 170, 186, 255);
+	border-top: 2px inset rgba(0, 0, 0, 33); 
+	border-left: 2px inset rgba(0, 0, 0, 33); 
+	border-bottom: 2px solid rgba(170, 170, 186, 33); 
+	border-right: 2px solid rgba(170, 170, 186, 33); 
+	border-radius: 4px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Request Replace-By-Fee</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QFrame" name="frame_3">
    <property name="geometry">

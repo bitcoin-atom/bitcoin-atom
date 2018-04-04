@@ -229,15 +229,15 @@ void SendCoinsDialog::setModel(WalletModel *_model)
         connect(changeFeeDialog->ui->groupCustom, SIGNAL(buttonClicked(int)), this, SLOT(updateFeeSectionControls()));
         connect(changeFeeDialog->ui->groupCustom, SIGNAL(buttonClicked(int)), this, SLOT(coinControlUpdateLabels()));
 
-        //connect(ui->optInRBF, SIGNAL(stateChanged(int)), this, SLOT(updateSmartFeeLabel()));
-        //connect(ui->optInRBF, SIGNAL(stateChanged(int)), this, SLOT(coinControlUpdateLabels()));
+        connect(changeFeeDialog->ui->optInRBF, SIGNAL(stateChanged(int)), this, SLOT(updateSmartFeeLabel()));
+        connect(changeFeeDialog->ui->optInRBF, SIGNAL(stateChanged(int)), this, SLOT(coinControlUpdateLabels()));
         changeFeeDialog->ui->customFee->setSingleStep(GetRequiredFee(1000));
         updateFeeSectionControls();
         updateMinFeeLabel();
         updateSmartFeeLabel();
 
         // set default rbf checkbox state
-        //ui->optInRBF->setCheckState(model->getDefaultWalletRbf() ? Qt::Checked : Qt::Unchecked);
+        changeFeeDialog->ui->optInRBF->setCheckState(model->getDefaultWalletRbf() ? Qt::Checked : Qt::Unchecked);
 
         // set the smartfee-sliders default value (wallets default conf.target or last stored value)
         QSettings settings;
@@ -444,12 +444,12 @@ void SendCoinsDialog::on_sendButton_clicked()
     questionString.append(QString("<span style='font-size:10pt;font-weight:normal;'><br />(=%1)</span>")
         .arg(alternativeUnits.join(" " + tr("or") + "<br />")));
 
-    //if (ui->optInRBF->isChecked())
-    //{
-    //    questionString.append("<hr /><span>");
-    //    questionString.append(tr("This transaction signals replaceability (optin-RBF)."));
-    //    questionString.append("</span>");
-    //}
+    if (changeFeeDialog->ui->optInRBF->isChecked())
+    {
+        questionString.append("<hr /><span>");
+        questionString.append(tr("This transaction signals replaceability (optin-RBF)."));
+        questionString.append("</span>");
+    }
 
     SendConfirmationDialog confirmationDialog(tr("Confirm send coins"),
         questionString.arg(formatted.join("<br />")), SEND_CONFIRM_DELAY, this);
@@ -788,7 +788,7 @@ void SendCoinsDialog::updateCoinControlState(CCoinControl& ctrl)
     // Either custom fee will be used or if not selected, the confirmation target from dropdown box
     ctrl.m_confirm_target = getConfTargetForIndex(changeFeeDialog->ui->confTargetSelector->value());
 
-    //ctrl.signalRbf = ui->optInRBF->isChecked();
+    ctrl.signalRbf = changeFeeDialog->ui->optInRBF->isChecked();
     ctrl.signalRbf = false;
 }
 
@@ -979,7 +979,7 @@ void SendCoinsDialog::updateCardInfo()
     // Always use a CCoinControl instance, use the CoinControlDialog instance if CoinControl has been enabled
     CCoinControl ctrl;
     if (model->getOptionsModel()->getCoinControlFeatures())
-        ctrl = *CoinControlDialog::coinControl;
+        ctrl = *CoinControlDialog::coinControl();
 
     updateCoinControlState(ctrl);
 
