@@ -344,6 +344,12 @@ font-family: &quot;Roboto Mono&quot;;</string>
          </item>
          <item>
           <widget class="QLabel" name="label_5">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="font">
             <font>
              <family>Roboto Mono</family>
@@ -356,10 +362,41 @@ font-family: &quot;Roboto Mono&quot;;</string>
             <string notr="true">color: #b2b2c0;
 font-family: &quot;Roboto Mono&quot;;
 font-size: 16px;
-font-weight: 500;</string>
+font-weight: 500;
+margin-right: 10px;</string>
            </property>
            <property name="text">
             <string>BCA</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="useBech32">
+           <property name="styleSheet">
+            <string notr="true">QCheckBox {
+	font-family: &quot;Roboto Mono&quot;;
+	font-size: 16px;
+	font-weight: 500;
+}
+QCheckBox::indicator:unchecked {
+	background-color: rgba(170, 170, 186, 33);
+	border-top: 2px inset rgba(0, 0, 0, 33); 
+	border-left: 2px inset rgba(0, 0, 0, 33); 
+	border-bottom: 2px solid rgba(170, 170, 186, 33); 
+	border-right: 2px solid rgba(170, 170, 186, 33); 
+	border-radius: 4px;
+}
+QCheckBox::indicator:checked {
+	background-color: rgba(170, 170, 186, 255);
+	border-top: 2px inset rgba(0, 0, 0, 33); 
+	border-left: 2px inset rgba(0, 0, 0, 33); 
+	border-bottom: 2px solid rgba(170, 170, 186, 33); 
+	border-right: 2px solid rgba(170, 170, 186, 33); 
+	border-radius: 4px;
+}</string>
+           </property>
+           <property name="text">
+            <string>Use Bech32 address</string>
            </property>
           </widget>
          </item>
