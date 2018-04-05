@@ -63,10 +63,6 @@ int EstimateRedeemTxSerializeSize(const CScript& contractRedeemscript, std::vect
 bool TryDecodeAtomicSwapScript(const CScript& contractRedeemscript, const CScript& contractPubKeyScript,
                                std::vector<unsigned char>& secretHash, CScriptID& recipient, CKeyID& refund, int64_t& locktime, int64_t& secretSize)
 {
-    if (contractRedeemscript.size() != 20) {
-        return false;
-    }
-
     CScript::const_iterator pc = contractRedeemscript.begin();
     opcodetype opcode;
     std::vector<unsigned char> secretSizeData;
@@ -114,12 +110,11 @@ bool CreateRefundSigScript(CWallet* pwallet, const CScript& contractRedeemscript
         return false;
     }
 
-    refundSigScript = CScript() << vch << ToByteVector(pubKey) << 0;
-    refundSigScript += contractRedeemscript;
+    refundSigScript = CScript() << vch << ToByteVector(pubKey) << int64_t(0) << std::vector<unsigned char>(contractRedeemscript.begin(), contractRedeemscript.end());
     return VerifyScript(refundSigScript, contractPubKeyScript, nullptr, STANDARD_SCRIPT_VERIFY_FLAGS, creator.Checker());
 }
 
-bool BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscript, const CMutableTransaction& contractTx, CMutableTransaction& refundTx)
+bool BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscript, const CMutableTransaction& contractTx, CMutableTransaction& refundTx, CAmount& refundFee)
 {
     CScriptID swapContractAddr = CScriptID(contractRedeemscript);
     CScript contractPubKeyScript = GetScriptForDestination(swapContractAddr);
@@ -130,6 +125,7 @@ bool BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscrip
         if (contractTx.vout[i].scriptPubKey.size() == contractPubKeyScript.size() &&
             std::equal(contractPubKeyScript.begin(), contractPubKeyScript.end(), contractTx.vout[i].scriptPubKey.begin())) {
             contractOutPoint.n = i;
+            break;
         }
     }
 
@@ -156,7 +152,7 @@ bool BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscrip
 
     int refundTxSize = EstimateRefundTxSerializeSize(contractRedeemscript, refundTx.vout);
     CCoinControl coinControl;
-    CAmount refundFee = GetMinimumFee(refundTxSize, coinControl, ::mempool, ::feeEstimator, nullptr);
+    refundFee = GetMinimumFee(refundTxSize, coinControl, ::mempool, ::feeEstimator, nullptr);
     refundTx.vout[0].nValue = contractTx.vout[contractOutPoint.n].nValue - refundFee;
     if (IsDust(refundTx.vout[0], ::dustRelayFee)) {
         return false;
@@ -215,7 +211,8 @@ bool BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmoun
 
     // build a refund tx
     CMutableTransaction refundTx;
-    if (!BuildRefundTransaction(pwallet, contractRedeemscript, CMutableTransaction(*wtx.tx), refundTx)) {
+    CAmount refundFee;
+    if (!BuildRefundTransaction(pwallet, contractRedeemscript, CMutableTransaction(*wtx.tx), refundTx, refundFee)) {
         return false;
     }
 
@@ -225,7 +222,9 @@ bool BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmoun
     contract.contractRedeemscript = contractRedeemscript;
     contract.contractAddr = swapContractAddr;
     contract.contactTx = wtx.tx;
-    contract.refundTx = MakeTransactionRef(CTransaction(refundTx));
+    contract.contractFee = nFeeRequired;
+    contract.refundTx = MakeTransactionRef(std::move(refundTx));
+    contract.refundFee = refundFee;
     return true;
 }
 
@@ -273,11 +272,11 @@ UniValue initiateswap(const JSONRPCRequest& request)
     res.push_back(Pair("contract", c));
 
     UniValue contractData = SwapTxToUniv(contract.contactTx);
-    contractData.push_back(Pair("fee", contract.contractFee));
+    contractData.push_back(Pair("fee", ValueFromAmount(contract.contractFee)));
     res.push_back(Pair("contractTx", contractData));
 
     UniValue refundData = SwapTxToUniv(contract.refundTx);
-    refundData.push_back(Pair("fee", contract.refundFee));
+    refundData.push_back(Pair("fee", ValueFromAmount(contract.refundFee)));
     res.push_back(Pair("refundTx", refundData));
 
     return res;
