@@ -283,6 +283,54 @@ UniValue initiateswap(const JSONRPCRequest& request)
     return res;
 }
 
+UniValue redeemswap(const JSONRPCRequest& request)
+{
+    CWallet * const pwallet = GetWalletForJSONRPCRequest(request);
+    if (!EnsureWalletIsAvailable(pwallet, request.fHelp)) {
+        return NullUniValue;
+    }
+
+    if (request.fHelp || request.params.size() != 2)
+        throw std::runtime_error("");
+
+    const std::string& contractHex = request.params[0].get_str();
+    if (!IsHex(contractHex)) {
+        throw JSONRPCError(RPC_TYPE_ERROR, "Failed to decode contract");
+    }
+
+    std::vector<unsigned char> contract = ParseHex(contractHex);
+
+    const std::string& contractTxHex = request.params[1].get_str();
+    CMutableTransaction contractTx;
+    if (!DecodeHexTx(contractTx, contractTxHex)) {
+        throw JSONRPCError(RPC_TYPE_ERROR, "Failed to decode contract transaction");
+    }
+
+    const std::string& secretHex = request.params[2].get_str();
+    if (!IsHex(secretHex)) {
+        throw JSONRPCError(RPC_TYPE_ERROR, "Failed to decode secret");
+    }
+
+    std::vector<unsigned char> secret = ParseHex(secretHex);
+
+    std::vector<unsigned char> secretHash;
+    CScriptID recipient;
+    CKeyID refund;
+    int64_t locktime;
+    int64_t secretSize;
+
+    CScript contractRedeemScript(contract.begin(), contract.end());
+    CScriptID swapContractAddr = CScriptID(contractRedeemScript);
+    CScript contractPubKeyScript = GetScriptForDestination(swapContractAddr);
+
+    if (!TryDecodeAtomicSwapScript(contractRedeemScript, contractPubKeyScript, secretHash, recipient, refund, locktime, secretSize)) {
+        throw JSONRPCError(RPC_TYPE_ERROR, "Contract is not an atomic swap script recognized by this tool");
+    }
+
+    UniValue res(UniValue::VOBJ);
+    return res;
+}
+
 static const CRPCCommand commands[] =
 { //  category              name                      actor (function)         argNames
   //  --------------------- ------------------------  -----------------------  ----------
