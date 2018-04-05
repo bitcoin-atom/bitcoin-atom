@@ -16,15 +16,21 @@
 #include <validation.h>
 #include <wallet/rpcwallet.h>
 #include <wallet/fees.h>
+#include <core_io.h>
 
 static const int SECRET_SIZE = 32;
 
 class SwapContract
 {
 public:
+    std::vector<unsigned char> secret;
+    std::vector<unsigned char> secretHash;
     CScript contractRedeemscript;
+    CScriptID contractAddr;
+    CAmount contractFee;
     CTransactionRef contactTx;
     CTransactionRef refundTx;
+    CAmount refundFee;
 };
 
 
@@ -42,7 +48,7 @@ int EstimateRefundTxSerializeSize(const CScript& contractRedeemscript, std::vect
     for (const CTxOut& txout : txOuts) {
         outputsSerializeSize += ::GetSerializeSize(txout, 0, 0);
     }
-    return 4 + 4 + 4 + ::GetSerializeSize(VARINT(1), 0, 0) + ::GetSerializeSize(VARINT(txOuts.size()), 0, 0) + CalcInputSize(redeemAtomicSwapSigScriptSize + contractRedeemscript.size()) + outputsSerializeSize;
+    return 4 + 4 + 4 + ::GetSerializeSize(VARINT(1), 0, 0) + ::GetSerializeSize(VARINT(txOuts.size()), 0, 0) + CalcInputSize(refundAtomicSwapSigScriptSize + contractRedeemscript.size()) + outputsSerializeSize;
 }
 
 int EstimateRedeemTxSerializeSize(const CScript& contractRedeemscript, std::vector<CTxOut> txOuts)
@@ -121,8 +127,8 @@ bool BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscrip
     COutPoint contractOutPoint;
     contractOutPoint.hash = contractTx.GetHash();
     for (size_t i = 0; i < contractTx.vout.size(); i++) {
-        if (contractTx.vout[i].scriptPubKey.size() == contractRedeemscript.size() &&
-            std::equal(contractRedeemscript.begin(), contractRedeemscript.end(), contractTx.vout[i].scriptPubKey.begin())) {
+        if (contractTx.vout[i].scriptPubKey.size() == contractPubKeyScript.size() &&
+            std::equal(contractPubKeyScript.begin(), contractPubKeyScript.end(), contractTx.vout[i].scriptPubKey.begin())) {
             contractOutPoint.n = i;
         }
     }
@@ -148,7 +154,7 @@ bool BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscrip
     refundTx.nLockTime = locktime;
     refundTx.vout.push_back(CTxOut(0, refundPubkeyScript));
 
-    int refundTxSize = EstimateRedeemTxSerializeSize(contractRedeemscript, refundTx.vout);
+    int refundTxSize = EstimateRefundTxSerializeSize(contractRedeemscript, refundTx.vout);
     CCoinControl coinControl;
     CAmount refundFee = GetMinimumFee(refundTxSize, coinControl, ::mempool, ::feeEstimator, nullptr);
     refundTx.vout[0].nValue = contractTx.vout[contractOutPoint.n].nValue - refundFee;
@@ -171,8 +177,6 @@ bool BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscrip
 
 bool BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmount nAmount)
 {
-    //CKeyID addr = boost::get<CKeyID>(dest);
-
     unsigned char secret[SECRET_SIZE];
     unsigned char secretHash[CSHA256::OUTPUT_SIZE];
 
@@ -216,10 +220,21 @@ bool BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmoun
     }
 
     contract = SwapContract();
+    contract.secret = std::vector<unsigned char>(secret, secret + SECRET_SIZE);
+    contract.secretHash = vSecretHash;
     contract.contractRedeemscript = contractRedeemscript;
+    contract.contractAddr = swapContractAddr;
     contract.contactTx = wtx.tx;
     contract.refundTx = MakeTransactionRef(CTransaction(refundTx));
     return true;
+}
+
+UniValue SwapTxToUniv(const CTransactionRef& tx)
+{
+    UniValue res(UniValue::VOBJ);
+    res.push_back(Pair("txid", tx->GetHash().GetHex()));
+    res.push_back(Pair("hex", EncodeHexTx(*tx, RPCSerializationFlags())));
+    return res;
 }
 
 UniValue initiateswap(const JSONRPCRequest& request)
@@ -247,7 +262,36 @@ UniValue initiateswap(const JSONRPCRequest& request)
         throw JSONRPCError(RPC_TYPE_ERROR, "");
     }
 
-    //TODO: return all needed contract details
-    return NullUniValue;
+    UniValue res(UniValue::VOBJ);
+
+    res.push_back(Pair("secret", HexStr(contract.secret.begin(), contract.secret.end())));
+    res.push_back(Pair("secretHash", HexStr(contract.secretHash.begin(), contract.secretHash.end())));
+
+    UniValue c(UniValue::VOBJ);
+    c.push_back(Pair("address", EncodeDestination(contract.contractAddr)));
+    c.push_back(Pair("scriptHex", HexStr(contract.contractRedeemscript.begin(), contract.contractRedeemscript.end())));
+    res.push_back(Pair("contract", c));
+
+    UniValue contractData = SwapTxToUniv(contract.contactTx);
+    contractData.push_back(Pair("fee", contract.contractFee));
+    res.push_back(Pair("contractTx", contractData));
+
+    UniValue refundData = SwapTxToUniv(contract.refundTx);
+    refundData.push_back(Pair("fee", contract.refundFee));
+    res.push_back(Pair("refundTx", refundData));
+
+    return res;
+}
+
+static const CRPCCommand commands[] =
+{ //  category              name                      actor (function)         argNames
+  //  --------------------- ------------------------  -----------------------  ----------
+    { "atomicswaps",    "initiateswap",      &initiateswap,      {"address","amount"} },
+};
+
+void RegisterAtomicSwapRPCCommands(CRPCTable &t)
+{
+    for (unsigned int vcidx = 0; vcidx < ARRAYLEN(commands); vcidx++)
+        t.appendCommand(commands[vcidx].name, &commands[vcidx]);
 }
 
