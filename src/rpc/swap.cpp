@@ -114,7 +114,7 @@ bool CreateRefundSigScript(CWallet* pwallet, const CScript& contractRedeemscript
     return VerifyScript(refundSigScript, contractPubKeyScript, nullptr, STANDARD_SCRIPT_VERIFY_FLAGS, creator.Checker());
 }
 
-bool BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscript, const CMutableTransaction& contractTx, CMutableTransaction& refundTx, CAmount& refundFee)
+void BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscript, const CMutableTransaction& contractTx, CMutableTransaction& refundTx, CAmount& refundFee)
 {
     CScriptID swapContractAddr = CScriptID(contractRedeemscript);
     CScript contractPubKeyScript = GetScriptForDestination(swapContractAddr);
@@ -130,7 +130,7 @@ bool BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscrip
     }
 
     if (contractOutPoint.n == (uint32_t) -1) {
-        return false;
+        throw JSONRPCError(RPC_TRANSACTION_ERROR, "Contract tx does not contain a P2SH contract payment");
     }
 
     std::vector<unsigned char> secretHash;
@@ -140,7 +140,7 @@ bool BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscrip
     int64_t secretSize;
 
     if (!TryDecodeAtomicSwapScript(contractRedeemscript, contractPubKeyScript, secretHash, recipient, refundAddr, locktime, secretSize)) {
-        return false;
+        throw JSONRPCError(RPC_TRANSACTION_ERROR, "Invalid atomic swap script");
     }
 
     //create refund transaction
@@ -155,7 +155,7 @@ bool BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscrip
     refundFee = GetMinimumFee(refundTxSize, coinControl, ::mempool, ::feeEstimator, nullptr);
     refundTx.vout[0].nValue = contractTx.vout[contractOutPoint.n].nValue - refundFee;
     if (IsDust(refundTx.vout[0], ::dustRelayFee)) {
-        return false;
+        throw JSONRPCError(RPC_TRANSACTION_ERROR, strprintf("Redeem output value of %d is dust", refundTx.vout[0].nValue));
     }
 
     CTxIn txIn(contractOutPoint);
@@ -164,11 +164,10 @@ bool BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscrip
 
     CScript refundSigScript;
     if (!CreateRefundSigScript(pwallet, contractRedeemscript, contractPubKeyScript, refundAddr, refundTx, contractTx.vout[contractOutPoint.n].nValue, refundSigScript)) {
-        return false;
+        throw JSONRPCError(RPC_TRANSACTION_ERROR, "Faield to create refund script signature");
     }
 
     refundTx.vin[0].scriptSig = refundSigScript;
-    return true;
 }
 
 bool BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmount nAmount)
@@ -181,16 +180,14 @@ bool BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmoun
     sha.Write(secret.data(), secret.size());
     sha.Finalize(secretHash.data());
 
-    //build contract
     CTxDestination refundDest = GetRawChangeAddress(pwallet, OUTPUT_TYPE_LEGACY);
     CKeyID refundAddress = boost::get<CKeyID>(refundDest);
 
     int64_t locktime = GetAdjustedTime() + 48 * 60 * 60;
-    CScript contractRedeemscript = CreateAtomicSwapRedeemscript(refundAddress, dest, locktime, SECRET_SIZE, secretHash);
+    CScript contractRedeemscript = CreateAtomicSwapRedeemscript(refundAddress, dest, locktime, secret.size(), secretHash);
     CScriptID swapContractAddr = CScriptID(contractRedeemscript);
     CScript contractPubKeyScript = GetScriptForDestination(swapContractAddr);
 
-    // Create the contract transaction
     CReserveKey reservekey(pwallet);
     CAmount nFeeRequired;
     std::string strError;
@@ -202,17 +199,13 @@ bool BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmoun
     coinControl.change_type = OUTPUT_TYPE_LEGACY;
     CWalletTx wtx;
     if (!pwallet->CreateTransaction(vecSend, wtx, reservekey, nFeeRequired, nChangePosRet, strError, coinControl)) {
-        return false;
+        throw JSONRPCError(RPC_WALLET_ERROR, strError);
     }
 
-    // build a refund tx
     CMutableTransaction refundTx;
     CAmount refundFee;
-    if (!BuildRefundTransaction(pwallet, contractRedeemscript, CMutableTransaction(*wtx.tx), refundTx, refundFee)) {
-        return false;
-    }
+    BuildRefundTransaction(pwallet, contractRedeemscript, CMutableTransaction(*wtx.tx), refundTx, refundFee);
 
-    contract = SwapContract();
     contract.secret = secret;
     contract.secretHash = secretHash;
     contract.contractRedeemscript = contractRedeemscript;
