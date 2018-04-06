@@ -222,6 +222,22 @@ UniValue SwapTxToUniv(const CTransactionRef& tx)
     return res;
 }
 
+void SwapContractToUniv(const SwapContract& contract, UniValue& res)
+{
+    UniValue c(UniValue::VOBJ);
+    c.push_back(Pair("address", EncodeDestination(contract.contractAddr)));
+    c.push_back(Pair("scriptHex", HexStr(contract.contractRedeemscript.begin(), contract.contractRedeemscript.end())));
+    res.push_back(Pair("contract", c));
+
+    UniValue contractData = SwapTxToUniv(contract.contactTx);
+    contractData.push_back(Pair("fee", ValueFromAmount(contract.contractFee)));
+    res.push_back(Pair("contractTx", contractData));
+
+    UniValue refundData = SwapTxToUniv(contract.refundTx);
+    refundData.push_back(Pair("fee", ValueFromAmount(contract.refundFee)));
+    res.push_back(Pair("refundTx", refundData));
+}
+
 UniValue initiateswap(const JSONRPCRequest& request)
 {
     CWallet * const pwallet = GetWalletForJSONRPCRequest(request);
@@ -251,22 +267,52 @@ UniValue initiateswap(const JSONRPCRequest& request)
     BuildContract(contract, pwallet, destAddress, nAmount, locktime, secretHash);
 
     UniValue res(UniValue::VOBJ);
-
     res.push_back(Pair("secret", HexStr(secret.begin(), secret.end())));
     res.push_back(Pair("secretHash", HexStr(secretHash.begin(), secretHash.end())));
 
-    UniValue c(UniValue::VOBJ);
-    c.push_back(Pair("address", EncodeDestination(contract.contractAddr)));
-    c.push_back(Pair("scriptHex", HexStr(contract.contractRedeemscript.begin(), contract.contractRedeemscript.end())));
-    res.push_back(Pair("contract", c));
+    SwapContractToUniv(contract, res);
 
-    UniValue contractData = SwapTxToUniv(contract.contactTx);
-    contractData.push_back(Pair("fee", ValueFromAmount(contract.contractFee)));
-    res.push_back(Pair("contractTx", contractData));
+    return res;
+}
 
-    UniValue refundData = SwapTxToUniv(contract.refundTx);
-    refundData.push_back(Pair("fee", ValueFromAmount(contract.refundFee)));
-    res.push_back(Pair("refundTx", refundData));
+UniValue participateswap(const JSONRPCRequest& request)
+{
+    CWallet * const pwallet = GetWalletForJSONRPCRequest(request);
+    if (!EnsureWalletIsAvailable(pwallet, request.fHelp)) {
+        return NullUniValue;
+    }
+
+    if (request.fHelp || request.params.size() != 3)
+        throw std::runtime_error("");
+
+    CTxDestination dest = DecodeDestination(request.params[0].get_str());
+    if (dest.which() != 1) {
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Participant address is not P2PKH");
+    }
+
+    CAmount nAmount = AmountFromValue(request.params[1]);
+    if (nAmount <= 0) {
+        throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount");
+    }
+
+    const std::string& secretHashHex = request.params[2].get_str();
+    if (!IsHex(secretHashHex)) {
+        throw JSONRPCError(RPC_TYPE_ERROR, "Failed to decode secret hash");
+    }
+
+    std::vector<unsigned char> secretHash = ParseHex(secretHashHex);
+    if (secretHash.size() != CSHA256::OUTPUT_SIZE) {
+        throw JSONRPCError(RPC_TYPE_ERROR, "Secret hash has wrong size");
+    }
+
+    CKeyID destAddress = boost::get<CKeyID>(dest);
+    int64_t locktime = GetAdjustedTime() + 24 * 60 * 60;
+
+    SwapContract contract;
+    BuildContract(contract, pwallet, destAddress, nAmount, locktime, secretHash);
+
+    UniValue res(UniValue::VOBJ);
+    SwapContractToUniv(contract, res);
 
     return res;
 }
@@ -322,7 +368,8 @@ UniValue redeemswap(const JSONRPCRequest& request)
 static const CRPCCommand commands[] =
 { //  category              name                      actor (function)         argNames
   //  --------------------- ------------------------  -----------------------  ----------
-    { "atomicswaps",    "initiateswap",      &initiateswap,      {"address","amount"} },
+    { "atomicswaps",    "initiateswap",     &initiateswap,      {"address","amount"} },
+    { "atomicswaps",    "participateswap",  &participateswap,   {"address","amount","secret_hash"} },
 };
 
 void RegisterAtomicSwapRPCCommands(CRPCTable &t)
