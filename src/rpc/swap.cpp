@@ -23,8 +23,6 @@ static const int SECRET_SIZE = 32;
 class SwapContract
 {
 public:
-    std::vector<unsigned char> secret;
-    std::vector<unsigned char> secretHash;
     CScript contractRedeemscript;
     CScriptID contractAddr;
     CAmount contractFee;
@@ -170,20 +168,12 @@ void BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscrip
     refundTx.vin[0].scriptSig = refundSigScript;
 }
 
-void BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmount nAmount, int64_t locktime)
+void BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmount nAmount, int64_t locktime, std::vector<unsigned char> secretHash)
 {
-    std::vector<unsigned char> secret(SECRET_SIZE, 0);
-    std::vector<unsigned char> secretHash(CSHA256::OUTPUT_SIZE, 0);
-
-    GetRandBytes(secret.data(), secret.size());
-    CSHA256 sha;
-    sha.Write(secret.data(), secret.size());
-    sha.Finalize(secretHash.data());
-
     CTxDestination refundDest = GetRawChangeAddress(pwallet, OUTPUT_TYPE_LEGACY);
     CKeyID refundAddress = boost::get<CKeyID>(refundDest);
 
-    CScript contractRedeemscript = CreateAtomicSwapRedeemscript(refundAddress, dest, locktime, secret.size(), secretHash);
+    CScript contractRedeemscript = CreateAtomicSwapRedeemscript(refundAddress, dest, locktime, SECRET_SIZE, secretHash);
     CScriptID swapContractAddr = CScriptID(contractRedeemscript);
     CScript contractPubKeyScript = GetScriptForDestination(swapContractAddr);
 
@@ -205,14 +195,23 @@ void BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmoun
     CAmount refundFee;
     BuildRefundTransaction(pwallet, contractRedeemscript, CMutableTransaction(*wtx.tx), refundTx, refundFee);
 
-    contract.secret = secret;
-    contract.secretHash = secretHash;
     contract.contractRedeemscript = contractRedeemscript;
     contract.contractAddr = swapContractAddr;
     contract.contactTx = wtx.tx;
     contract.contractFee = nFeeRequired;
     contract.refundTx = MakeTransactionRef(std::move(refundTx));
     contract.refundFee = refundFee;
+}
+
+void GenerateSecret(std::vector<unsigned char>& secret, std::vector<unsigned char>& secretHash)
+{
+    secret.assign(SECRET_SIZE, 0);
+    secretHash.assign(CSHA256::OUTPUT_SIZE, 0);
+
+    GetRandBytes(secret.data(), secret.size());
+    CSHA256 sha;
+    sha.Write(secret.data(), secret.size());
+    sha.Finalize(secretHash.data());
 }
 
 UniValue SwapTxToUniv(const CTransactionRef& tx)
@@ -244,15 +243,17 @@ UniValue initiateswap(const JSONRPCRequest& request)
     }
 
     CKeyID destAddress = boost::get<CKeyID>(dest);
-
     int64_t locktime = GetAdjustedTime() + 48 * 60 * 60;
+    std::vector<unsigned char> secret, secretHash;
+    GenerateSecret(secret, secretHash);
+
     SwapContract contract;
-    BuildContract(contract, pwallet, destAddress, nAmount, locktime);
+    BuildContract(contract, pwallet, destAddress, nAmount, locktime, secretHash);
 
     UniValue res(UniValue::VOBJ);
 
-    res.push_back(Pair("secret", HexStr(contract.secret.begin(), contract.secret.end())));
-    res.push_back(Pair("secretHash", HexStr(contract.secretHash.begin(), contract.secretHash.end())));
+    res.push_back(Pair("secret", HexStr(secret.begin(), secret.end())));
+    res.push_back(Pair("secretHash", HexStr(secretHash.begin(), secretHash.end())));
 
     UniValue c(UniValue::VOBJ);
     c.push_back(Pair("address", EncodeDestination(contract.contractAddr)));
