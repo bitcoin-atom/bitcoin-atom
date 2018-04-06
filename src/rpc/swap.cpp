@@ -173,24 +173,20 @@ bool BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscrip
 
 bool BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmount nAmount)
 {
-    unsigned char secret[SECRET_SIZE];
-    unsigned char secretHash[CSHA256::OUTPUT_SIZE];
+    std::vector<unsigned char> secret(SECRET_SIZE, 0);
+    std::vector<unsigned char> secretHash(CSHA256::OUTPUT_SIZE, 0);
 
-    //TODO: initialize secret (random)
-
+    GetRandBytes(secret.data(), secret.size());
     CSHA256 sha;
-    sha.Write(secret, SECRET_SIZE);
-    sha.Finalize(secretHash);
+    sha.Write(secret.data(), secret.size());
+    sha.Finalize(secretHash.data());
 
     //build contract
     CTxDestination refundDest = GetRawChangeAddress(pwallet, OUTPUT_TYPE_LEGACY);
     CKeyID refundAddress = boost::get<CKeyID>(refundDest);
 
     int64_t locktime = GetAdjustedTime() + 48 * 60 * 60;
-
-    std::vector<unsigned char> vSecretHash;
-    vSecretHash.insert(vSecretHash.end(), secretHash, secretHash + CSHA256::OUTPUT_SIZE);
-    CScript contractRedeemscript = CreateAtomicSwapRedeemscript(refundAddress, dest, locktime, SECRET_SIZE, vSecretHash);
+    CScript contractRedeemscript = CreateAtomicSwapRedeemscript(refundAddress, dest, locktime, SECRET_SIZE, secretHash);
     CScriptID swapContractAddr = CScriptID(contractRedeemscript);
     CScript contractPubKeyScript = GetScriptForDestination(swapContractAddr);
 
@@ -217,8 +213,8 @@ bool BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmoun
     }
 
     contract = SwapContract();
-    contract.secret = std::vector<unsigned char>(secret, secret + SECRET_SIZE);
-    contract.secretHash = vSecretHash;
+    contract.secret = secret;
+    contract.secretHash = secretHash;
     contract.contractRedeemscript = contractRedeemscript;
     contract.contractAddr = swapContractAddr;
     contract.contactTx = wtx.tx;
