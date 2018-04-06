@@ -170,7 +170,7 @@ void BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscrip
     refundTx.vin[0].scriptSig = refundSigScript;
 }
 
-bool BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmount nAmount)
+void BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmount nAmount, int64_t locktime)
 {
     std::vector<unsigned char> secret(SECRET_SIZE, 0);
     std::vector<unsigned char> secretHash(CSHA256::OUTPUT_SIZE, 0);
@@ -183,7 +183,6 @@ bool BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmoun
     CTxDestination refundDest = GetRawChangeAddress(pwallet, OUTPUT_TYPE_LEGACY);
     CKeyID refundAddress = boost::get<CKeyID>(refundDest);
 
-    int64_t locktime = GetAdjustedTime() + 48 * 60 * 60;
     CScript contractRedeemscript = CreateAtomicSwapRedeemscript(refundAddress, dest, locktime, secret.size(), secretHash);
     CScriptID swapContractAddr = CScriptID(contractRedeemscript);
     CScript contractPubKeyScript = GetScriptForDestination(swapContractAddr);
@@ -214,7 +213,6 @@ bool BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmoun
     contract.contractFee = nFeeRequired;
     contract.refundTx = MakeTransactionRef(std::move(refundTx));
     contract.refundFee = refundFee;
-    return true;
 }
 
 UniValue SwapTxToUniv(const CTransactionRef& tx)
@@ -241,14 +239,15 @@ UniValue initiateswap(const JSONRPCRequest& request)
     }
 
     CAmount nAmount = AmountFromValue(request.params[1]);
-    if (nAmount <= 0)
+    if (nAmount <= 0) {
         throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount");
+    }
 
     CKeyID destAddress = boost::get<CKeyID>(dest);
+
+    int64_t locktime = GetAdjustedTime() + 48 * 60 * 60;
     SwapContract contract;
-    if (!BuildContract(contract, pwallet, destAddress, nAmount)) {
-        throw JSONRPCError(RPC_TYPE_ERROR, "");
-    }
+    BuildContract(contract, pwallet, destAddress, nAmount, locktime);
 
     UniValue res(UniValue::VOBJ);
 
