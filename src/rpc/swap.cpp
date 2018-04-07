@@ -114,6 +114,16 @@ bool CreateRefundSigScript(CWallet* pwallet, const CScript& contractRedeemscript
 
 void BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscript, const CMutableTransaction& contractTx, CMutableTransaction& refundTx, CAmount& refundFee)
 {
+    std::vector<unsigned char> secretHash;
+    CKeyID recipient;
+    CKeyID refundAddr;
+    int64_t locktime;
+    int64_t secretSize;
+
+    if (!TryDecodeAtomicSwapScript(contractRedeemscript, secretHash, recipient, refundAddr, locktime, secretSize)) {
+        throw JSONRPCError(RPC_TRANSACTION_ERROR, "Invalid atomic swap script");
+    }
+
     CScriptID swapContractAddr = CScriptID(contractRedeemscript);
     CScript contractPubKeyScript = GetScriptForDestination(swapContractAddr);
 
@@ -129,16 +139,6 @@ void BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscrip
 
     if (contractOutPoint.n == (uint32_t) -1) {
         throw JSONRPCError(RPC_TRANSACTION_ERROR, "Contract tx does not contain a P2SH contract payment");
-    }
-
-    std::vector<unsigned char> secretHash;
-    CKeyID recipient;
-    CKeyID refundAddr;
-    int64_t locktime;
-    int64_t secretSize;
-
-    if (!TryDecodeAtomicSwapScript(contractRedeemscript, secretHash, recipient, refundAddr, locktime, secretSize)) {
-        throw JSONRPCError(RPC_TRANSACTION_ERROR, "Invalid atomic swap script");
     }
 
     //create refund transaction
@@ -285,7 +285,7 @@ UniValue auditswap(const JSONRPCRequest& request)
     if (request.fHelp || request.params.size() != 2)
         throw std::runtime_error("");
 
-    std::vector<unsigned char> scriptData(ParseHexV(request.params[0], "scriptHex"));
+    std::vector<unsigned char> scriptData(ParseHexV(request.params[0], "hexscript"));
     CScript contractRedeemscript = CScript(scriptData.begin(), scriptData.end());
 
     CMutableTransaction tx;
@@ -428,12 +428,41 @@ UniValue redeemswap(const JSONRPCRequest& request)
     return res;
 }
 
+UniValue refundswap(const JSONRPCRequest& request)
+{
+    CWallet * const pwallet = GetWalletForJSONRPCRequest(request);
+    if (!EnsureWalletIsAvailable(pwallet, request.fHelp)) {
+        return NullUniValue;
+    }
+
+    if (request.fHelp || request.params.size() != 2)
+        throw std::runtime_error("");
+
+    std::vector<unsigned char> scriptData(ParseHexV(request.params[0], "hexscript"));
+    CScript contractRedeemscript = CScript(scriptData.begin(), scriptData.end());
+
+    CMutableTransaction tx;
+    if (!DecodeHexTx(tx, request.params[1].get_str(), true)) {
+        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Failed to decode contract transaction");
+    }
+
+    CMutableTransaction refundTx;
+    CAmount refundFee;
+    BuildRefundTransaction(pwallet, contractRedeemscript, tx, refundTx, refundFee);
+
+    UniValue res = SwapTxToUniv(MakeTransactionRef(std::move(refundTx)));
+    res.push_back(Pair("fee", ValueFromAmount(refundFee)));
+
+    return res;
+}
+
 static const CRPCCommand commands[] =
 { //  category              name                      actor (function)         argNames
   //  --------------------- ------------------------  -----------------------  ----------
     { "atomicswaps",    "initiateswap",     &initiateswap,      {"address","amount"} },
     { "atomicswaps",    "auditswap",        &auditswap,         {"hexscript","hextransaction"} },
-    { "atomicswaps",    "participateswap",  &participateswap,   {"address","amount","secret_hash"} },
+    { "atomicswaps",    "participateswap",  &participateswap,   {"address","amount","secret_hash"} },  
+    { "atomicswaps",    "refundswap",       &refundswap,        {"hexscript","hextransaction"} },
 };
 
 void RegisterAtomicSwapRPCCommands(CRPCTable &t)
