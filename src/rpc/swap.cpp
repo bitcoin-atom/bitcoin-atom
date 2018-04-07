@@ -358,14 +358,9 @@ UniValue participateswap(const JSONRPCRequest& request)
         throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount");
     }
 
-    const std::string& secretHashHex = request.params[2].get_str();
-    if (!IsHex(secretHashHex)) {
-        throw JSONRPCError(RPC_TYPE_ERROR, "Failed to decode secret hash");
-    }
-
-    std::vector<unsigned char> secretHash = ParseHex(secretHashHex);
+    std::vector<unsigned char> secretHash(ParseHexV(request.params[2], "secrethash"));
     if (secretHash.size() != CSHA256::OUTPUT_SIZE) {
-        throw JSONRPCError(RPC_TYPE_ERROR, "Secret hash has wrong size");
+         throw JSONRPCError(RPC_TYPE_ERROR, "Secret hash has wrong size");
     }
 
     CKeyID destAddress = boost::get<CKeyID>(dest);
@@ -428,6 +423,52 @@ UniValue redeemswap(const JSONRPCRequest& request)
     return res;
 }
 
+UniValue extractsecret(const JSONRPCRequest& request)
+{
+    CWallet * const pwallet = GetWalletForJSONRPCRequest(request);
+    if (!EnsureWalletIsAvailable(pwallet, request.fHelp)) {
+        return NullUniValue;
+    }
+
+    if (request.fHelp || request.params.size() != 2)
+        throw std::runtime_error("");
+
+    CMutableTransaction tx;
+    if (!DecodeHexTx(tx, request.params[0].get_str(), true)) {
+        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Failed to decode redemption transaction");
+    }
+
+    std::vector<unsigned char> secretHash(ParseHexV(request.params[1], "secrethash"));
+    if (secretHash.size() != CSHA256::OUTPUT_SIZE) {
+         throw JSONRPCError(RPC_TYPE_ERROR, "Secret hash has wrong size");
+    }
+
+    CSHA256 sha;
+    for (const CTxIn txin : tx.vin) {
+        CScript::const_iterator pc = txin.scriptSig.begin();
+        std::vector<unsigned char> data, secretHashCalculated(CSHA256::OUTPUT_SIZE, 0);
+        while (pc < txin.scriptSig.end())
+        {
+            opcodetype opcode;
+            if (!txin.scriptSig.GetOp(pc, opcode, data)) {
+                break;
+            }
+            if (data.size() != 0) {
+                sha.Write(data.data(), data.size());
+                sha.Finalize(secretHashCalculated.data());
+                sha.Reset();
+                if (std::equal(secretHashCalculated.begin(), secretHashCalculated.end(), secretHash.begin())) {
+                    UniValue res(UniValue::VOBJ);
+                    res.push_back(Pair("secret", HexStr(data.begin(), data.end())));
+                    return res;
+                }
+            }
+        }
+    }
+
+    throw JSONRPCError(RPC_TRANSACTION_ERROR, "Transaction does not contain the secret");
+}
+
 UniValue refundswap(const JSONRPCRequest& request)
 {
     CWallet * const pwallet = GetWalletForJSONRPCRequest(request);
@@ -461,8 +502,9 @@ static const CRPCCommand commands[] =
   //  --------------------- ------------------------  -----------------------  ----------
     { "atomicswaps",    "initiateswap",     &initiateswap,      {"address","amount"} },
     { "atomicswaps",    "auditswap",        &auditswap,         {"hexscript","hextransaction"} },
-    { "atomicswaps",    "participateswap",  &participateswap,   {"address","amount","secret_hash"} },  
+    { "atomicswaps",    "participateswap",  &participateswap,   {"address","amount","secrethash"} },
     { "atomicswaps",    "refundswap",       &refundswap,        {"hexscript","hextransaction"} },
+    { "atomicswaps",    "extractsecret",    &extractsecret,     {"hextransaction","secrethash"} },
 };
 
 void RegisterAtomicSwapRPCCommands(CRPCTable &t)
