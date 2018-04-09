@@ -112,6 +112,19 @@ bool CreateRefundSigScript(CWallet* pwallet, const CScript& contractRedeemscript
     return VerifyScript(refundSigScript, contractPubKeyScript, nullptr, STANDARD_SCRIPT_VERIFY_FLAGS, creator.Checker());
 }
 
+bool CreateRedeemSigScript(CWallet* pwallet, const CScript& contractRedeemscript, const CScript contractPubKeyScript, const CKeyID& address, const std::vector<unsigned char>& secret, CMutableTransaction& redeemTx, CAmount amount, CScript& redeemSigScript)
+{
+    MutableTransactionSignatureCreator creator(pwallet, &redeemTx, 0, amount, SIGHASH_ALL|SIGHASH_FORKID);
+    std::vector<unsigned char> vch;
+    CPubKey pubKey;
+    if (!creator.CreateSig(vch, address, pubKey, contractRedeemscript, SIGVERSION_BASE)) {
+        return false;
+    }
+
+    redeemSigScript = CScript() << vch << ToByteVector(pubKey) << secret << int64_t(1) << std::vector<unsigned char>(contractRedeemscript.begin(), contractRedeemscript.end());
+    return VerifyScript(redeemSigScript, contractPubKeyScript, nullptr, STANDARD_SCRIPT_VERIFY_FLAGS, creator.Checker());
+}
+
 void BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscript, const CMutableTransaction& contractTx, CMutableTransaction& refundTx, CAmount& refundFee)
 {
     std::vector<unsigned char> secretHash;
@@ -382,7 +395,7 @@ UniValue redeemswap(const JSONRPCRequest& request)
         return NullUniValue;
     }
 
-    if (request.fHelp || request.params.size() != 2)
+    if (request.fHelp || request.params.size() != 3)
         throw std::runtime_error("");
 
     const std::string& contractHex = request.params[0].get_str();
@@ -394,7 +407,7 @@ UniValue redeemswap(const JSONRPCRequest& request)
 
     const std::string& contractTxHex = request.params[1].get_str();
     CMutableTransaction contractTx;
-    if (!DecodeHexTx(contractTx, contractTxHex)) {
+    if (!DecodeHexTx(contractTx, contractTxHex, true)) {
         throw JSONRPCError(RPC_TYPE_ERROR, "Failed to decode contract transaction");
     }
 
@@ -419,7 +432,61 @@ UniValue redeemswap(const JSONRPCRequest& request)
         throw JSONRPCError(RPC_TYPE_ERROR, "Contract is not an atomic swap script recognized by this tool");
     }
 
-    UniValue res(UniValue::VOBJ);
+    CScriptID contractAddr = CScriptID(contractRedeemScript);
+    int contractOutIndex = -1;
+    for (size_t i = 0; i < contractTx.vout.size(); i++) {
+        const CTxOut& txout = contractTx.vout[i];
+        txnouttype type;
+        std::vector<CTxDestination> vDest;
+        int nRequired;
+        if (!ExtractDestinations(txout.scriptPubKey, type, vDest, nRequired) || type != TX_SCRIPTHASH) {
+            continue;
+        }
+
+        if (*boost::get<CScriptID>(&vDest[0]) == contractAddr) {
+            contractOutIndex = i;
+            break;
+        }
+    }
+
+    if (contractOutIndex == -1) {
+        throw JSONRPCError(RPC_TRANSACTION_ERROR, "Transaction does not contain the contract output");
+    }
+
+    COutPoint contractOutPoint;
+    contractOutPoint.hash = contractTx.GetHash();
+    contractOutPoint.n = contractOutIndex;
+
+    CTxDestination addr = GetRawChangeAddress(pwallet, OUTPUT_TYPE_LEGACY);
+    CScript outScript = GetScriptForDestination(addr);
+
+    CMutableTransaction redeemTx;
+
+    redeemTx.nLockTime = locktime;
+    redeemTx.vout.push_back(CTxOut(0, outScript));
+
+    CTxIn txIn(contractOutPoint);
+    txIn.nSequence = 0;
+    redeemTx.vin.push_back(txIn);
+
+    int redeemTxSize = EstimateRedeemTxSerializeSize(contractRedeemScript, redeemTx.vout);
+    CCoinControl coinControl;
+    CAmount redeemFee = GetMinimumFee(redeemTxSize, coinControl, ::mempool, ::feeEstimator, nullptr);
+    redeemTx.vout[0].nValue = contractTx.vout[contractOutPoint.n].nValue - redeemFee;
+    if (IsDust(redeemTx.vout[0], ::dustRelayFee)) {
+        throw JSONRPCError(RPC_TRANSACTION_ERROR, strprintf("Redeem output value of %d is dust", redeemTx.vout[0].nValue));
+    }
+
+    CScript redeemSigScript;
+    if (!CreateRedeemSigScript(pwallet, contractRedeemScript, contractPubKeyScript, recipient, secret, redeemTx, contractTx.vout[contractOutPoint.n].nValue, redeemSigScript)) {
+        throw JSONRPCError(RPC_TRANSACTION_ERROR, "Faield to create redeem script signature");
+    }
+
+    redeemTx.vin[0].scriptSig = redeemSigScript;
+
+    UniValue res = SwapTxToUniv(MakeTransactionRef(std::move(redeemTx)));
+    res.push_back(Pair("Redeem fee", ValueFromAmount(redeemFee)));
+
     return res;
 }
 
@@ -503,6 +570,7 @@ static const CRPCCommand commands[] =
     { "atomicswaps",    "initiateswap",     &initiateswap,      {"address","amount"} },
     { "atomicswaps",    "auditswap",        &auditswap,         {"hexscript","hextransaction"} },
     { "atomicswaps",    "participateswap",  &participateswap,   {"address","amount","secrethash"} },
+    { "atomicswaps",    "redeemswap",       &redeemswap,        {"hexscript","hextransaction","secret"} },
     { "atomicswaps",    "refundswap",       &refundswap,        {"hexscript","hextransaction"} },
     { "atomicswaps",    "extractsecret",    &extractsecret,     {"hextransaction","secrethash"} },
 };
