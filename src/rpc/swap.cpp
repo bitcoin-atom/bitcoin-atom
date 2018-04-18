@@ -466,7 +466,6 @@ UniValue redeemswap(const JSONRPCRequest& request)
     redeemTx.vout.push_back(CTxOut(0, outScript));
 
     CTxIn txIn(contractOutPoint);
-    txIn.nSequence = 0;
     redeemTx.vin.push_back(txIn);
 
     int redeemTxSize = EstimateRedeemTxSerializeSize(contractRedeemScript, redeemTx.vout);
@@ -479,7 +478,7 @@ UniValue redeemswap(const JSONRPCRequest& request)
 
     CScript redeemSigScript;
     if (!CreateRedeemSigScript(pwallet, contractRedeemScript, contractPubKeyScript, recipient, secret, redeemTx, contractTx.vout[contractOutPoint.n].nValue, redeemSigScript)) {
-        throw JSONRPCError(RPC_TRANSACTION_ERROR, "Faield to create redeem script signature");
+        throw JSONRPCError(RPC_TRANSACTION_ERROR, "Failed to create redeem script signature");
     }
 
     redeemTx.vin[0].scriptSig = redeemSigScript;
