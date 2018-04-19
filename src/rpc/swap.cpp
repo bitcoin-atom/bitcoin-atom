@@ -175,7 +175,7 @@ void BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscrip
 
     CScript refundSigScript;
     if (!CreateRefundSigScript(pwallet, contractRedeemscript, contractPubKeyScript, refundAddr, refundTx, contractTx.vout[contractOutPoint.n].nValue, refundSigScript)) {
-        throw JSONRPCError(RPC_TRANSACTION_ERROR, "Faield to create refund script signature");
+        throw JSONRPCError(RPC_TRANSACTION_ERROR, "Failed to create refund script signature");
     }
 
     refundTx.vin[0].scriptSig = refundSigScript;
@@ -183,6 +183,8 @@ void BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscrip
 
 void BuildContract(SwapContract& contract, CWallet* pwallet, CKeyID dest, CAmount nAmount, int64_t locktime, std::vector<unsigned char> secretHash)
 {
+    LOCK2(cs_main, pwallet->cs_wallet);
+
     CTxDestination refundDest = GetRawChangeAddress(pwallet, OUTPUT_TYPE_LEGACY);
     CKeyID refundAddress = boost::get<CKeyID>(refundDest);
 
@@ -271,6 +273,8 @@ UniValue initiateswap(const JSONRPCRequest& request)
         throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount");
     }
 
+    EnsureWalletIsUnlocked(pwallet);
+
     CKeyID destAddress = boost::get<CKeyID>(dest);
     int64_t locktime = GetAdjustedTime() + 48 * 60 * 60;
     std::vector<unsigned char> secret, secretHash;
@@ -290,11 +294,6 @@ UniValue initiateswap(const JSONRPCRequest& request)
 
 UniValue auditswap(const JSONRPCRequest& request)
 {
-    CWallet * const pwallet = GetWalletForJSONRPCRequest(request);
-    if (!EnsureWalletIsAvailable(pwallet, request.fHelp)) {
-        return NullUniValue;
-    }
-
     if (request.fHelp || request.params.size() != 2)
         throw std::runtime_error("");
 
@@ -376,6 +375,8 @@ UniValue participateswap(const JSONRPCRequest& request)
          throw JSONRPCError(RPC_TYPE_ERROR, "Secret hash has wrong size");
     }
 
+    EnsureWalletIsUnlocked(pwallet);
+
     CKeyID destAddress = boost::get<CKeyID>(dest);
     int64_t locktime = GetAdjustedTime() + 24 * 60 * 60;
 
@@ -398,25 +399,19 @@ UniValue redeemswap(const JSONRPCRequest& request)
     if (request.fHelp || request.params.size() != 3)
         throw std::runtime_error("");
 
-    const std::string& contractHex = request.params[0].get_str();
-    if (!IsHex(contractHex)) {
-        throw JSONRPCError(RPC_TYPE_ERROR, "Failed to decode contract");
-    }
+    std::vector<unsigned char> contract(ParseHexV(request.params[0], "hexscript"));
 
-    std::vector<unsigned char> contract = ParseHex(contractHex);
-
-    const std::string& contractTxHex = request.params[1].get_str();
     CMutableTransaction contractTx;
-    if (!DecodeHexTx(contractTx, contractTxHex, true)) {
+    if (!DecodeHexTx(contractTx, request.params[1].get_str(), true)) {
         throw JSONRPCError(RPC_TYPE_ERROR, "Failed to decode contract transaction");
     }
 
-    const std::string& secretHex = request.params[2].get_str();
-    if (!IsHex(secretHex)) {
-        throw JSONRPCError(RPC_TYPE_ERROR, "Failed to decode secret");
+    std::vector<unsigned char> secret(ParseHexV(request.params[2], "secret"));
+    if (secret.size() != SECRET_SIZE) {
+         throw JSONRPCError(RPC_TYPE_ERROR, "Secret has wrong size");
     }
 
-    std::vector<unsigned char> secret = ParseHex(secretHex);
+    EnsureWalletIsUnlocked(pwallet);
 
     std::vector<unsigned char> secretHash;
     CKeyID recipient;
@@ -457,6 +452,8 @@ UniValue redeemswap(const JSONRPCRequest& request)
     contractOutPoint.hash = contractTx.GetHash();
     contractOutPoint.n = contractOutIndex;
 
+    LOCK2(cs_main, pwallet->cs_wallet);
+
     CTxDestination addr = GetRawChangeAddress(pwallet, OUTPUT_TYPE_LEGACY);
     CScript outScript = GetScriptForDestination(addr);
 
@@ -491,11 +488,6 @@ UniValue redeemswap(const JSONRPCRequest& request)
 
 UniValue extractsecret(const JSONRPCRequest& request)
 {
-    CWallet * const pwallet = GetWalletForJSONRPCRequest(request);
-    if (!EnsureWalletIsAvailable(pwallet, request.fHelp)) {
-        return NullUniValue;
-    }
-
     if (request.fHelp || request.params.size() != 2)
         throw std::runtime_error("");
 
@@ -552,6 +544,10 @@ UniValue refundswap(const JSONRPCRequest& request)
     if (!DecodeHexTx(tx, request.params[1].get_str(), true)) {
         throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Failed to decode contract transaction");
     }
+
+    LOCK2(cs_main, pwallet->cs_wallet);
+
+    EnsureWalletIsUnlocked(pwallet);
 
     CMutableTransaction refundTx;
     CAmount refundFee;
