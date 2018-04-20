@@ -1271,6 +1271,8 @@ CTxDestination GetDestinationForKey(const CPubKey& key, OutputType);
 /** Get all destinations (potentially) supported by the wallet for the given key. */
 std::vector<CTxDestination> GetAllDestinationsForKey(const CPubKey& key);
 
+CTxDestination GetRawChangeAddress(CWallet * const pwallet, OutputType output_type);
+
 /** RAII object to check and reserve a wallet rescan */
 class WalletRescanReserver
 {

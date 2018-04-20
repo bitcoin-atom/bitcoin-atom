@@ -34,6 +34,24 @@ bool TransactionSignatureCreator::CreateSig(std::vector<unsigned char>& vchSig, 
     return true;
 }
 
+bool TransactionSignatureCreator::CreateSig(std::vector<unsigned char>& vchSig, const CKeyID& address, CPubKey& pubkey, const CScript& scriptCode, SigVersion sigversion) const
+{
+    CKey key;
+    if (!keystore->GetKey(address, key))
+        return false;
+
+    // Signing with uncompressed keys is disabled in witness scripts
+    if (sigversion == SIGVERSION_WITNESS_V0 && !key.IsCompressed())
+        return false;
+
+    uint256 hash = SignatureHash(scriptCode, *txTo, nIn, nHashType, amount, sigversion);
+    if (!key.Sign(hash, vchSig))
+        return false;
+    vchSig.push_back((unsigned char)nHashType);
+    pubkey = key.GetPubKey();
+    return true;
+}
+
 static bool Sign1(const CKeyID& address, const BaseSignatureCreator& creator, const CScript& scriptCode, std::vector<valtype>& ret, SigVersion sigversion)
 {
     std::vector<unsigned char> vchSig;

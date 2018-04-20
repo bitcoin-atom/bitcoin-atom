@@ -149,6 +149,8 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "listminting", 1, "skip" },
     { "listminting", 2, "minweight" },
     { "listminting", 3, "maxweight" },
+    { "initiateswap", 1, "amount" },
+    { "participateswap", 1, "amount" },
 };
 
 class CRPCConvertTable

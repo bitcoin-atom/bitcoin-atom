@@ -52,6 +52,21 @@ CWallet *GetWalletForJSONRPCRequest(const JSONRPCRequest& request)
     return ::vpwallets.size() == 1 || (request.fHelp && ::vpwallets.size() > 0) ? ::vpwallets[0] : nullptr;
 }
 
+CTxDestination GetRawChangeAddress(CWallet * const pwallet, OutputType output_type)
+{
+    CReserveKey reservekey(pwallet);
+    CPubKey vchPubKey;
+    if (!reservekey.GetReservedKey(vchPubKey, true))
+        throw JSONRPCError(RPC_WALLET_KEYPOOL_RAN_OUT, "Error: Keypool ran out, please call keypoolrefill first");
+
+    reservekey.KeepKey();
+
+    pwallet->LearnRelatedScripts(vchPubKey, output_type);
+    CTxDestination dest = GetDestinationForKey(vchPubKey, output_type);
+
+    return dest;
+}
+
 std::string HelpRequiringPassphrase(CWallet * const pwallet)
 {
     return pwallet && pwallet->IsCrypted()
@@ -229,7 +244,6 @@ UniValue getaccountaddress(const JSONRPCRequest& request)
     return ret;
 }
 
-
 UniValue getrawchangeaddress(const JSONRPCRequest& request)
 {
     CWallet * const pwallet = GetWalletForJSONRPCRequest(request);
@@ -265,16 +279,7 @@ UniValue getrawchangeaddress(const JSONRPCRequest& request)
         }
     }
 
-    CReserveKey reservekey(pwallet);
-    CPubKey vchPubKey;
-    if (!reservekey.GetReservedKey(vchPubKey, true))
-        throw JSONRPCError(RPC_WALLET_KEYPOOL_RAN_OUT, "Error: Keypool ran out, please call keypoolrefill first");
-
-    reservekey.KeepKey();
-
-    pwallet->LearnRelatedScripts(vchPubKey, output_type);
-    CTxDestination dest = GetDestinationForKey(vchPubKey, output_type);
-
+    CTxDestination dest = GetRawChangeAddress(pwallet, output_type);
     return EncodeDestination(dest);
 }
 

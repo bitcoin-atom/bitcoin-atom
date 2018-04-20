@@ -42,6 +42,7 @@ public:
     TransactionSignatureCreator(const CKeyStore* keystoreIn, const CTransaction* txToIn, unsigned int nInIn, const CAmount& amountIn, int nHashTypeIn=SIGHASH_ALL|SIGHASH_FORKID);
     const BaseSignatureChecker& Checker() const override { return checker; }
     bool CreateSig(std::vector<unsigned char>& vchSig, const CKeyID& keyid, const CScript& scriptCode, SigVersion sigversion) const override;
+    bool CreateSig(std::vector<unsigned char>& vchSig, const CKeyID& address, CPubKey& pubkey, const CScript& scriptCode, SigVersion sigversion) const;
 };
 
 class MutableTransactionSignatureCreator : public TransactionSignatureCreator {

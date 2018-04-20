@@ -22,6 +22,8 @@ void RegisterRawTransactionRPCCommands(CRPCTable &tableRPC);
 /** Register minting RPC commands */
 void RegisterMintingRPCCommands(CRPCTable &tableRPC);
 
+void RegisterAtomicSwapRPCCommands(CRPCTable &tableRPC);
+
 static inline void RegisterAllCoreRPCCommands(CRPCTable &t)
 {
     RegisterBlockchainRPCCommands(t);
@@ -30,6 +32,7 @@ static inline void RegisterAllCoreRPCCommands(CRPCTable &t)
     RegisterMiningRPCCommands(t);
     RegisterRawTransactionRPCCommands(t);
     RegisterMintingRPCCommands(t);
+    RegisterAtomicSwapRPCCommands(t);
 }
 
 #endif
