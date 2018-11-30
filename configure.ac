@@ -17,6 +17,7 @@ AC_CONFIG_MACRO_DIR([build-aux/m4])
 BITCOIN_DAEMON_NAME=atomd
 BITCOIN_GUI_NAME=atom-qt
 BITCOIN_CLI_NAME=atom-cli
+BITCOIN_DEX_NAME=atom-dex
 BITCOIN_TX_NAME=atom-tx
 
 dnl Unless the user specified ARFLAGS, force it to be cr
@@ -293,7 +294,7 @@ CPPFLAGS="$CPPFLAGS -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS"
 
 AC_ARG_WITH([utils],
   [AS_HELP_STRING([--with-utils],
-  [build bitcoin-cli bitcoin-tx (default=yes)])],
+  [build bitcoin-cli bitcoin-tx bitcoin-dex (default=yes)])],
   [build_bitcoin_utils=$withval],
   [build_bitcoin_utils=yes])
 
@@ -1064,7 +1065,7 @@ AC_MSG_CHECKING([whether to build bitcoind])
 AM_CONDITIONAL([BUILD_BITCOIND], [test x$build_bitcoind = xyes])
 AC_MSG_RESULT($build_bitcoind)
 
-AC_MSG_CHECKING([whether to build utils (bitcoin-cli bitcoin-tx)])
+AC_MSG_CHECKING([whether to build utils (bitcoin-cli bitcoin-tx bitcoin-dex)])
 AM_CONDITIONAL([BUILD_BITCOIN_UTILS], [test x$build_bitcoin_utils = xyes])
 AC_MSG_RESULT($build_bitcoin_utils)
 
@@ -1233,6 +1234,7 @@ AC_SUBST(COPYRIGHT_HOLDERS_FINAL, "_COPYRIGHT_HOLDERS_FINAL")
 AC_SUBST(BITCOIN_DAEMON_NAME)
 AC_SUBST(BITCOIN_GUI_NAME)
 AC_SUBST(BITCOIN_CLI_NAME)
+AC_SUBST(BITCOIN_DEX_NAME)
 AC_SUBST(BITCOIN_TX_NAME)
 
 AC_SUBST(RELDFLAGS)

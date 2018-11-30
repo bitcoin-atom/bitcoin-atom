@@ -607,7 +607,6 @@ static CCriticalSection csPathCached;
 
 const fs::path &GetDataDir(bool fNetSpecific)
 {
-
     LOCK(csPathCached);
 
     fs::path &path = fNetSpecific ? pathCachedNetSpecific : pathCached;

@@ -2214,8 +2214,8 @@ void CWallet::AvailableCoins(std::vector<COutput> &vCoins, bool fOnlySafe, const
             const uint256& wtxid = entry.first;
             const CWalletTx* pcoin = &entry.second;
 
-            if (!CheckFinalTx(*pcoin->tx))
-                continue;
+            //if (!CheckFinalTx(*pcoin->tx))
+            //    continue;
 
             const CBlockIndex* blockIndex;
             int nDepth = pcoin->GetDepthInMainChain(blockIndex);
@@ -2230,10 +2230,10 @@ void CWallet::AvailableCoins(std::vector<COutput> &vCoins, bool fOnlySafe, const
 
             // We should not consider coins which aren't at least in our mempool
             // It's possible for these to be conflicted via ancestors which we may never be able to detect
-            if (nDepth == 0 && !pcoin->InMempool())
-                continue;
+            //if (nDepth == 0 && !pcoin->InMempool())
+            //    continue;
 
-            bool safeTx = pcoin->IsTrusted();
+            bool safeTx = true;//pcoin->IsTrusted();
 
             // We should not consider coins from transactions that are replacing
             // other transactions.
@@ -2444,8 +2444,8 @@ bool CWallet::SelectCoinsMinConf(const CAmount& nTargetValue, const int nConfMin
 
         const CWalletTx *pcoin = output.tx;
 
-        if (output.nDepth < (pcoin->IsFromMe(ISMINE_ALL) ? nConfMine : nConfTheirs))
-            continue;
+        //if (output.nDepth < (pcoin->IsFromMe(ISMINE_ALL) ? nConfMine : nConfTheirs))
+        //    continue;
 
         if (!mempool.TransactionWithinChainLimit(pcoin->GetHash(), nMaxAncestors))
             continue;
@@ -2483,8 +2483,9 @@ bool CWallet::SelectCoinsMinConf(const CAmount& nTargetValue, const int nConfMin
 
     if (nTotalLower < nTargetValue)
     {
-        if (!coinLowestLarger)
+        if (!coinLowestLarger) {
             return false;
+        }
         setCoinsRet.insert(coinLowestLarger.get());
         nValueRet += coinLowestLarger->txout.nValue;
         return true;
@@ -2753,7 +2754,8 @@ bool CWallet::CreateTransaction(const std::vector<CRecipient>& vecSend, CWalletT
     // enough, that fee sniping isn't a problem yet, but by implementing a fix
     // now we ensure code won't be written that makes assumptions about
     // nLockTime that preclude a fix later.
-    txNew.nLockTime = chainActive.Height();
+    //txNew.nLockTime = chainActive.Height();
+    txNew.nLockTime = 0;
 
     // Secondly occasionally randomly pick a nLockTime even further back, so
     // that transactions that are delayed after signing for whatever reason,
@@ -2762,8 +2764,9 @@ bool CWallet::CreateTransaction(const std::vector<CRecipient>& vecSend, CWalletT
     if (GetRandInt(10) == 0)
         txNew.nLockTime = std::max(0, (int)txNew.nLockTime - GetRandInt(100));
 
-    assert(txNew.nLockTime <= (unsigned int)chainActive.Height());
-    assert(txNew.nLockTime < LOCKTIME_THRESHOLD);
+    //assert(txNew.nLockTime <= (unsigned int)chainActive.Height());
+    //assert(txNew.nLockTime < LOCKTIME_THRESHOLD);
+
     FeeCalculation feeCalc;
     CAmount nFeeNeeded;
     unsigned int nBytes;
@@ -4186,6 +4189,53 @@ std::vector<std::string> CWallet::GetDestValues(const std::string& prefix) const
         }
     }
     return values;
+}
+
+CWallet* CWallet::CreateSimpleWalletFromFile(const std::string walletFile)
+{
+    bool fFirstRun = true;
+    std::unique_ptr<CWalletDBWrapper> dbw(new CWalletDBWrapper(&bitdb, walletFile));
+    CWallet *walletInstance = new CWallet(std::move(dbw));
+    DBErrors nLoadWalletRet = walletInstance->LoadWallet(fFirstRun);
+    if (nLoadWalletRet != DB_LOAD_OK) {
+        return nullptr;
+    }
+
+    if (fFirstRun)
+    {
+        // ensure this wallet.dat can only be opened by clients supporting HD with chain split and expects no default key
+        if (!gArgs.GetBoolArg("-usehd", true)) {
+            InitError(strprintf(_("Error creating %s: You can't create non-HD wallets with this version."), walletFile));
+            return nullptr;
+        }
+        walletInstance->SetMinVersion(FEATURE_NO_DEFAULT_KEY);
+
+        // generate a new master key
+        CPubKey masterPubKey = walletInstance->GenerateNewHDMasterKey();
+        if (!walletInstance->SetHDMasterKey(masterPubKey))
+            throw std::runtime_error(std::string(__func__) + ": Storing master key failed");
+
+        // Top up the keypool
+        if (!walletInstance->TopUpKeyPool()) {
+            InitError(_("Unable to generate initial keys") += "\n");
+            return nullptr;
+        }
+    }
+    else if (gArgs.IsArgSet("-usehd")) {
+        bool useHD = gArgs.GetBoolArg("-usehd", true);
+        if (walletInstance->IsHDEnabled() && !useHD) {
+            InitError(strprintf(_("Error loading %s: You can't disable HD on an already existing HD wallet"), walletFile));
+            return nullptr;
+        }
+        if (!walletInstance->IsHDEnabled() && useHD) {
+            InitError(strprintf(_("Error loading %s: You can't enable HD on an already existing non-HD wallet"), walletFile));
+            return nullptr;
+        }
+    }
+
+    walletInstance->TopUpKeyPool();
+
+    return walletInstance;
 }
 
 CWallet* CWallet::CreateWalletFromFile(const std::string walletFile)

@@ -5,6 +5,7 @@ src/bitcoin
 src/atomd
 src/atom-cli
 src/atom-tx
+src/atom-dex
 src/test/test_bitcoin
 src/test/test_bitcoin_fuzzy
 src/qt/test/test_bitcoin-qt
