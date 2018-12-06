@@ -26,7 +26,7 @@ public:
     CAmount refundFee;
 };
 
-bool initiateswap(CWallet* const pwallet, const CCoinControl& coinControl, const std::string& destination, CAmount nAmount, std::vector<unsigned char>& secret, std::vector<unsigned char>& secretHash, SwapContract& contract, CReserveKey& reservekey, RPCErrorCode& error, std::string& errorStr);
+bool initiateswap(CWallet* const pwallet, const CCoinControl& coinControl, const std::string& destination, CAmount nAmount, std::vector<unsigned char>& secret, std::vector<unsigned char>& secretHash, SwapContract& contract, CAmount& contractFee, CReserveKey& reservekey, RPCErrorCode& error, std::string& errorStr);
 bool participateswap(CWallet* const pwallet, const CCoinControl& coinControl, const std::string& destination, CAmount nAmount, const std::string& secretHashStr, SwapContract& contract, CReserveKey& reservekey, RPCErrorCode& error, std::string& errorStr);
 bool redeemswap(CWallet* const pwallet, const CCoinControl& coinControl, const std::string& contractStr, const std::string& contractTxStr, const std::string& secretStr, CMutableTransaction& redeemTx, CAmount& redeemFee, RPCErrorCode& error, std::string& errorStr);
 bool extractsecret(const std::string& redeemTxStr, const std::string& secretHashStr, std::vector<unsigned char>& data, RPCErrorCode& error, std::string& errorStr);

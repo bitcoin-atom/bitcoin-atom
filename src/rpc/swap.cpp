@@ -255,7 +255,7 @@ void SwapContractToUniv(const SwapContract& contract, UniValue& res)
     res.push_back(Pair("refundTx", refundData));
 }
 
-bool initiateswap(CWallet* const pwallet, const CCoinControl& coinControl, const std::string& destination, CAmount nAmount, std::vector<unsigned char>& secret, std::vector<unsigned char>& secretHash, SwapContract& contract, CReserveKey& reservekey, RPCErrorCode& error, std::string& errorStr)
+bool initiateswap(CWallet* const pwallet, const CCoinControl& coinControl, const std::string& destination, CAmount nAmount, std::vector<unsigned char>& secret, std::vector<unsigned char>& secretHash, SwapContract& contract, CAmount& contractFee, CReserveKey& reservekey, RPCErrorCode& error, std::string& errorStr)
 {
     CTxDestination dest = DecodeDestination(destination);
     if (dest.which() != 1) {
@@ -280,7 +280,12 @@ bool initiateswap(CWallet* const pwallet, const CCoinControl& coinControl, const
     int64_t locktime = GetAdjustedTime() + 48 * 60 * 60;
     GenerateSecret(secret, secretHash);
 
-    return BuildContract(coinControl, contract, pwallet, destAddress, nAmount, locktime, secretHash, reservekey, error, errorStr);
+    bool res = BuildContract(coinControl, contract, pwallet, destAddress, nAmount, locktime, secretHash, reservekey, error, errorStr);
+    if (res) {
+        contractFee = contract.contractFee;
+    }
+
+    return res;
 }
 
 UniValue initiateswap(const JSONRPCRequest& request)
@@ -332,7 +337,9 @@ UniValue initiateswap(const JSONRPCRequest& request)
 
     CReserveKey reservekey(pwallet);
 
-    if (!initiateswap(pwallet, coinControl, request.params[0].get_str(), AmountFromValue(request.params[1]), secret, secretHash, contract, reservekey, error, errorStr)) {
+    CAmount contractFee = 0;
+
+    if (!initiateswap(pwallet, coinControl, request.params[0].get_str(), AmountFromValue(request.params[1]), secret, secretHash, contract, contractFee, reservekey, error, errorStr)) {
         throw JSONRPCError(error, errorStr);
     }
 
