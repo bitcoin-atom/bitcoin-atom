@@ -97,7 +97,7 @@ std::string static EncodeDumpString(const std::string &str) {
     return ret.str();
 }
 
-bool GetWalletAddressesForKey(CWallet * const pwallet, const CKeyID &keyid, std::string &strAddr, std::string &strLabel)
+bool GetWalletAddresses(CWallet * const pwallet, const CKeyID &keyid, std::string &strAddr, std::string &strLabel)
 {
     bool fLabelFound = false;
     CKey key;
@@ -141,7 +141,7 @@ void getKeys(CWallet* pwallet) {
         CKey key;
         if (pwallet->GetKey(keyid, key)) {
             std::string strAddrLegacy = EncodeDestination(GetDestinationForKey(key.GetPubKey(), OUTPUT_TYPE_LEGACY));
-            if (GetWalletAddressesForKey(pwallet, keyid, strAddr, strLabel)) {
+            if (GetWalletAddresses(pwallet, keyid, strAddr, strLabel)) {
                 std::cout << "1 " << CBitcoinSecret(key).ToString() << " " << strAddr << " " << strAddrLegacy << std::endl;
             } else if (keyid == masterKeyID) {
 
