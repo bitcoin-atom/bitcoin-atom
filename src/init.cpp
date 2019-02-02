@@ -1462,7 +1462,7 @@ bool AppInitMain()
                     return InitError(_("Incorrect or no genesis block found. Wrong datadir for network?"));
 
                 // Check for changed -txindex state
-                if (fTxIndex != DEFAULT_TXINDEX) {
+                if (fTxIndex != gArgs.GetBoolArg("-txindex", DEFAULT_TXINDEX)) {
                     strLoadError = _("You need to rebuild the database using -reindex to change -txindex");
                     break;
                 }
