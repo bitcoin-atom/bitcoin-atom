@@ -30,6 +30,7 @@ bool initiateswap(CWallet* const pwallet, const CCoinControl& coinControl, const
 bool participateswap(CWallet* const pwallet, const CCoinControl& coinControl, const std::string& destination, CAmount nAmount, const std::string& secretHashStr, SwapContract& contract, CReserveKey& reservekey, RPCErrorCode& error, std::string& errorStr);
 bool redeemswap(CWallet* const pwallet, const CCoinControl& coinControl, const std::string& contractStr, const std::string& contractTxStr, const std::string& secretStr, CMutableTransaction& redeemTx, CAmount& redeemFee, RPCErrorCode& error, std::string& errorStr);
 bool extractsecret(const std::string& redeemTxStr, const std::string& secretHashStr, std::vector<unsigned char>& data, RPCErrorCode& error, std::string& errorStr);
-bool refundswap(CWallet* const pwallet, const std::string& contractStr, const std::string& contractTxStr, CMutableTransaction& refundTx, CAmount& refundFee, RPCErrorCode& error, std::string& errorStr);
+bool refundswap(CWallet* const pwallet, const CCoinControl& coinControl, const std::string& contractStr, const std::string& contractTxStr, CMutableTransaction& refundTx, CAmount& refundFee, RPCErrorCode& error, std::string& errorStr);
+bool auditswap(const std::string& contractStr, const std::string& contractTxStr, std::vector<unsigned char>& secretHash, CAmount& contractValue, CKeyID& recipient, CScriptID& contractAddr, CKeyID& refundAddr, int64_t& locktime, RPCErrorCode& error, std::string& errorStr);
 
 #endif

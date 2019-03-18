@@ -175,7 +175,7 @@ void clearTransactions(CWallet* pwallet) {
     endCommand(3);
 }
 
-void createTransaction(CWallet* pwallet, const std::string& recepientAddress, long long value, long long feePerKb) {
+void createTransaction(CWallet* pwallet, const std::string& destAddr, const std::string& recepientAddress, long long value, long long feePerKb) {
     CReserveKey reservekey(pwallet);
     CAmount nFeeRequired;
     std::string strError;
@@ -186,11 +186,12 @@ void createTransaction(CWallet* pwallet, const std::string& recepientAddress, lo
     CCoinControl ctrl;
     ctrl.change_type = OUTPUT_TYPE_LEGACY;
     ctrl.m_feerate = CFeeRate(feePerKb);
+    ctrl.destChange = DecodeDestination(destAddr);
     CWalletTx wtx;
     if (!pwallet->CreateTransaction(vecSend, wtx, reservekey, nFeeRequired, nChangePosRet, strError, ctrl)) {
         endCommandWithError(4, strError);
     } else {
-        reservekey.KeepKey();
+        //reservekey.KeepKey();
         std::string txHex = EncodeHexTx(*(wtx.tx));
         endCommandWithResult(4, txHex, value, nFeeRequired);
     }
@@ -216,7 +217,7 @@ void getNewAddress(CWallet* pwallet) {
     }
 }
 
-void initiateSwap(CWallet* pwallet, const std::string& address, long long value, long long feePerKb) {
+void initiateSwap(CWallet* pwallet, const std::string& destAddr, const std::string& address, long long value, long long feePerKb) {
     std::vector<unsigned char> secret, secretHash;
     SwapContract contract;
     RPCErrorCode error;
@@ -225,6 +226,7 @@ void initiateSwap(CWallet* pwallet, const std::string& address, long long value,
     CCoinControl coinControl;
     coinControl.change_type = OUTPUT_TYPE_LEGACY;
     coinControl.m_feerate = CFeeRate(feePerKb);
+    coinControl.destChange = DecodeDestination(destAddr);
 
     CReserveKey reservekey(pwallet);
 
@@ -242,7 +244,7 @@ void initiateSwap(CWallet* pwallet, const std::string& address, long long value,
     }
 }
 
-void participateSwap(CWallet* pwallet, const std::string& address, const std::string& secretHash, long long value, long long feePerKb) {
+void participateSwap(CWallet* pwallet, const std::string& destAddr, const std::string& address, const std::string& secretHash, long long value, long long feePerKb) {
     SwapContract contract;
     RPCErrorCode error;
     std::string errorStr;
@@ -250,6 +252,7 @@ void participateSwap(CWallet* pwallet, const std::string& address, const std::st
     CCoinControl coinControl;
     coinControl.change_type = OUTPUT_TYPE_LEGACY;
     coinControl.m_feerate = CFeeRate(feePerKb);
+    coinControl.destChange = DecodeDestination(destAddr);
 
     CReserveKey reservekey(pwallet);
 
@@ -276,7 +279,7 @@ void extractSecret(const std::string& redeemTx, const std::string& secretHash) {
     }
 }
 
-void redeemSwap(CWallet* pwallet, const std::string& contract, const std::string& contractTx, const std::string& secret, long long feePerKb) {
+void redeemSwap(CWallet* pwallet, const std::string& destAddr, const std::string& contract, const std::string& contractTx, const std::string& secret, long long feePerKb) {
     CMutableTransaction redeemTx;
     CAmount redeemFee;
     RPCErrorCode error; 
@@ -284,6 +287,7 @@ void redeemSwap(CWallet* pwallet, const std::string& contract, const std::string
 
     CCoinControl coinControl;
     coinControl.m_feerate = CFeeRate(feePerKb);
+    coinControl.destChange = DecodeDestination(destAddr);
 
     if (!redeemswap(pwallet, coinControl, contract, contractTx, secret, redeemTx, redeemFee, error, errorStr)) {
         endCommandWithError(9, errorStr);
@@ -293,17 +297,38 @@ void redeemSwap(CWallet* pwallet, const std::string& contract, const std::string
     }
 }
 
-void refundSwap(CWallet* pwallet, const std::string& contract, const std::string& contractTx, long long feePerKb) {
+void refundSwap(CWallet* pwallet, const std::string& destAddr, const std::string& contract, const std::string& contractTx, long long feePerKb) {
     CMutableTransaction refundTx;
     CAmount refundFee;
     RPCErrorCode error; 
     std::string errorStr;
 
-    if (!refundswap(pwallet, contract, contractTx, refundTx, refundFee, error, errorStr)) {
+    CCoinControl coinControl;
+    coinControl.destChange = DecodeDestination(destAddr);
+
+    if (!refundswap(pwallet, coinControl, contract, contractTx, refundTx, refundFee, error, errorStr)) {
         endCommandWithError(10, errorStr);
     } else {
         std::string txHex = EncodeHexTx(*(MakeTransactionRef(std::move(refundTx))));
         endCommandWithResult(10, txHex, refundFee);
+    }
+}
+
+void auditSwap(CWallet* pwallet, const std::string& contract, const std::string& contractTx) {
+        RPCErrorCode error;
+    std::string errorStr;
+
+    CAmount contractValue;
+    std::vector<unsigned char> secretHash;
+    CScriptID contractAddr;
+    CKeyID recipient;
+    CKeyID refundAddr;
+    int64_t locktime;
+
+    if (!auditswap(contract, contractTx, secretHash, contractValue, recipient, contractAddr, refundAddr, locktime, error, errorStr)) {
+        endCommandWithError(11, errorStr);
+    } else {
+        endCommandWithResult(11, EncodeDestination(recipient), contractValue);
     }
 }
 
@@ -356,6 +381,9 @@ int main(int argc, char *argv[])
             clearTransactions(wallet);
         }
         if (command == 4) {
+            std::cout << "4 0" << std::endl;
+            std::string destChange;
+            std::cin >> destChange;
             std::cout << "4 1" << std::endl;
             std::string recepientAddress;
             std::cin >> recepientAddress;
@@ -365,12 +393,15 @@ int main(int argc, char *argv[])
             std::cout << "4 3" << std::endl;
             long long feePerKb;
             std::cin >> feePerKb;
-            createTransaction(wallet, recepientAddress, value, feePerKb);
+            createTransaction(wallet, destChange, recepientAddress, value, feePerKb);
         }
         if (command == 5) {
             getNewAddress(wallet);
         }
         if (command == 6) {
+            std::cout << "6 0" << std::endl;
+            std::string destChange;
+            std::cin >> destChange;
             std::cout << "6 1" << std::endl;
             std::string address;
             std::cin >> address;
@@ -380,9 +411,12 @@ int main(int argc, char *argv[])
             std::cout << "6 3" << std::endl;
             long long feePerKb;
             std::cin >> feePerKb;
-            initiateSwap(wallet, address, value, feePerKb);
+            initiateSwap(wallet, destChange, address, value, feePerKb);
         }
         if (command == 7) {
+            std::cout << "7 0" << std::endl;
+            std::string destChange;
+            std::cin >> destChange;
             std::cout << "7 1" << std::endl;
             std::string address;
             std::cin >> address;
@@ -395,7 +429,7 @@ int main(int argc, char *argv[])
             std::cout << "7 4" << std::endl;
             long long feePerKb;
             std::cin >> feePerKb;
-            participateSwap(wallet, address, secretHash, value, feePerKb);
+            participateSwap(wallet, destChange, address, secretHash, value, feePerKb);
         }
         if (command == 8) {
             std::cout << "8 1" << std::endl;
@@ -407,6 +441,9 @@ int main(int argc, char *argv[])
             extractSecret(redeemTx, secretHash);
         }
         if (command == 9) {
+            std::cout << "9 0" << std::endl;
+            std::string destChange;
+            std::cin >> destChange;
             std::cout << "9 1" << std::endl;
             std::string contract;
             std::cin >> contract;
@@ -419,9 +456,12 @@ int main(int argc, char *argv[])
             std::cout << "9 4" << std::endl;
             long long feePerKb;
             std::cin >> feePerKb;
-            redeemSwap(wallet, contract, contractTx, secret, feePerKb);
+            redeemSwap(wallet, destChange, contract, contractTx, secret, feePerKb);
         }
         if (command == 10) {
+            std::cout << "10 0" << std::endl;
+            std::string destChange;
+            std::cin >> destChange;
             std::cout << "10 1" << std::endl;
             std::string contract;
             std::cin >> contract;
@@ -431,7 +471,16 @@ int main(int argc, char *argv[])
             std::cout << "10 3" << std::endl;
             long long feePerKb;
             std::cin >> feePerKb;
-            refundSwap(wallet, contract, contractTx, feePerKb);
+            refundSwap(wallet, destChange, contract, contractTx, feePerKb);
+        }
+        if (command == 11) {
+            std::cout << "11 1" << std::endl;
+            std::string contract;
+            std::cin >> contract;
+            std::cout << "11 2" << std::endl;
+            std::string contractTx;
+            std::cin >> contractTx;
+            auditSwap(wallet, contract, contractTx);
         }
     }
 

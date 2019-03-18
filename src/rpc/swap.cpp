@@ -114,7 +114,7 @@ bool CreateRedeemSigScript(CWallet* pwallet, const CScript& contractRedeemscript
     return VerifyScript(redeemSigScript, contractPubKeyScript, nullptr, STANDARD_SCRIPT_VERIFY_FLAGS, creator.Checker());
 }
 
-bool BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscript, const CMutableTransaction& contractTx, CMutableTransaction& refundTx, CAmount& refundFee, RPCErrorCode& error, std::string& errorStr)
+bool BuildRefundTransaction(CWallet* pwallet, const CCoinControl& coinControl, const CScript& contractRedeemscript, const CMutableTransaction& contractTx, CMutableTransaction& refundTx, CAmount& refundFee, RPCErrorCode& error, std::string& errorStr)
 {
     std::vector<unsigned char> secretHash;
     CKeyID recipient;
@@ -148,14 +148,19 @@ bool BuildRefundTransaction(CWallet* pwallet, const CScript& contractRedeemscrip
     }
 
     //create refund transaction
-    CTxDestination refundAddress = GetRawChangeAddress(pwallet, OUTPUT_TYPE_LEGACY);
+    CTxDestination refundAddress;
+    if (!boost::get<CNoDestination>(&coinControl.destChange)) {
+        refundAddress = coinControl.destChange;
+    } else {
+        refundAddress = GetRawChangeAddress(pwallet, OUTPUT_TYPE_LEGACY);
+    }
+
     CScript refundPubkeyScript = GetScriptForDestination(refundAddress);
 
     refundTx.nLockTime = locktime;
     refundTx.vout.push_back(CTxOut(0, refundPubkeyScript));
 
     int refundTxSize = EstimateRefundTxSerializeSize(contractRedeemscript, refundTx.vout);
-    CCoinControl coinControl;
     refundFee = GetMinimumFee(refundTxSize, coinControl, ::mempool, ::feeEstimator, nullptr);
     refundTx.vout[0].nValue = contractTx.vout[contractOutPoint.n].nValue - refundFee;
     if (IsDust(refundTx.vout[0], ::dustRelayFee)) {
@@ -184,7 +189,13 @@ bool BuildContract(const CCoinControl& coinControl, SwapContract& contract, CWal
 {
     LOCK2(cs_main, pwallet->cs_wallet);
 
-    CTxDestination refundDest = GetRawChangeAddress(pwallet, OUTPUT_TYPE_LEGACY);
+    CTxDestination refundDest;
+    if (!boost::get<CNoDestination>(&coinControl.destChange)) {
+        refundDest = coinControl.destChange;
+    } else {
+        refundDest = GetRawChangeAddress(pwallet, OUTPUT_TYPE_LEGACY);
+    }
+
     CKeyID refundAddress = boost::get<CKeyID>(refundDest);
 
     CScript contractRedeemscript = CreateAtomicSwapRedeemscript(refundAddress, dest, locktime, SECRET_SIZE, secretHash);
@@ -206,7 +217,7 @@ bool BuildContract(const CCoinControl& coinControl, SwapContract& contract, CWal
 
     CMutableTransaction refundTx;
     CAmount refundFee;
-    if (!BuildRefundTransaction(pwallet, contractRedeemscript, CMutableTransaction(*wtx.tx), refundTx, refundFee, error, errorStr)) {
+    if (!BuildRefundTransaction(pwallet, coinControl, contractRedeemscript, CMutableTransaction(*wtx.tx), refundTx, refundFee, error, errorStr)) {
         return false;
     }
 
@@ -352,38 +363,19 @@ UniValue initiateswap(const JSONRPCRequest& request)
     return res;
 }
 
-UniValue auditswap(const JSONRPCRequest& request)
+bool auditswap(const std::string& contractStr, const std::string& contractTxStr, std::vector<unsigned char>& secretHash, CAmount& contractValue, CKeyID& recipient, CScriptID& contractAddr, CKeyID& refundAddr, int64_t& locktime, RPCErrorCode& error, std::string& errorStr)
 {
-    if (request.fHelp || request.params.size() != 2)
-        throw std::runtime_error(
-            "auditswap \"hexscript\" \"hextransaction\"\n"
-            "\nThe auditswap command inspects a contract script and parses out the addresses that may claim the output, the locktime, and the secret hash. It also validates that the contract transaction pays to the contract and reports the contract output amount. Each party should audit the contract provided by the other to verify that their address is the recipient address, the output value is correct, and that the locktime is sensible.\n"
-            "\nArgumets:\n"
-            "1. \"hexscript\"       (string, required) The hex-encoded contract\n"
-            "2. \"hextransaction\"  (string, required) The hex-encoded contract transaction\n"
-            "\nResult:\n"
-            "{\n"
-            "  \"contractAddress\"  (string) The Atom address of the swap contract\n" 
-            "  \"contractValue\"    (numeric) The value for the swap\n"
-            "  \"recipientAddress\" (string) The recipient address\n"
-            "  \"refundAddress\"    (string) The address for refund\n"
-            "  \"secretHash\"       (string) The hash of redemption secret\n" 
-            "  \"locktime\"         (numeric) The time for refund unlock\n"
-            "}\n"
-            "\nExamples:\n"
-            + HelpExampleCli("auditswap", "\"6382012088a82085a6637bfc298b2623b94bfeacc8d491edfa0abf3d8bb1c0f2d3b5fa58ad17158876a914109cc30524c19942078ba4356d88e6ef2aa71b546704d408da5ab17576a91423905458d1f6ed5c1efdcf87c9e4e1bc4e57a7796888ac\" \"02000000000101ddbd704186145cc9dcd0b5356d3480efe9b70cf4f2b7d9c919bc6eb506724b0100000000171600143986c86ad67c57f62174d48f159f9de554ba1138feffffff02e0d3f505000000001976a914c929fc3aad535e0d60bb416cc4294a757e31743788ac00e1f5050000000017a91471301e862d2a4e3f01bac5d9255c4d4d81331d7a8702473044022039527fbf8e0a5926d5282138617e1efaec5b2324ddf907623fb185e278b7b71e02203ca51954c1bbccd53927015a384c0236fc5ed2ed5a977adbddaa1c5f7528208a4121022e2622378dc8b9395be551ebaec071fe16ea705d9b018bdecb92ac57e6152e85742d1400\"")
-            + HelpExampleRpc("auditswap", "\"6382012088a82085a6637bfc298b2623b94bfeacc8d491edfa0abf3d8bb1c0f2d3b5fa58ad17158876a914109cc30524c19942078ba4356d88e6ef2aa71b546704d408da5ab17576a91423905458d1f6ed5c1efdcf87c9e4e1bc4e57a7796888ac\" \"02000000000101ddbd704186145cc9dcd0b5356d3480efe9b70cf4f2b7d9c919bc6eb506724b0100000000171600143986c86ad67c57f62174d48f159f9de554ba1138feffffff02e0d3f505000000001976a914c929fc3aad535e0d60bb416cc4294a757e31743788ac00e1f5050000000017a91471301e862d2a4e3f01bac5d9255c4d4d81331d7a8702473044022039527fbf8e0a5926d5282138617e1efaec5b2324ddf907623fb185e278b7b71e02203ca51954c1bbccd53927015a384c0236fc5ed2ed5a977adbddaa1c5f7528208a4121022e2622378dc8b9395be551ebaec071fe16ea705d9b018bdecb92ac57e6152e85742d1400\"")
-        );
-
-    std::vector<unsigned char> scriptData(ParseHexV(request.params[0], "hexscript"));
+    std::vector<unsigned char> scriptData(ParseHex(contractStr));
     CScript contractRedeemscript = CScript(scriptData.begin(), scriptData.end());
 
     CMutableTransaction tx;
-    if (!DecodeHexTx(tx, request.params[1].get_str(), true)) {
-        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Failed to decode contract transaction");
+    if (!DecodeHexTx(tx, contractTxStr, true)) {
+        error = RPC_DESERIALIZATION_ERROR;
+        errorStr = "Failed to decode contract transaction";
+        return false;
     }
 
-    CScriptID contractAddr = CScriptID(contractRedeemscript);
+    contractAddr = CScriptID(contractRedeemscript);
     int contractOutIndex = -1;
     for (size_t i = 0; i < tx.vout.size(); i++) {
         const CTxOut& txout = tx.vout[i];
@@ -401,25 +393,68 @@ UniValue auditswap(const JSONRPCRequest& request)
     }
 
     if (contractOutIndex == -1) {
-        throw JSONRPCError(RPC_TRANSACTION_ERROR, "Transaction does not contain the contract output");
+        error = RPC_TRANSACTION_ERROR;
+        errorStr = "Transaction does not contain the contract output";
+        return false;
     }
 
-    std::vector<unsigned char> secretHash;
-    CKeyID recipient;
-    CKeyID refundAddr;
-    int64_t locktime;
     int64_t secretSize;
     if (!TryDecodeAtomicSwapScript(contractRedeemscript, secretHash, recipient, refundAddr, locktime, secretSize)) {
-        throw JSONRPCError(RPC_TRANSACTION_ERROR, "Invalid atomic swap script");
+        error = RPC_TRANSACTION_ERROR;
+        errorStr = "Invalid atomic swap script";
+        return false;
     }
 
     if (secretSize != SECRET_SIZE) {
-        throw JSONRPCError(RPC_TRANSACTION_ERROR, strprintf("Incorrect secret size: %d", secretSize));
+        error = RPC_TRANSACTION_ERROR;
+        errorStr = strprintf("Incorrect secret size: %d", secretSize);
+        return false;
+    }
+
+    contractValue = tx.vout[contractOutIndex].nValue;
+    return true;
+}
+
+UniValue auditswap(const JSONRPCRequest& request)
+{
+    if (request.fHelp || request.params.size() != 2)
+        throw std::runtime_error(
+            "auditswap \"hexscript\" \"hextransaction\"\n"
+            "\nThe auditswap command inspects a contract script and parses out the addresses that may claim the output, the locktime, and the secret hash. It also validates that the contract transaction pays to the contract and reports the contract output amount. Each party should audit the contract provided by the other to verify that their address is the recipient address, the output value is correct, and that the locktime is sensible.\n"
+            "\nArgumets:\n"
+            "1. \"hexscript\"       (string, required) The hex-encoded contract\n"
+            "2. \"hextransaction\"  (string, required) The hex-encoded contract transaction\n"
+            "\nResult:\n"
+            "{\n"
+            "  \"contractAddress\"  (string) The Bitcoin address of the swap contract\n"
+            "  \"contractValue\"    (numeric) The value for the swap\n"
+            "  \"recipientAddress\" (string) The recipient address\n"
+            "  \"refundAddress\"    (string) The address for refund\n"
+            "  \"secretHash\"       (string) The hash of redemption secret\n" 
+            "  \"locktime\"         (numeric) The time for refund unlock\n"
+            "}\n"
+            "\nExamples:\n"
+            + HelpExampleCli("auditswap", "\"6382012088a82085a6637bfc298b2623b94bfeacc8d491edfa0abf3d8bb1c0f2d3b5fa58ad17158876a914109cc30524c19942078ba4356d88e6ef2aa71b546704d408da5ab17576a91423905458d1f6ed5c1efdcf87c9e4e1bc4e57a7796888ac\" \"02000000000101ddbd704186145cc9dcd0b5356d3480efe9b70cf4f2b7d9c919bc6eb506724b0100000000171600143986c86ad67c57f62174d48f159f9de554ba1138feffffff02e0d3f505000000001976a914c929fc3aad535e0d60bb416cc4294a757e31743788ac00e1f5050000000017a91471301e862d2a4e3f01bac5d9255c4d4d81331d7a8702473044022039527fbf8e0a5926d5282138617e1efaec5b2324ddf907623fb185e278b7b71e02203ca51954c1bbccd53927015a384c0236fc5ed2ed5a977adbddaa1c5f7528208a4121022e2622378dc8b9395be551ebaec071fe16ea705d9b018bdecb92ac57e6152e85742d1400\"")
+            + HelpExampleRpc("auditswap", "\"6382012088a82085a6637bfc298b2623b94bfeacc8d491edfa0abf3d8bb1c0f2d3b5fa58ad17158876a914109cc30524c19942078ba4356d88e6ef2aa71b546704d408da5ab17576a91423905458d1f6ed5c1efdcf87c9e4e1bc4e57a7796888ac\" \"02000000000101ddbd704186145cc9dcd0b5356d3480efe9b70cf4f2b7d9c919bc6eb506724b0100000000171600143986c86ad67c57f62174d48f159f9de554ba1138feffffff02e0d3f505000000001976a914c929fc3aad535e0d60bb416cc4294a757e31743788ac00e1f5050000000017a91471301e862d2a4e3f01bac5d9255c4d4d81331d7a8702473044022039527fbf8e0a5926d5282138617e1efaec5b2324ddf907623fb185e278b7b71e02203ca51954c1bbccd53927015a384c0236fc5ed2ed5a977adbddaa1c5f7528208a4121022e2622378dc8b9395be551ebaec071fe16ea705d9b018bdecb92ac57e6152e85742d1400\"")
+        );
+
+    RPCErrorCode error;
+    std::string errorStr;
+
+    CAmount contractValue;
+    std::vector<unsigned char> secretHash;
+    CScriptID contractAddr;
+    CKeyID recipient;
+    CKeyID refundAddr;
+    int64_t locktime;
+
+    if (!auditswap(request.params[0].get_str(), request.params[1].get_str(), secretHash, contractValue, recipient, contractAddr, refundAddr, locktime, error, errorStr)) {
+        throw JSONRPCError(error, errorStr);
     }
 
     UniValue res(UniValue::VOBJ);
     res.push_back(Pair("contractAddress", EncodeDestination(contractAddr)));
-    res.push_back(Pair("contractValue", ValueFromAmount(tx.vout[contractOutIndex].nValue)));
+    res.push_back(Pair("contractValue", ValueFromAmount(contractValue)));
     res.push_back(Pair("recipientAddress", EncodeDestination(recipient)));
     res.push_back(Pair("refundAddress", EncodeDestination(refundAddr)));
     res.push_back(Pair("secretHash", HexStr(secretHash.begin(), secretHash.end())));
@@ -432,11 +467,15 @@ bool participateswap(CWallet* const pwallet, const CCoinControl& coinControl, co
 {
     CTxDestination dest = DecodeDestination(destination);
     if (dest.which() != 1) {
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Participant address is not P2PKH");
+        error = RPC_INVALID_ADDRESS_OR_KEY;
+        errorStr = "Participant address is not P2PKH";
+        return false;
     }
 
     if (nAmount <= 0) {
-        throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount");
+        error = RPC_TYPE_ERROR;
+        errorStr = "Invalid amount";
+        return false;
     }
 
     if (!IsHex(secretHashStr)) {
@@ -601,7 +640,13 @@ bool redeemswap(CWallet* const pwallet, const CCoinControl& coinControl, const s
 
     LOCK2(cs_main, pwallet->cs_wallet);
 
-    CTxDestination addr = GetRawChangeAddress(pwallet, OUTPUT_TYPE_LEGACY);
+    CTxDestination addr;
+    if (!boost::get<CNoDestination>(&coinControl.destChange)) {
+        addr = coinControl.destChange;
+    } else {
+        addr = GetRawChangeAddress(pwallet, OUTPUT_TYPE_LEGACY);
+    }
+
     CScript outScript = GetScriptForDestination(addr);
 
     redeemTx.nLockTime = locktime;
@@ -753,7 +798,7 @@ UniValue extractsecret(const JSONRPCRequest& request)
     return res;
 }
 
-bool refundswap(CWallet* const pwallet, const std::string& contractStr, const std::string& contractTxStr, CMutableTransaction& refundTx, CAmount& refundFee, RPCErrorCode& error, std::string& errorStr)
+bool refundswap(CWallet* const pwallet, const CCoinControl& coinControl, const std::string& contractStr, const std::string& contractTxStr, CMutableTransaction& refundTx, CAmount& refundFee, RPCErrorCode& error, std::string& errorStr)
 {
     if (!IsHex(contractStr)) {
         error = RPC_INVALID_PARAMETER;
@@ -779,7 +824,7 @@ bool refundswap(CWallet* const pwallet, const std::string& contractStr, const st
         return false;
     }
 
-    return BuildRefundTransaction(pwallet, contractRedeemscript, tx, refundTx, refundFee, error, errorStr);
+    return BuildRefundTransaction(pwallet, coinControl, contractRedeemscript, tx, refundTx, refundFee, error, errorStr);
 }
 
 UniValue refundswap(const JSONRPCRequest& request)
@@ -812,8 +857,9 @@ UniValue refundswap(const JSONRPCRequest& request)
     CAmount refundFee;
     RPCErrorCode error;
     std::string errorStr;
+    CCoinControl coinControl;
 
-    if (!refundswap(pwallet, request.params[0].get_str(), request.params[1].get_str(), refundTx, refundFee, error, errorStr)) {
+    if (!refundswap(pwallet, coinControl, request.params[0].get_str(), request.params[1].get_str(), refundTx, refundFee, error, errorStr)) {
         throw JSONRPCError(error, errorStr);
     }
 
