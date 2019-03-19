@@ -304,6 +304,7 @@ void refundSwap(CWallet* pwallet, const std::string& destAddr, const std::string
     std::string errorStr;
 
     CCoinControl coinControl;
+    coinControl.m_feerate = CFeeRate(feePerKb);
     coinControl.destChange = DecodeDestination(destAddr);
 
     if (!refundswap(pwallet, coinControl, contract, contractTx, refundTx, refundFee, error, errorStr)) {
