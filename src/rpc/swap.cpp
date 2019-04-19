@@ -288,7 +288,8 @@ bool initiateswap(CWallet* const pwallet, const CCoinControl& coinControl, const
     }
 
     CKeyID destAddress = boost::get<CKeyID>(dest);
-    int64_t locktime = GetAdjustedTime() + 48 * 60 * 60;
+    //int64_t locktime = GetAdjustedTime() + 48 * 60 * 60;
+    int64_t locktime = GetAdjustedTime() + 22 * 60 * 60;
     GenerateSecret(secret, secretHash);
 
     bool res = BuildContract(coinControl, contract, pwallet, destAddress, nAmount, locktime, secretHash, reservekey, error, errorStr);
@@ -498,7 +499,8 @@ bool participateswap(CWallet* const pwallet, const CCoinControl& coinControl, co
     }
 
     CKeyID destAddress = boost::get<CKeyID>(dest);
-    int64_t locktime = GetAdjustedTime() + 24 * 60 * 60;
+    //int64_t locktime = GetAdjustedTime() + 24 * 60 * 60;
+    int64_t locktime = GetAdjustedTime() + 22 * 60 * 60;
 
     return BuildContract(coinControl, contract, pwallet, destAddress, nAmount, locktime, secretHash, reservekey, error, errorStr);
 }
