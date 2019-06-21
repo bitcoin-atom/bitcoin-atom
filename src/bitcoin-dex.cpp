@@ -22,6 +22,10 @@ void endCommand(int command) {
     std::cout << "end " << command << std::endl;
 }
 
+void endCommandWithResult(int command, int result) {
+    std::cout << "end " << command << " " << result << std::endl;
+}
+
 void endCommandWithError(int command, const std::string& error) {
     std::cout << "end " << command << " error " << error << std::endl;
 }
@@ -333,6 +337,55 @@ void auditSwap(CWallet* pwallet, const std::string& contract, const std::string&
     }
 }
 
+void validateAddr(const std::string& addr) {
+    if (IsValidDestinationString(addr)) {
+        endCommandWithResult(12, 1);
+    } else {
+        endCommandWithResult(12, 0);
+    }
+}
+
+void isLocked(CWallet* pwallet) {
+    if (pwallet->IsCrypted() && pwallet->IsLocked()) {
+        endCommandWithResult(13, 1);
+    } else {
+        endCommandWithResult(13, 0);
+    }
+}
+
+void walletLock(CWallet* pwallet, const SecureString& passPhrase) {
+    if (pwallet->EncryptWallet(passPhrase)) {
+        endCommand(14);
+    } else {
+        endCommandWithError(14, "wallet encrypt failed");
+    }
+}
+
+void walletUnlock(CWallet* pwallet, const SecureString& passPhrase) {
+    if (pwallet->Unlock(passPhrase)) {
+        endCommand(15);
+    } else {
+        endCommandWithError(15, "wallet unlock failed");
+    }
+}
+
+void isCrypted(CWallet* pwallet) {
+    if (pwallet->IsCrypted()) {
+        endCommandWithResult(16, 1);
+    } else {
+        endCommandWithResult(16, 0);
+    }
+}
+
+void changePassPhrase(CWallet* pwallet, const SecureString& oldPass, const SecureString& newPass) {
+    pwallet->Lock();
+    if (pwallet->ChangeWalletPassphrase(oldPass, newPass)) {
+        endCommand(17);
+    } else {
+        endCommandWithError(17, "change pass phrase failed");
+    }
+}
+
 int main(int argc, char *argv[])
 {
 	gArgs.ParseParameters(argc, argv);
@@ -482,6 +535,47 @@ int main(int argc, char *argv[])
             std::string contractTx;
             std::cin >> contractTx;
             auditSwap(wallet, contract, contractTx);
+        }
+        if (command == 12) {
+            std::cout << "12 1" << std::endl;
+            std::string addr;
+            std::cin >> addr;
+            validateAddr(addr);
+        }
+        if (command == 13) {
+            isLocked(wallet);
+        }
+        if (command == 14) {
+            std::cout << "14 1" << std::endl;
+            std::string nonSecPassPhrase;
+            std::cin >> nonSecPassPhrase;
+            SecureString passPhrase;
+            passPhrase.assign(nonSecPassPhrase.c_str());
+            walletLock(wallet, passPhrase);
+        }
+        if (command == 15) {
+            std::cout << "15 1" << std::endl;
+            std::string nonSecPassPhrase;
+            std::cin >> nonSecPassPhrase;
+            SecureString passPhrase;
+            passPhrase.assign(nonSecPassPhrase.c_str());
+            walletUnlock(wallet, passPhrase);
+        }
+        if (command == 16) {
+            isCrypted(wallet);
+        }
+        if (command == 17) {
+            std::cout << "17 1" << std::endl;
+            std::string nonSecOldPassPhrase;
+            std::cin >> nonSecOldPassPhrase;
+            SecureString oldPassPhrase;
+            oldPassPhrase.assign(nonSecOldPassPhrase.c_str());
+            std::cout << "17 2" << std::endl;
+            std::string nonSecNewPassPhrase;
+            std::cin >> nonSecNewPassPhrase;
+            SecureString newPassPhrase;
+            newPassPhrase.assign(nonSecNewPassPhrase.c_str());
+            changePassPhrase(wallet, oldPassPhrase, newPassPhrase);
         }
     }
 
