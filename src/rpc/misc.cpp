@@ -120,6 +120,10 @@ UniValue getinfo(const JSONRPCRequest& request)
     obj.push_back(Pair("paytxfee",      ValueFromAmount(payTxFee.GetFeePerK())));
 #endif
     obj.push_back(Pair("relayfee",      ValueFromAmount(::minRelayTxFee.GetFeePerK())));
+#ifdef ENABLE_WALLET
+    obj.pushKV("encrypted",     pwallet->IsCrypted());
+    obj.pushKV("mintonly",      fWalletUnlockMintOnly);
+#endif
     obj.push_back(Pair("errors",        GetWarnings("statusbar")));
     return obj;
 }

@@ -56,6 +56,12 @@ std::string GetWarnings(const std::string& strFor)
     if (gArgs.GetBoolArg("-testsafemode", DEFAULT_TESTSAFEMODE))
         strStatusBar = strRPC = strGUI = "testsafemode enabled";
 
+    if (strMintWarning != "")
+    {
+        strStatusBar = strRPC = strGUI = strMintWarning;
+        strGUI += (strGUI.empty() ? "" : uiAlertSeperator) + strMintWarning;
+    }
+
     // Misc warnings like out of disk space and clock is wrong
     if (strMiscWarning != "")
     {

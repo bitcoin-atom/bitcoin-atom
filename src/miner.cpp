@@ -126,6 +126,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewPoSBlock(bool& fPoSCanc
 
 std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& scriptPubKeyIn, bool fMineWitnessTx, bool fAddProofOfStake, bool& fPoSCancel, CWallet* pwallet)
 {
+    LogPrintf("CreateNewBlock(): fAddProofOfStake: %s\n", fAddProofOfStake ? "true" : "false");
     int64_t nTimeStart = GetTimeMicros();
 
     resetBlock();
@@ -157,9 +158,12 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
         CMutableTransaction txCoinStake;
         nCoinStakeTime = GetAdjustedTime();
         int64_t nSearchTime = nCoinStakeTime;
+        LogPrintf("CreateNewBlock(): nSearchTime: %u, nLastCoinStakeSearchTime: %u\n", nSearchTime, nLastCoinStakeSearchTime);
         if (nSearchTime > nLastCoinStakeSearchTime) {
             if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime-nLastCoinStakeSearchTime, txCoinStake, nCoinStakeTime, nPosReward)) {
+                LogPrintf("CreateNewBlock(): nCoinStakeTime: %u\n", nCoinStakeTime);
                 if (nCoinStakeTime >= std::max(pindexPrev->GetMedianTimePast()+1, pindexPrev->GetBlockTime() - MAX_FUTURE_BLOCK_TIME)) {
+                    LogPrintf("CreateNewBlock(): txCoinStake added\n");
                     pblock->vtx.push_back(MakeTransactionRef(std::move(txCoinStake)));
                     fPoSCancel = false;
                 }
