@@ -50,6 +50,26 @@ static CUpdatedBlock latestblock;
 
 extern void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry);
 
+double CalcDifficultyFromBits(uint32_t nBits)
+{
+    int nShift = (nBits >> 24) & 0xff;
+    double dDiff =
+        (double)0x0000ffff / (double)(nBits & 0x00ffffff);
+
+    while (nShift < 29)
+    {
+        dDiff *= 256.0;
+        nShift++;
+    }
+    while (nShift > 29)
+    {
+        dDiff /= 256.0;
+        nShift--;
+    }
+
+    return dDiff;
+}
+
 double GetDifficulty(const CChain& chain, const CBlockIndex* blockindex, bool fPowOnly)
 {
     if (blockindex == nullptr)
@@ -66,22 +86,7 @@ double GetDifficulty(const CChain& chain, const CBlockIndex* blockindex, bool fP
         }
     }
 
-    int nShift = (blockindex->nBits >> 24) & 0xff;
-    double dDiff =
-        (double)0x0000ffff / (double)(blockindex->nBits & 0x00ffffff);
-
-    while (nShift < 29)
-    {
-        dDiff *= 256.0;
-        nShift++;
-    }
-    while (nShift > 29)
-    {
-        dDiff /= 256.0;
-        nShift--;
-    }
-
-    return dDiff;
+    return CalcDifficultyFromBits(blockindex->nBits);
 }
 
 double GetDifficulty(const CBlockIndex* blockindex, bool fPowOnly)
@@ -1589,7 +1594,7 @@ UniValue getchaintxstats(const JSONRPCRequest& request)
             pindex = chainActive.Tip();
         }
     }
-    
+
     assert(pindex != nullptr);
 
     if (request.params[0].isNull()) {

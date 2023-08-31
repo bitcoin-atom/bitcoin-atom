@@ -21,6 +21,8 @@
 
 #include <boost/test/unit_test.hpp>
 
+// TODO: fix
+
 BOOST_FIXTURE_TEST_SUITE(bloom_tests, BasicTestingSetup)
 
 BOOST_AUTO_TEST_CASE(bloom_create_insert_serialize)
