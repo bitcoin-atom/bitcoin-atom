@@ -8,7 +8,7 @@
 
 #include <boost/test/unit_test.hpp>
 
-
+// TODO: fix
 BOOST_FIXTURE_TEST_SUITE(merkleblock_tests, BasicTestingSetup)
 
 /**

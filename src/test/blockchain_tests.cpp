@@ -13,6 +13,11 @@ bool DoubleEquals(double a, double b, double epsilon)
     return std::abs(a - b) < epsilon;
 }
 
+double GetDifficulty(const CChain& chain, const CBlockIndex* blockindex)
+{
+    return GetDifficulty(chain, blockindex, true);
+}
+
 CBlockIndex* CreateBlockIndexWithNbits(uint32_t nbits)
 {
     CBlockIndex* block_index = new CBlockIndex();

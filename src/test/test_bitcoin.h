@@ -77,6 +77,7 @@ class CScript;
 //
 struct TestChain100Setup : public TestingSetup {
     TestChain100Setup();
+    TestChain100Setup(bool txIndex);
 
     // Create a new block with just given transactions, coinbase paying to
     // scriptPubKey, and try to add it to the current chain.

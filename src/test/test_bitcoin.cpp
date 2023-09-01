@@ -110,8 +110,13 @@ TestingSetup::~TestingSetup()
         fs::remove_all(pathTemp);
 }
 
-TestChain100Setup::TestChain100Setup() : TestingSetup(CBaseChainParams::REGTEST)
+TestChain100Setup::TestChain100Setup() : TestChain100Setup::TestChain100Setup(false)
 {
+}
+
+TestChain100Setup::TestChain100Setup(bool txIndex) : TestingSetup(CBaseChainParams::REGTEST)
+{
+    fTxIndex = txIndex;
     // CreateAndProcessBlock() does not support building SegWit blocks, so don't activate in these tests.
     // TODO: fix the code to support SegWit blocks.
     UpdateVersionBitsParameters(Consensus::DEPLOYMENT_SEGWIT, 0, Consensus::BIP9Deployment::NO_TIMEOUT);

@@ -52,6 +52,10 @@ OutputType g_change_type = OUTPUT_TYPE_NONE;
 const char * DEFAULT_WALLET_DAT = "wallet.dat";
 const uint32_t BIP32_HARDENED_KEY_LIMIT = 0x80000000;
 
+// optional setting to unlock wallet for block minting only;
+// serves to disable the trivial sendmoney when OS account compromised
+bool fWalletUnlockMintOnly = false;
+
 /**
  * Fees smaller than this (in satoshi) are considered zero fee (for transaction creation)
  * Override with -mintxfee
@@ -3108,7 +3112,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     static uint32_t nStakeSplitAge = (60 * 60 * 24 * 90);
     const Consensus::Params& consensusParams = Params().GetConsensus();
     CAmount nPoWReward = GetBlockSubsidy(chainActive.Tip()->nPowHeight, consensusParams);
-    CAmount nCombineThreshold = nPoWReward / 3;
+    // CAmount nCombineThreshold = nPoWReward / 3;
 
     arith_uint256 bnTargetPerCoinDay;
     bnTargetPerCoinDay.SetCompact(nBits);
@@ -3132,12 +3136,15 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     CAmount nValueIn = 0;
     std::vector<COutput> vCoins;
     AvailableCoins(vCoins, true, nullptr, nCoinStakeTime);
+    LogPrintf("CreateCoinStake : AvailableCoins loaded. Output Count: %zu\n", vCoins.size());
     if (!SelectCoins(vCoins, nBalance - nReserveBalance, setCoins, nValueIn))
         return false;
     if (setCoins.empty())
         return false;
     CAmount nCredit = 0;
     CScript scriptPubKeyKernel;
+
+    LogPrintf("CreateCoinStake : %zu coins selected\n", setCoins.size());
 
     // This is static cache for minimize block loads for each POS-attempt
     // Possible values of ->value.first
@@ -3147,18 +3154,69 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     static uint256HashMap<std::pair<CBlockHeader*, unsigned int> > CacheBlockOffset;
     CacheBlockOffset.Set(setCoins.size() << 1); // 2x pointers
     uint256HashMap<std::pair<CBlockHeader*, unsigned int> >::Data *pbo = NULL;
-    for (const CInputCoin& pcoin : setCoins)
-    {
-        pbo = TryGetBlockOffset(CacheBlockOffset, pcoin.outpoint.hash);
-        if (pbo == nullptr)
+
+    std::vector<std::tuple<CInputCoin, uint64_t>> coinsWithAge;
+    const int64_t DAY = 24 * 60 * 60;
+
+    LogPrintf("CreateCoinStake : calculate coinAge\n");
+
+    for (const CInputCoin& coin : setCoins) {
+        pbo = TryGetBlockOffset(CacheBlockOffset, coin.outpoint.hash);
+        if (pbo == nullptr) {
+            LogPrintf("CreateCoinStake : TryGetBlockOffset failed\n");
             continue;
+        }
+
+        CBlockHeader& header = *(pbo->value.first);
+
+        static int nMaxStakeSearchInterval = 60;
+        if (header.GetBlockTime() + consensusParams.nStakeMinAge > nCoinStakeTime - nMaxStakeSearchInterval) {
+            continue; // only count coins meeting min age requirement
+        }
+
+        int64_t nDayWeight = (std::min((nCoinStakeTime - header.GetBlockTime()), Params().GetConsensus().nStakeMaxAge) - Params().GetConsensus().nStakeMinAge) / DAY;
+        uint64_t coinAge = std::max(coin.txout.nValue * nDayWeight / COIN, (int64_t)0);
+
+        coinsWithAge.push_back(std::make_tuple(coin, coinAge));
+    }
+
+    LogPrintf("CreateCoinStake : sort coins by coinAge desc\n");
+
+    std::sort(coinsWithAge.begin(), coinsWithAge.end(),
+        [](const std::tuple<CInputCoin, uint64_t> &a, const std::tuple<CInputCoin, uint64_t> &b) {
+            return std::get<1>(a) > std::get<1>(b);
+        }
+    );
+
+    uint64_t coinStakeInputLimit = std::numeric_limits<uint64_t>::max();
+
+    if (gArgs.IsArgSet("-coinstakeinputlimit") && !ParseUInt64(gArgs.GetArg("-coinstakeinputlimit", ""), &coinStakeInputLimit))
+        return error("CreateCoinStake : invalid coinstake input limit");
+
+    std::size_t i = 0UL;
+    for (const auto& tuple : coinsWithAge)
+    {
+        const CInputCoin& pcoin = std::get<0>(tuple);
+        uint64_t coinAge = std::get<1>(tuple);
+
+        LogPrintf("CreateCoinStake : Start processing %zu-th potential input. TxID: %s, n: %u, coinAge: %lu\n",
+            i, pcoin.outpoint.hash.ToString(), pcoin.outpoint.n, coinAge);
+        ++i;
+        pbo = TryGetBlockOffset(CacheBlockOffset, pcoin.outpoint.hash);
+        if (pbo == nullptr) {
+            LogPrintf("CreateCoinStake : TryGetBlockOffset failed\n");
+            continue;
+        }
 
         CBlockHeader& header = *(pbo->value.first);
         unsigned int offset  = pbo->value.second;
 
         static int nMaxStakeSearchInterval = 60;
-        if (header.GetBlockTime() + consensusParams.nStakeMinAge > nCoinStakeTime - nMaxStakeSearchInterval)
+        if (header.GetBlockTime() + consensusParams.nStakeMinAge > nCoinStakeTime - nMaxStakeSearchInterval) {
             continue; // only count coins meeting min age requirement
+        }
+
+        LogPrintf("CreateCoinStake : Searching kernel\n");
 
         bool fKernelFound = false;
         for (uint32_t n = 0; n < std::min(nSearchInterval, (int64_t)nMaxStakeSearchInterval) && !fKernelFound; n++)
@@ -3178,15 +3236,38 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                     LogPrint(BCLog::COINSTAKE, "CreateCoinStake : failed to parse kernel type=%d\n", whichType);
                     break;
                 }
-                LogPrint(BCLog::COINSTAKE, "CreateCoinStake : parsed kernel type=%d\n", whichType);
-                if (whichType != TX_PUBKEY && whichType != TX_PUBKEYHASH)
+
+                // On ScriptHash - unpack external P2SH layer, to extract script for future processing
+                if (whichType == TX_WITNESS_V0_SCRIPTHASH || whichType == TX_SCRIPTHASH)
                 {
-                    LogPrint(BCLog::COINSTAKE, "CreateCoinStake : no support for kernel type=%d\n", whichType);
-                    break;  // only support pay to public key and pay to address
-                }
-                if (whichType == TX_PUBKEYHASH) // pay to address type
-                {
+                    uint160 hash;
+                    if (whichType == TX_SCRIPTHASH) {
+                        hash = uint160(vSolutions[0]);
+                    }
+                    else {
+                        CRIPEMD160().Write(&vSolutions[0][0], vSolutions[0].size()).Finalize(hash.begin());
+                    }
+
+                    CScriptID scriptID(hash);
+                    // Unpack p2sh and rewrite scriptPubKeyKernel
+                    if (!this->GetCScript(scriptID, scriptPubKeyKernel)) {
+                        LogPrint(BCLog::COINSTAKE, "CreateCoinStake : failed unpack P2SH/P2WSH script for type=%d\n", whichType);
+                        break;  // unable to find corresponding nested p2sh script
+                    }
+
+                    // Re-solve nested P2SH/P2WSH script again
+                    if (!Solver(scriptPubKeyKernel, whichType, vSolutions)) {
+                        LogPrint(BCLog::COINSTAKE, "CreateCoinStake : failed to solve nested P2SH/P2WSH script for=%d\n", whichType);
+                        break;
+                    }
+
+                     LogPrint(BCLog::COINSTAKE, "CreateCoinStake : unpacked P2SH/P2WSH to type=%d\n", whichType);
+                } // P2SH/P2WSH
+
+                // pay to address type or witness keyhash
+                if (whichType == TX_PUBKEYHASH || whichType == TX_WITNESS_V0_KEYHASH) {
                     // convert to pay to public key type
+                    // we need natural key for sign/verify PoS block
                     CKey key;
                     if (!keystore.GetKey(CKeyID(uint160(vSolutions[0])), key))
                     {
@@ -3195,8 +3276,13 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                     }
                     scriptPubKeyOut << ToByteVector(key.GetPubKey()) << OP_CHECKSIG;
                 }
-                else
+                else if (whichType == TX_PUBKEY) {
                     scriptPubKeyOut = scriptPubKeyKernel;
+                }
+                else {
+                    LogPrint(BCLog::COINSTAKE, "CreateCoinStake : no support for kernel type=%d\n", whichType);
+                    break;
+                }
 
                 nCoinStakeTime -= n;
 
@@ -3205,6 +3291,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 vCoinsPrev.push_back(pcoin);
 
                 // Try to add outStakeReward as input if it hasn't already been spent.
+#if 0
                 if (header.IsProofOfStake()) {
                     const CWalletTx* wtx = GetWalletTx(pcoin.outpoint.hash);
                     const CBlockIndex* blockIndex;
@@ -3221,6 +3308,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                         }
                     }
                 }
+#endif
 
                 txNew.vout.push_back(CTxOut(0, scriptPubKeyOut));
                 if (header.GetBlockTime() + nStakeSplitAge > nCoinStakeTime && nCredit > nPoWReward && gArgs.GetBoolArg("-splitpos", true))
@@ -3232,10 +3320,20 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         }
         if (fKernelFound)
             break; // if kernel is found stop searching
+
+        if (i >= coinStakeInputLimit) {
+            LogPrintf("CreateCoinStake : coinStakeInputLimit reached: %lu\n", coinStakeInputLimit);
+            break;
+        }
     }
     if (nCredit == 0 || nCredit > nBalance - nReserveBalance)
         return false;
 
+#if 0
+    // Disable collect dust into Coinstake TX since 0.8.0, because of:
+    // - practically, it almost never happening
+    // - dust is useful in DP TX optimizer
+    // - after unpack p2sh/p2wsh scriptPubKeyKernel is changed, need control it
     bool prevStakeRewardIncluded = txNew.vin.size() == 2;
     for (const CInputCoin& pcoin : setCoins)
     {
@@ -3274,6 +3372,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             CacheBlockOffset.MarkDel(bo);
         }
     }
+#endif
     // Calculate coin age reward
     {
         uint64_t nCoinAge;

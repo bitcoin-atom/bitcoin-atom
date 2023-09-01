@@ -5,6 +5,8 @@
 #ifndef BITCOIN_RPC_BLOCKCHAIN_H
 #define BITCOIN_RPC_BLOCKCHAIN_H
 
+#include <stdint.h>
+
 class CBlock;
 class CBlockIndex;
 class UniValue;
@@ -17,6 +19,7 @@ class UniValue;
  * difficulty (4295032833 hashes).
  */
 double GetDifficulty(const CBlockIndex* blockindex = nullptr, bool fPowOnly = true);
+double CalcDifficultyFromBits(uint32_t nBits);
 
 /** Callback for when block tip changed. */
 void RPCNotifyBlockChange(bool ibd, const CBlockIndex *);

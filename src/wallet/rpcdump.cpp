@@ -62,7 +62,7 @@ std::string DecodeDumpString(const std::string &str) {
     for (unsigned int pos = 0; pos < str.length(); pos++) {
         unsigned char c = str[pos];
         if (c == '%' && pos+2 < str.length()) {
-            c = (((str[pos+1]>>6)*9+((str[pos+1]-'0')&15)) << 4) | 
+            c = (((str[pos+1]>>6)*9+((str[pos+1]-'0')&15)) << 4) |
                 ((str[pos+2]>>6)*9+((str[pos+2]-'0')&15));
             pos += 2;
         }
@@ -130,6 +130,9 @@ UniValue importprivkey(const JSONRPCRequest& request)
         LOCK2(cs_main, pwallet->cs_wallet);
 
         EnsureWalletIsUnlocked(pwallet);
+
+        if (fWalletUnlockMintOnly) // no importprivkey in mint-only mode
+        	throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Wallet is unlocked for minting only.");
 
         std::string strSecret = request.params[0].get_str();
         std::string strLabel = "";
