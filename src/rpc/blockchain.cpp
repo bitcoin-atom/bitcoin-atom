@@ -1234,11 +1234,8 @@ UniValue getblockchaininfo(const JSONRPCRequest& request)
     obj.push_back(Pair("headers",               pindexBestHeader ? pindexBestHeader->nHeight : -1));
     obj.push_back(Pair("bestblockhash",         chainActive.Tip()->GetBlockHash().GetHex()));
 
-    UniValue difficulty(UniValue::VOBJ);
-    difficulty.push_back(Pair("proof-of-work",  (double)GetDifficulty()));
-    difficulty.push_back(Pair("proof-of-stake", (double)GetDifficulty(GetLastBlockIndex(chainActive.Tip(), Params().GetConsensus(), true), false)));
-
-    obj.push_back(Pair("difficulty",            difficulty));
+    obj.push_back(Pair("difficulty",            (double)GetDifficulty()));
+        obj.push_back(Pair("difficulty_pos",    (double)GetDifficulty(GetLastBlockIndex(chainActive.Tip(), Params().GetConsensus(), true), false)));
     obj.push_back(Pair("mediantime",            (int64_t)chainActive.Tip()->GetMedianTimePast()));
     obj.push_back(Pair("verificationprogress",  GuessVerificationProgress(Params().TxData(), chainActive.Tip())));
     obj.push_back(Pair("initialblockdownload",  IsInitialBlockDownload()));
